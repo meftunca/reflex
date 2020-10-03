@@ -3,7 +3,7 @@
   "short_name": "ReFlex ui",
   "description": "Güçlü tasarımlar için kolay çözüm",
   "start_url": ".",
-  "display": "minimal",
+  "display": "minimal-ui",
   "theme_color": "#11A6E7",
   "background_color": "#E76511",
   "crossorigin": "anonymous",
