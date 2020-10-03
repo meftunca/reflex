@@ -1,1 +1,0 @@
-{"description":"","displayName":"ThemeProvider","methods":[],"props":{"theme":{"defaultValue":null,"description":"","name":"theme","required":true,"type":{"name":"Theme"}}},"filename":"theming"}
