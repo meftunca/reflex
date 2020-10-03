@@ -1,0 +1,1 @@
+{"description":"","displayName":"Collapse","methods":[],"props":{"open":{"defaultValue":{"value":"false"},"description":"","name":"open","required":false,"type":{"name":"enum","raw":"boolean","value":[{"value":"false"},{"value":"true"}]}},"starterHeight":{"defaultValue":null,"description":"","name":"starterHeight","required":false,"type":{"name":"number"}}},"filename":"index"}
