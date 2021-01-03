@@ -1,0 +1,138 @@
+---
+name: Buttons
+menu: Inputs
+route: /documentation/inputs/buttons
+---
+
+import { Box, Button } from "@re-flex/ui";
+import { GenerateButton, GenerateButtonCodes } from "./Variants";
+
+# With Icon
+
+### Example Usage
+
+```js live=true
+<>
+  <Button
+    variant="outlined"
+    affixIcon={<FiCheckCircle />}
+    color="success"
+    size={14}
+  >
+    Icon Check Circle (affix)
+  </Button>
+
+  <Button
+    variant="outlined"
+    suffixIcon={<FiAlertOctagon />}
+    color="error"
+    size={14}
+  >
+    Icon Alert (suffix)
+  </Button>
+</>
+```
+
+# Sizes
+
+### Example Usage
+
+```js live=true
+<>
+  <Button variant="contained" color="primary" size={10}>
+    Primary 10px
+  </Button>
+
+  <Button variant="contained" color="primary" size={12}>
+    Primary 12px
+  </Button>
+
+  <Button variant="contained" color="primary" size={14}>
+    Primary 14px
+  </Button>
+</>
+```
+
+# Variants
+
+> default value = "text"
+
+> Options => "text" | "contained" | "outlined"
+
+## Contained Buttons
+
+<br />
+
+### Example Contained Buttons
+
+<Box m={[16, 0]} p={32} bgColor="paper" radius={6}>
+  <GenerateButton variant="contained" />
+</Box>
+
+### Example Usage
+
+```js live=true
+<>
+  <Button variant="contained" color="primary">
+    Primary
+  </Button>
+
+  <Button variant="contained" color="#dc3545">
+    Custom Color
+  </Button>
+</>
+```
+
+## Outlined Buttons
+
+<br />
+
+### Example Outlined Buttons
+
+<Box m={[16, 0]} p={32} bgColor="paper" radius={6}>
+  <GenerateButton variant="outlined" />
+</Box>
+
+### Example Usage
+
+```js live=true
+<>
+  <Button variant="outlined" color="primary">
+    Primary
+  </Button>
+
+  <Button variant="outlined" color="#dc3545">
+    Custom Color
+  </Button>
+</>
+```
+
+## Text Buttons
+
+<br />
+
+### Example Text Buttons
+
+<Box m={[16, 0]} p={32} bgColor="paper" radius={6}>
+  <GenerateButton variant="text" />
+</Box>
+
+### Example Usage
+
+```js live=true
+<>
+  <Button variant="text" color="primary">
+    Primary
+  </Button>
+
+  <Button variant="text" color="#dc3545">
+    Custom Color
+  </Button>
+
+  <Button color="primary">(OR WithOut Variant)</Button>
+</>
+```
+
+## Props
+
+<Props of={Button} />

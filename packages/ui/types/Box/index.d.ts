@@ -1,0 +1,33 @@
+import React from "react";
+declare type overflowType = "hidden" | "initial" | "inherit" | "visible" | "scroll" | "auto";
+declare type overflowPlacementType = {
+    x?: overflowType;
+    y?: overflowType;
+};
+export declare type BoxProps = {
+    theme?: any;
+    className?: string | string[];
+    overflow?: overflowType | overflowPlacementType;
+    transition?: string;
+    width?: string | number;
+    height?: string | number;
+    pt?: number;
+    pl?: number;
+    pr?: number;
+    pb?: number;
+    p?: number | number[];
+    mt?: number;
+    ml?: number;
+    mr?: number;
+    mb?: number;
+    m?: number | number[];
+    radius?: number | number[];
+    shadow?: number | string;
+    color?: string;
+    bgColor?: "paper" | "background" | "primary" | "secondary" | "error" | "warning" | "info" | "success" | string;
+    display?: "flex" | "inline-flex" | "block" | "inline-block" | "grid" | "inline-grid";
+    spacing?: number | number[];
+    style?: {};
+};
+declare const Box: React.FC<BoxProps>;
+export default Box;

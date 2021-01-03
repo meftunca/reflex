@@ -1,0 +1,21 @@
+import React from "react";
+import Ripple from "../Ripple";
+import { Theme } from "../utils/theme/theming";
+export declare type Props = {
+    colorDepth?: "light" | "main" | "dark";
+    size?: number;
+    color?: "textPrimary" | "textSecondary" | "primary" | "secondary" | "error" | "warning" | "info" | "success" | string;
+    variant?: "outlined" | "contained" | "text";
+    ripple?: typeof Ripple.defaultProps | null;
+    label?: string;
+    avatar?: React.ReactNode;
+    icon?: React.ReactNode;
+    deleteIcon?: React.ReactNode;
+    selectedIcon?: React.ReactNode;
+    onDelete?: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    onSelect?: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    selected?: Boolean;
+    theme?: Theme;
+};
+declare const Chip: React.FC<Props>;
+export default Chip;

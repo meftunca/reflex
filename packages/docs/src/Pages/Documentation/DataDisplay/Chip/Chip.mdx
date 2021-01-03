@@ -1,0 +1,37 @@
+---
+name: Chip
+menu: Data Display
+route: /documentation/data-display/chip
+---
+
+import { Chip } from "@re-flex/ui";
+import ChipSimple from "./";
+
+## Basic usage
+
+<ChipSimple />
+
+```js live=true
+<>
+  <Chip
+    label={"contained"}
+    variant="contained"
+    color="primary"
+    onSelect={() => console.info("Silindi")}
+  />
+  <Chip
+    label={"outlined"}
+    variant="outlined"
+    onSelect={() => console.info("Silindi")}
+  />
+  <Chip
+    label={"text"}
+    variant="text"
+    onSelect={() => console.info("Silindi")}
+  />
+</>
+```
+
+## Properties
+
+<Props of={Chip} />

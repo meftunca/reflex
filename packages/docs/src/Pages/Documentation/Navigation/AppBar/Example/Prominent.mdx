@@ -1,0 +1,30 @@
+---
+parent: AppBar
+hidden: true
+---
+
+import { AppBar, Button, Text } from "@re-flex/ui";
+
+### Prominent AppBar
+
+```js live=true column=true
+<AppBar
+  css={{
+    height: 125,
+    ">": {
+      alignSelf: "flex-start",
+    },
+  }}
+>
+  <Button>Menu</Button>
+  <Text
+    style={{ alignSelf: "flex-end", margin: "0 16px", flexGrow: 1 }}
+    variant="subtitle1"
+  >
+    Re-FLEX UI
+  </Text>
+  <Button>Actions 1</Button>
+  <Button>Actions 2</Button>
+  <Button>Actions 3</Button>
+</AppBar>
+```

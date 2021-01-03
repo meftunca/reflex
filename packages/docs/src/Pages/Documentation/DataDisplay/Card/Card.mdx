@@ -1,0 +1,64 @@
+---
+name: Card
+menu: Data Display
+route: /documentation/data-display/card
+---
+
+import { Card, Avatar, Button, Text } from "@re-flex/ui";
+
+## Introduction
+
+### Example
+
+```js live=true
+<Card shadow={1} width={300}>
+  <Card.Header>
+    <Avatar label="User Name" />
+    <Text variant="body2">User Name</Text>
+  </Card.Header>
+  <Card.Content>
+    <Text variant="subtitle1">Deneme Yazısı</Text>
+    <Text variant="body2">
+      Lorem ipsum is placeholder text commonly used in the graphic, print, and
+      publishing industries for previewing layouts and visual mockups.
+    </Text>
+  </Card.Content>
+  <Card.Footer>
+    <Button>Action</Button>
+  </Card.Footer>
+</Card>
+```
+
+### Use shadow
+
+> Şuan 25 seviyeye kadar otomatik gölgelendirmeyi `shadow={0...24}` aralığında girerek yapabilirsiniz.
+> Yakın zamanda gölge oluşturucu entegre edilerek teorik olarak sonsuz gölgelendirmeyi projeye kazandıracağız.
+> Ayrıca Gölge oluşturucu ile yaklaşık 800byte alan kazanmamızı da sağlayacaktır
+
+```js live=true column=true
+<div
+  style={{
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+  }}
+>
+  {new Array(25).fill("").map((_, shadowLevel) => (
+    <Card
+      shadow={shadowLevel}
+      width={120}
+      height={120}
+      p={34}
+      m={34}
+      key={shadowLevel}
+    >
+      <Text>Level:{shadowLevel}</Text>
+    </Card>
+  ))}
+</div>
+```
+
+## Properties
+
+<Props of={Card} />

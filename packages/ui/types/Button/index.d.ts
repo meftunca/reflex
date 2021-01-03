@@ -1,0 +1,30 @@
+import React from "react";
+import Ripple from "../Ripple";
+export declare type buttonVariables = {
+    fontFamily?: string;
+    fontSize?: number;
+    fontWeightLight?: number;
+    fontWeightRegular?: number;
+    fontWeightMedium?: number;
+    fontWeightBold?: number;
+    fontWeight?: number;
+    fontStyle?: string;
+    fontStretch?: string;
+    textTransform?: string;
+    opacity?: number;
+    letterSpacing?: number;
+};
+export declare type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    vars?: buttonVariables;
+    colorDepth?: "light" | "main" | "dark";
+    suffixIcon?: React.ReactNode;
+    affixIcon?: React.ReactNode;
+    fullWidth?: boolean;
+    size?: number;
+    color?: "primary" | "secondary" | "error" | "warning" | "info" | "success" | string;
+    variant?: "outlined" | "contained" | "text";
+    ripple?: typeof Ripple.defaultProps | null;
+    classname?: string | string[];
+};
+declare const Button: React.FC<Props>;
+export default Button;

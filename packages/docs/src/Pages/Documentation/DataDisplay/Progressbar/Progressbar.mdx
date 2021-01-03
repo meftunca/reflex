@@ -1,0 +1,40 @@
+---
+name: Progressbar
+menu: Data Display
+route: /documentation/data-display/progressbar
+---
+
+import {
+  List,
+  Button,
+  CircularProgressbar,
+  LinearProgressbar,
+} from "@re-flex/ui";
+
+# Progressbar
+
+## Circular Progressbar
+
+```js live=true
+<>
+  <CircularProgressbar value={50}></CircularProgressbar>
+  <CircularProgressbar indeterminate></CircularProgressbar>
+</>
+```
+
+### Properties
+
+<Props of={CircularProgressbar} />
+
+### Linear Progressbar
+
+```js live=true
+<>
+  <LinearProgressbar value={50}></LinearProgressbar>
+  <LinearProgressbar indeterminate></LinearProgressbar>
+</>
+```
+
+### Properties
+
+<Props of={LinearProgressbar} />

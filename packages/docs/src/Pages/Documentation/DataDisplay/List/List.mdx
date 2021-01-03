@@ -1,0 +1,33 @@
+---
+name: List
+menu: Data Display
+route: /documentation/data-display/list
+---
+
+import { List, Button } from "@re-flex/ui";
+import ListSample from "./List.tsx";
+
+# List
+
+## Basic usage
+
+<ListSample />
+
+```js live=true
+<List>
+  <List.Item
+    button
+    title="List Item 1"
+    description="List Item Description"
+    rightItem={
+      <Button variant="outlined" size={12}>
+        Add
+      </Button>
+    }
+  />
+</List>
+```
+
+## Properties
+
+<Props of={List} />

@@ -1,0 +1,27 @@
+{
+  "name": "reflex-ui",
+  "version": "0.0.1",
+  "description": "Starter for Monorepos: Lerna, TypeScript, CRA and Storybook",
+  "main": "index.js",
+  "repository": "https://github.com/meftunca/reflex",
+  "author": "buraksenturk25@gmail.com",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "lerna bootstrap && lerna exec yarn &&  lerna link",
+    "publish": "lerna publish --force-publish",
+    "test": "lerna run test",
+    "start": "yarn bootstrap && lerna run start  --stream --parallel",
+    "serve": "yarn bootstrap && lerna exec serve -s build  --scope=@re-flex/docs",
+    "docs": "yarn bootstrap; lerna run start --stream --scope=@re-flex/docs",
+    "docs:build": "yarn bootstrap; lerna run build --scope=@re-flex/docs",
+    "build": "lerna run build --stream;lerna serve && gh-pages",
+    "gh-pages": "gh-pages -d docs"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "gh-pages": "^3.1.0"
+  }
+}

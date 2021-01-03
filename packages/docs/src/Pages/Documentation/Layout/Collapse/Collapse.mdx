@@ -1,0 +1,32 @@
+---
+name: Collapse
+menu: Layout
+route: /documentation/layout/collapse
+---
+
+import { List, Button, Collapse } from "@re-flex/ui";
+import CollapseSimple from "./";
+
+## Basic usage
+
+<CollapseSimple />
+
+```js live=true
+function Example() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(!open)}>Toggle Collapse</Button>
+      <Collapse open={open}>
+        <Box bgColor="#f0f0f0" p={40} radius={6} m={[24, 12]}>
+          <Text>Collapse Content</Text>
+        </Box>
+      </Collapse>
+    </>
+  );
+}
+```
+
+## Properties
+
+<Props of={Collapse} />

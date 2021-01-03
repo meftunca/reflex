@@ -1,0 +1,68 @@
+---
+name: Navigations (Tabs)
+menu: Navigation
+route: /documentation/navigation/bottom-navigation
+---
+
+import { BottomNavigation } from "@re-flex/ui";
+import Test from "./Example.js";
+
+## Introduction
+
+```js live=true column=true
+function Example() {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  return (
+    <BottomNavigation index={activeIndex} onChangeIndex={setActiveIndex}>
+      <BottomNavigation.Action icon={<FiAnchor />} label="Anchor" />
+      <BottomNavigation.Action icon={<FiSearch />} label="Search" />
+      <BottomNavigation.Action icon={<FiClock />} label="Clock" />
+    </BottomNavigation>
+  );
+}
+```
+
+## Layer Editing
+
+> `<Box/>` bileşeninin tüm özelliklerini `<BottomNavigation/>` bileşeniyle kullanabilirsiniz. Animasyonlardaki bozulmaları önlemek için lütfen `min-height` değeri tanımlayın
+
+```js live=true column=true
+function Example() {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  return (
+    <BottomNavigation
+      p={[4, 8]}
+      shadow={2}
+      radius={12}
+      bgColor="paper"
+      index={activeIndex}
+      onChangeIndex={setActiveIndex}
+    >
+      <BottomNavigation.Action
+        direction="column"
+        icon={<FiCloudSnow />}
+        label="Snow"
+      />
+      <BottomNavigation.Action
+        direction="column"
+        icon={<FiCloudRain />}
+        label="Rain"
+      />
+      <BottomNavigation.Action
+        direction="column"
+        icon={<FiCloudDrizzle />}
+        label="Drizzle"
+      />
+    </BottomNavigation>
+  );
+}
+```
+
+### BottomNavigation Props
+
+<Props of={BottomNavigation} />
+<br />
+
+### BottomNavigation Action Props
+
+<Props of={BottomNavigation.Action} />

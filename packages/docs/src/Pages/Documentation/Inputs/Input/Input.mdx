@@ -1,0 +1,37 @@
+---
+name: Input
+menu: Inputs
+route: /documentation/inputs/input
+---
+
+import { TextField, Button } from "@re-flex/ui";
+
+## Basic usage
+
+### Filled
+
+```js live=true
+<>
+  <TextField startAdornment={<Button>H</Button>} />
+  <TextField tag="textarea" endAdornment={<Button>H</Button>} />
+  <TextField tag="div" endAdornment={<Button>H</Button>} />
+</>
+```
+
+### Outlined
+
+```js live=true
+<>
+  <TextField variant="outlined" startAdornment={<Button>H</Button>} />
+  <TextField
+    variant="outlined"
+    tag="textarea"
+    endAdornment={<Button>H</Button>}
+  />
+  <TextField variant="outlined" tag="div" endAdornment={<Button>H</Button>} />
+</>
+```
+
+## Properties
+
+<Props of={TextField} />

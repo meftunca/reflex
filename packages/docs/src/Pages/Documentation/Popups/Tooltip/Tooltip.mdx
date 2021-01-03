@@ -1,0 +1,22 @@
+---
+name: Tooltip
+menu: PopUp
+route: /documentation/popup/tooltip
+---
+
+import { List, Button, Tooltip } from "@re-flex/ui";
+import TooltipSimple from "./";
+
+## Basic usage
+
+<TooltipSimple />
+
+```js live=true
+<Popper placement="top-start" content="hi">
+  <Button>Reference</Button>
+</Popper>
+```
+
+## Properties
+
+<Props of={Tooltip} />
