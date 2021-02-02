@@ -1,13 +1,12 @@
-//@ts-nocheck
+import { Theme, useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import { readableColorIsBlack } from "color2k";
 import React from "react";
-import Ripple from "../Ripple";
 import Box from "../Box";
-import { isObject } from "../utils/helpers/is";
-import { Theme, useTheme } from "../utils/theme/theming";
-import IconButton from "../Button/IconButton";
+import IconButton from "../IconButton/IconButton";
+import Ripple from "../Ripple";
 import Text from "../Typography";
+import { isObject } from "../utils/helpers/is";
 
 const RiCloseLine = () => (
   <svg
@@ -110,6 +109,7 @@ const ChipBase = styled(Box)(
       colorDepth = "main",
       variant = "text",
       size = 30,
+      // @ts-ignore
       theme: { palette, prefix },
     }: Props = props;
     let obj: any = {};

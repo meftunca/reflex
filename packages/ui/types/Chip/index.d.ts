@@ -1,6 +1,6 @@
+import { Theme } from "@emotion/react";
 import React from "react";
 import Ripple from "../Ripple";
-import { Theme } from "../utils/theme/theming";
 export declare type Props = {
     colorDepth?: "light" | "main" | "dark";
     size?: number;

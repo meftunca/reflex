@@ -1,12 +1,11 @@
-import DefaultTheme from "../../../utils/theme/defaultTheme";
-import { css } from "@emotion/react";
 import { darken, lighten } from "color2k";
+import DefaultTheme from "../../../utils/theme/defaultTheme";
 
 const CircularProgressbarStyled = ({
   prefix,
   palette,
   transitions,
-}: typeof DefaultTheme) => css`
+}: typeof DefaultTheme) => `
   .${prefix}-progressbar {
     --progressbar-color: ${palette.primary.main};
     --progressbar-size: 32px;
@@ -42,9 +41,11 @@ const CircularProgressbarStyled = ({
       }
     }
     &.linear {
-      --progressbar-bgcolor: ${palette.type === "dark"
-        ? darken(palette.primary.main, 0.7)
-        : lighten(palette.primary.main, 0.9)};
+      --progressbar-bgcolor: ${
+        palette.type === "dark"
+          ? darken(palette.primary.main, 0.7)
+          : lighten(palette.primary.main, 0.9)
+      };
       overflow: hidden;
       display: block;
       width: 100%;

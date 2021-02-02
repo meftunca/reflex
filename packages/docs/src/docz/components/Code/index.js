@@ -1,18 +1,31 @@
 /* eslint react/jsx-key: 0 */
 /** @jsx jsx */
-import React from "react";
-import { jsx, css } from "@emotion/react";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { jsx } from "@emotion/react";
 import { mdx } from "@mdx-js/react";
 import * as Reflex from "@re-flex/ui";
-import * as FICons from "react-icons/fi";
 import { image } from "faker/locale/en";
+import Highlight, { defaultProps } from "prism-react-renderer";
 import ultramin from "prism-react-renderer/themes/palenight";
-
-export default ({ children, column = false, className, live, render }) => {
+import React, { useEffect } from "react";
+import * as FICons from "react-icons/fi";
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
+export default ({
+  children,
+  column = false,
+  className,
+  live,
+  render,
+  ...rest
+}) => {
+  const [] = React.useState();
   const language = className.replace(/language-/, "");
-
+  useEffect(() => {
+    if (rest.path) {
+      fetch(rest.path)
+        .then((d) => d.text())
+        .then(console.log);
+    }
+  }, []);
   if (live) {
     return (
       <>
@@ -65,7 +78,6 @@ export default ({ children, column = false, className, live, render }) => {
               <LiveEditor
                 css={{
                   height: "100%",
-                  ">textarea": { padding: "1.5rem 1rem !important" },
                 }}
               />
             </Reflex.Box>

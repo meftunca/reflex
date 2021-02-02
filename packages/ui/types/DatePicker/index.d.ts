@@ -1,2 +1,4 @@
-declare const _default: () => JSX.Element;
-export default _default;
+import React from "react";
+import { DatePickerProps } from "./Context";
+declare const DatePickerWrapper: React.FC<DatePickerProps>;
+export default DatePickerWrapper;

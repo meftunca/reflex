@@ -1,9 +1,8 @@
 import defaultTheme from "../../utils/theme/defaultTheme";
-import { css } from "@emotion/react";
 
 export const BoxVarsStyled = (theme: typeof defaultTheme = defaultTheme) => {
-  const { prefix, shadows } = theme;
-  return css`
+  const { prefix, shadows, transitions } = theme;
+  return `
     .${prefix}-box {
       --box-overflow: hidden;
       --box-margin: 0;
@@ -15,7 +14,7 @@ export const BoxVarsStyled = (theme: typeof defaultTheme = defaultTheme) => {
       --box-color: var(--typography-color);
       --box-width: 100%;
       --box-height: inherit;
-      --box-transition: all 0.2s linear;
+      --box-transition: all ${transitions.duration.enteringScreen} ${transitions.easing.easeInOut};
       --box-position: relative;
     }
   `;
@@ -23,7 +22,7 @@ export const BoxVarsStyled = (theme: typeof defaultTheme = defaultTheme) => {
 
 export const BoxInitialStyled = (theme: typeof defaultTheme = defaultTheme) => {
   const { prefix } = theme;
-  return css`
+  return `
     .${prefix}-box {
       margin: var(--box-margin);
       padding: var(--box-padding);

@@ -4,5 +4,5 @@ export declare type Props = {
     transition?: number;
     initialIndex?: number;
 };
-declare const Carousel: React.FC<Props>;
-export default Carousel;
+declare const _default: React.NamedExoticComponent<Props>;
+export default _default;

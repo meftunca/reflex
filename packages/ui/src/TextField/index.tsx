@@ -1,13 +1,12 @@
 /** @jsx jsx */
-import * as React from "react";
+import { jsx, useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useTheme } from "@emotion/react";
+import * as React from "react";
 import { mergeClassNames } from "../utils/helpers/stringFormat";
 import useMeasure from "../utils/hooks/useMeasure";
-import InputBase from "./InputBase";
 import TextFieldFilled from "./Filled";
+import InputBase from "./InputBase";
 import TextFieldOutlined from "./Outlined";
-import { jsx } from "@emotion/react";
 
 // Create Wrapper Component
 const TextFieldBase = styled.div();
@@ -38,10 +37,9 @@ const TextField: React.FC<Props> = ({
   label = "TextField",
 }) => {
   const theme = useTheme();
-  const [
-    startAdornmentRef,
-    { width: startAdornmentWidth, ...restStartAdornment },
-  ] = useMeasure<HTMLDivElement>();
+  const [startAdornmentRef, { width: startAdornmentWidth }] = useMeasure<
+    HTMLDivElement
+  >();
   const [endAdornmentRef, { width: endAdornmentWidth }] = useMeasure<
     HTMLDivElement
   >();

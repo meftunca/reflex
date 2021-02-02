@@ -4,15 +4,28 @@ menu: Inputs
 route: /documentation/inputs/input
 ---
 
-import { TextField, Button } from "@re-flex/ui";
+import { TextField, Button, Box } from "@re-flex/ui";
 
 ## Basic usage
 
+### Example
+
+```js live=true column=true
+<>
+  <Box bgColor="#0001" radius={[16, 16, 0, 0]} width="auto" pt={8}>
+    <TextField fullWidth startAdornment={<Button>H</Button>} />
+  </Box>
+  <TextField tag="textarea" startAdornment={<Button>H</Button>} />
+</>
+```
+
 ### Filled
 
-```js live=true
+```js live=true column=true
 <>
-  <TextField startAdornment={<Button>H</Button>} />
+  <Box bgColor="#0001" radius={[16, 16, 0, 0]} width="auto" pt={8}>
+    <TextField fullWidth startAdornment={<Button>H</Button>} />
+  </Box>
   <TextField tag="textarea" endAdornment={<Button>H</Button>} />
   <TextField tag="div" endAdornment={<Button>H</Button>} />
 </>
@@ -20,7 +33,7 @@ import { TextField, Button } from "@re-flex/ui";
 
 ### Outlined
 
-```js live=true
+```js live=true  column=true
 <>
   <TextField variant="outlined" startAdornment={<Button>H</Button>} />
   <TextField

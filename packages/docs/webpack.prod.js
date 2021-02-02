@@ -19,6 +19,7 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 const ResourceHintWebpackPlugin = require("resource-hints-webpack-plugin");
 // const ProgressiveManifest = require("webpack-pwa-manifest");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
   node: {},
@@ -112,20 +113,19 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         parallel: true,
-        cache: true,
         extractComments: () => {},
       }),
     ],
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new CompressionPlugin({
-      filename: "[path][base].gz",
-      algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
+    // new CompressionPlugin({
+    //   filename: "[path][base].gz",
+    //   algorithm: "gzip",
+    //   test: /\.js$|\.css$|\.html$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8,
+    // }),
     new CompressionPlugin({
       filename: "[path][base].br",
       algorithm: "brotliCompress",
@@ -158,5 +158,33 @@ module.exports = {
       useBabel: true,
     }),
     new BundleAnalyzerPlugin(),
+    // new WebpackPwaManifest({
+    //   name: "Re-Flex UI",
+    //   short_name: "My UI",
+    //   description: "Re-Flex Minimal React UI Library",
+    //   background_color: "#ffffff",
+    //   crossorigin: "use-credentials", //can be null, use-credentials or anonymous
+    //   icons: [
+    //     {
+    //       src: path.resolve("public/icons/android-icon.png"),
+    //       sizes: [36, 48, 72, 96, 144, 192], // multiple sizes
+    //       destination: path.join("icons", "android"),
+    //     },
+    //     {
+    //       src: path.resolve("public/icons/apple-icon.png"),
+    //       sizes: [57, 60, 72, 76, 114, 152,  180], // multiple sizes
+    //       destination: path.join("icons", "ios"),
+    //     },
+    //     {
+    //       src: path.resolve("public/icons/ms-icon-310x310.png"),
+    //       size: "310x310", // you can also use the specifications pattern
+    //     },
+    //     {
+    //       src: path.resolve("public/icons/ms-icon-310x310.png"),
+    //       size: "310x310", // you can also use the specifications pattern
+    //       purpose: "maskable",
+    //     },
+    //   ],
+    // }),
   ],
 };

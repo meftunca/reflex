@@ -1,23 +1,29 @@
-//@ts-nocheck
-import React, { useCallback, useLayoutEffect, useState } from "react";
+/* @jsx jsx */
+import { jsx } from "@emotion/react";
 // import { usePopper } from "react-popper";
 import styled from "@emotion/styled";
-import Box, { BoxProps } from "../Box";
-import Transition from "../Transition";
+import flip from "@popperjs/core/lib/modifiers/flip";
+import preventOverflow from "@popperjs/core/lib/modifiers/preventOverflow";
 import {
   createPopper,
   VirtualElement,
 } from "@popperjs/core/lib/popper-lite.js";
-
+import React, {
+  Fragment,
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
+import Box, { BoxProps } from "../Box";
+import Portal from "../Portal";
+import Transition from "../Transition";
 // import { useTheme } from "../../utils/theme/theming";
 import Text from "../Typography";
-import Portal from "../Portal";
-import { css } from "@emotion/react";
-import { useMemo } from "react";
 
 const usePopper = (
-  reference: React.ReactNode | Element | VirtualElement,
-  popperElement: React.ReactNode | HTMLElement,
+  reference: null | Element | VirtualElement,
+  popperElement: null | HTMLElement,
   options: { [key: string]: any }
 ) => {
   const [state, setState] = useState<{ [key: string]: any }>({
@@ -26,9 +32,7 @@ const usePopper = (
   });
   useLayoutEffect(() => {
     if (reference && popperElement) {
-      //@ts-ignore
       const rest = createPopper(reference, popperElement, options);
-      console.log("rest", rest);
       setState((prev) => ({ ...prev, ...rest.state }));
     }
   }, [reference, popperElement]);
@@ -36,12 +40,10 @@ const usePopper = (
   return state;
 };
 
-const StyledPopper = styled(Box)(css``, () => {
-  const styles = {};
-  // if (props.bgColor)
-  //   styles["--typography-color"] = Color(props.bgColor).isDark()
-  //     ? "white"
-  //     : "inherit";
+const StyledPopper = styled(Box)(({ theme }) => {
+  const styles = {
+    backgroundColor: theme.palette.background.paper,
+  };
   return styles;
 });
 
@@ -51,25 +53,20 @@ const Popper: React.FC<Props> = ({
   content,
   paperProps = {},
   onClickAway,
+  duration = 200,
 }) => {
+  const [portalEnable, setPortalEnable] = useState<boolean>(false);
   // const theme = useTheme();
   const isText = typeof content === "string";
   const [visible, setVisible] = React.useState<boolean | null>(null);
-  const referenceElement = React.useRef(null);
+  const referenceElement = React.useRef<Element | VirtualElement>(null);
   const popperElement = React.useRef<HTMLDivElement | null>(null);
   const { styles, attributes } = usePopper(
     referenceElement.current,
     popperElement.current,
     {
+      modifiers: [flip, preventOverflow],
       placement: placement,
-      // modifiers: [
-      //   {
-      //     name: "offset",
-      //     options: {
-      //       offset: [0, 8],
-      //     },
-      //   },
-      // ],
     }
   );
   const getRef = useMemo(() => {
@@ -78,34 +75,51 @@ const Popper: React.FC<Props> = ({
     return React.isValidElement(childElement)
       ? React.cloneElement(childElement, {
           ref: referenceElement,
-          onClick: () => setVisible(!visible),
+          onClick: () => {
+            setPortalEnable(true);
+            setTimeout(() => {
+              setVisible(!visible);
+            }, 30);
+          },
         })
       : null;
-  }, []);
-  const handleEvents = useCallback((event: MouseEvent | TouchEvent): void => {
-    if (visible !== true) return;
-    if (
-      popperElement.current &&
-      !popperElement.current.contains(event.target as Node)
-    ) {
-      if (onClickAway) onClickAway(event);
-      setVisible(false);
-    }
-  }, []);
+  }, [children]);
+  const handleEvents = useCallback(
+    (event: MouseEvent | TouchEvent): void => {
+      if (
+        visible === true &&
+        popperElement.current &&
+        !popperElement.current.contains(event.target as Node)
+      ) {
+        if (onClickAway) onClickAway(event);
+        setVisible(false);
+        setTimeout(() => {
+          setPortalEnable(false);
+          setVisible(null);
+        }, duration - 10);
+      }
+    },
+    [visible]
+  );
 
   React.useEffect(() => {
-    document.addEventListener("click", handleEvents);
+    document.addEventListener("mousedown", handleEvents);
     document.addEventListener("touchmove", handleEvents);
     return () => {
-      document.removeEventListener("click", handleEvents);
+      document.removeEventListener("mousedown", handleEvents);
       document.removeEventListener("touchmove", handleEvents);
     };
-  }, []);
+  }, [visible]);
   return (
-    <>
+    <Fragment>
       {getRef}
-      <Portal>
-        <div ref={popperElement} style={styles.popper} {...attributes.popper}>
+      <Portal enable={portalEnable}>
+        <div
+          ref={popperElement}
+          // style={styles}
+          // {...attributes}
+          data-show={visible !== null}
+        >
           <Transition
             animation={{
               in: {
@@ -118,12 +132,13 @@ const Popper: React.FC<Props> = ({
               },
             }}
             in={visible}
-            onEndOut={() => setVisible(null)}
+            duration={duration}
+            onEndOut={() => {}}
           >
             <StyledPopper
               bgColor={"paper"}
               p={[5, 12]}
-              color="white"
+              // color="white"
               shadow={2}
               radius={6}
               css={{
@@ -133,12 +148,7 @@ const Popper: React.FC<Props> = ({
               {...paperProps}
             >
               {isText ? (
-                <Text
-                  tag="span"
-                  variant="caption"
-                  color={isText ? "white" : "inherit"}
-                  align="center"
-                >
+                <Text tag="span" variant="caption" align="center">
                   {content}
                 </Text>
               ) : (
@@ -148,12 +158,14 @@ const Popper: React.FC<Props> = ({
           </Transition>
         </div>
       </Portal>
-    </>
+    </Fragment>
   );
 };
 
 export default Popper;
 type Props = {
+  // duration transition
+  duration?: number;
   // container: HTMLElement;
   /**
    * The `children` will be inside the DOM hierarchy of the parent component.

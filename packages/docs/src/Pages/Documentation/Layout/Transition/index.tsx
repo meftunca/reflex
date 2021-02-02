@@ -1,5 +1,5 @@
+import { Box, Text, Transition } from "@re-flex/ui";
 import * as React from "react";
-import { Transition, Text, Box } from "@re-flex/ui";
 
 const TransitionPage = () => {
   return (
@@ -20,11 +20,19 @@ const TransitionPage = () => {
               to: { top: 50, opacity: 0 },
             },
           }}
+          infinite
+          in={true}
           delay={1000}
         >
           <Box bgColor="red" width={200} height="200px"></Box>
         </Transition>
-        <Transition delay={1000} effect="Slide" direction="Top" in={true}>
+        <Transition
+          delay={1000}
+          infinite
+          in={true}
+          effect="Slide"
+          direction="Top"
+        >
           <Box bgColor="orange" width={200} height="200px"></Box>
         </Transition>
       </div>

@@ -4,7 +4,7 @@ menu: Inputs
 route: /documentation/inputs/buttons
 ---
 
-import { Box, Button } from "@re-flex/ui";
+import { Box, Button, ButtonBase } from "@re-flex/ui";
 import { GenerateButton, GenerateButtonCodes } from "./Variants";
 
 # With Icon
@@ -13,6 +13,9 @@ import { GenerateButton, GenerateButtonCodes } from "./Variants";
 
 ```js live=true
 <>
+  <ButtonBase p={[12, 24]} as="a">
+    Based Button
+  </ButtonBase>
   <Button
     variant="outlined"
     affixIcon={<FiCheckCircle />}

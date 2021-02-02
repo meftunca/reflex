@@ -1,6 +1,8 @@
-import { Button, styled } from "@re-flex/ui";
-import React from "react";
-export const ButtonProps: React.FC<typeof Button> = () => <></>;
+/* @jsx jsx */
+import { jsx } from "@emotion/react";
+import { Button } from "@re-flex/ui";
+import React, { Fragment } from "react";
+export const ButtonProps: React.FC<typeof Button> = () => <Fragment></Fragment>;
 
 const colors = {
   blue: "#0d6efd",
@@ -29,21 +31,7 @@ export const GenerateButton = ({
 }: {
   variant: "outlined" | "contained" | "text";
 }) => (
-  <>
-    {/* <svg
-      width="360"
-      height="56"
-      viewBox="0 0 360 56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M216 0C216 19.8823 199.882 36 180 36C160.118 36 144 19.8823 144 0H0V56H360V0H216Z"
-        fill="black"
-      />
-    </svg> */}
+  <Fragment>
     {Object.entries(colors).map(([name, color], k) => (
       <Button
         variant={variant}
@@ -54,7 +42,7 @@ export const GenerateButton = ({
         {name}
       </Button>
     ))}
-  </>
+  </Fragment>
 );
 
 export const GenerateButtonCodes = (

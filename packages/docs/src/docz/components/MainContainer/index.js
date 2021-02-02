@@ -1,8 +1,7 @@
 /** @jsx jsx */
-import { jsx, Box } from "@re-flex/ui";
-
-import * as styles from "./styles";
+import { Box, jsx } from "@re-flex/ui";
 import { PageInLink } from "../NavLink";
+import * as styles from "./styles";
 
 export const MainContainer = ({ open, children, ...rest }) => {
   return (
@@ -27,7 +26,7 @@ export const MainContainer = ({ open, children, ...rest }) => {
       >
         {children}
       </div>
-      {/* <PageInLink /> */}
+      <PageInLink />
     </Box>
   );
 };

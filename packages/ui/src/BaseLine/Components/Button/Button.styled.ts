@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import { lighten } from "color2k";
 import DefaultTheme from "../../../utils/theme/defaultTheme";
 const ButtonBaseLineVariables = ({
@@ -8,7 +7,7 @@ const ButtonBaseLineVariables = ({
   shadows,
 }: typeof DefaultTheme) => {
   const transitionTiming = `${transitions.duration.shorter}ms ${transitions.easing.easeInOut}`;
-  return css`
+  return `
     button,
     input[type="button"],
     .${prefix}-btn {
@@ -37,7 +36,7 @@ const ButtonBaseLineVariables = ({
 const ButtonBaseLineInitial = ({
   prefix,
   transitions,
-}: typeof DefaultTheme) => css`
+}: typeof DefaultTheme) => `
   /* button,
   input[type="button"], */
   .${prefix}-btn {

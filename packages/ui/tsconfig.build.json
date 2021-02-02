@@ -7,7 +7,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "lib": ["ES6", "dom", "ESNext"],
-    "jsx": "react",
+    "jsx": "react-jsx",
     "rootDir": "./src",
     "moduleResolution": "node",
     "inlineSourceMap": false,

@@ -1,4 +1,4 @@
-import Theme from "../theme/Types";
+import { Theme } from "@emotion/react";
 declare type parseColorType = {
     isDark: boolean;
     color: string;

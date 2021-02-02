@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 declare const DefaultTheme: {
     prefix: string;
     breakpoints: {
@@ -7,6 +8,7 @@ declare const DefaultTheme: {
         lg: number;
         xl: number;
     };
+    dayjs: typeof dayjs;
     space: {
         default: number;
         dense: number;
@@ -233,6 +235,7 @@ declare const DefaultTheme: {
             easeOut: string;
             easeIn: string;
             sharp: string;
+            linear: string;
         };
         duration: {
             shortest: number;

@@ -1,8 +1,6 @@
 const extract = require("remark-extract-frontmatter");
 const frontmatter = require("remark-frontmatter");
 const compiler = require("remark-stringify");
-const report = require("vfile-reporter");
-const parser = require("remark-parse");
 const { readSync } = require("to-vfile");
 const unified = require("remark");
 const yaml = require("yaml").parse;
@@ -10,21 +8,19 @@ const glob = require("glob");
 const fs = require("fs-extra");
 const groupby = require("lodash/groupBy");
 const watch = require("glob-watcher");
-const yamlParser = require("./yamlParser");
+const parser = require("remark-parse");
+const yamlConfig = require("remark-yaml-config");
 
-function logger() {
-  return console.dir;
-}
 const parseFile = async (filePath, push) => {
-  const file = await readSync(filePath);
-
-  const contents = await unified()
+  unified()
     // .use(parser)
     .use(compiler)
     .use(frontmatter, ["yaml"])
+    // .use(yamlConfig)
     .use(extract, { yaml: yaml })
     // .use(logger)
-    .process(file, function(err, file) {
+    .process(await readSync(filePath), function(err, file) {
+      if (err) console.error("Error: ", err);
       push({
         ...file.data,
         cwd: file.cwd,
@@ -84,14 +80,14 @@ export default  {
             ({ route, filePath }) =>
               `"${route}": lazy(() => import("${filePath}"))`
           )
-          .join(",");
+          .join(",\n");
       }
     })
-    .join(",")},
+    .join(",\n")},
      }
-      `
-      .replace(/(\s|\r|\n)/gim, "")
-      .replace("exportdefault", "export default");
+      `;
+    // .replace(/(\s|\r|\n)/gim, "")
+    // .replace("exportdefault", "export default");
 
     fs.writeFile("./src/Router.js", RouteJS, console.log);
     console.timeEnd("Create");

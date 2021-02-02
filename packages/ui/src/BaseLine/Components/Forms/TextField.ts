@@ -1,11 +1,10 @@
-import { css } from "@emotion/react";
 import DefaultTheme from "../../../utils/theme/defaultTheme";
 
 const TextFieldStyled = ({
   prefix,
   palette,
   transitions,
-}: typeof DefaultTheme) => css`
+}: typeof DefaultTheme) => `
   .${prefix}-textfield {
     --textfield-helper-color: ${palette.text.secondary};
     --textfield-color: ${palette.text.primary};

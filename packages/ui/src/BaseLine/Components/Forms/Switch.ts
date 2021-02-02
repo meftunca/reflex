@@ -1,11 +1,10 @@
 import DefaultTheme from "../../../utils/theme/defaultTheme";
-import { css } from "@emotion/react";
 
 const SwitchStyled = ({
   prefix,
 }: // palette,
 // transitions,
-typeof DefaultTheme) => css`
+typeof DefaultTheme) => `
   .${prefix}-switch {
     --switch-track-height: 14px;
     --switch-track-width: 32px;

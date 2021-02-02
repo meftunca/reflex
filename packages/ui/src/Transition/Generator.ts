@@ -31,19 +31,19 @@ export default {
     },
     Left: {
       in: EffectGenerator("-20vh", 0, "left", "in", [0, 1]),
-      out: EffectGenerator(0, "-50vh", "left", "out", [1, 0]),
+      out: EffectGenerator(0, "-20vh", "left", "out", [1, 0]),
     },
     Right: {
       in: EffectGenerator("-20vh", 0, "right", "in", [0, 1]),
-      out: EffectGenerator(0, "-50vh", "right", "out", [1, 0]),
+      out: EffectGenerator(0, "-20vh", "right", "out", [1, 0]),
     },
     Top: {
       in: EffectGenerator("-20vh", 0, "top", "in", [0, 1]),
-      out: EffectGenerator(0, "-50vh", "top", "out", [1, 0]),
+      out: EffectGenerator(0, "-20vh", "top", "out", [1, 0]),
     },
     Bottom: {
       in: EffectGenerator("-20vh", 0, "bottom", "in", [0, 1]),
-      out: EffectGenerator(0, "-50vh", "bottom", "out", [1, 0]),
+      out: EffectGenerator(0, "-20vh", "bottom", "out", [1, 0]),
     },
   },
   Slide: {
@@ -57,11 +57,11 @@ export default {
     },
     Top: {
       in: EffectGenerator("-20vh", 0, "top", "in"),
-      out: EffectGenerator(0, "-50vh", "top", "out"),
+      out: EffectGenerator(0, "-20vh", "top", "out"),
     },
     Bottom: {
       in: EffectGenerator("-20vh", 0, "bottom", "in"),
-      out: EffectGenerator(0, "-50vh", "bottom", "out"),
+      out: EffectGenerator(0, "-20vh", "bottom", "out"),
     },
   },
   Zoom: {

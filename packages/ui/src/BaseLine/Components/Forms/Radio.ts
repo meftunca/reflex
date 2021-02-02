@@ -1,12 +1,7 @@
-import { css } from "@emotion/react";
 import { darken, transparentize } from "color2k";
 import DefaultTheme from "../../../utils/theme/defaultTheme";
 
-const RadioStyled = ({
-  prefix,
-  palette,
-  transitions,
-}: typeof DefaultTheme) => css`
+const RadioStyled = ({ prefix, palette, transitions }: typeof DefaultTheme) => `
   .${prefix}-radio-btn {
     --radio-btn-transition: ${transitions.duration.shortest}ms
       ${transitions.easing.sharp};

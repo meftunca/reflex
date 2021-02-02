@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import { darken, transparentize } from "color2k";
 import DefaultTheme from "../../../utils/theme/defaultTheme";
 
@@ -6,7 +5,7 @@ const CheckboxStyled = ({
   prefix,
   palette,
   transitions,
-}: typeof DefaultTheme) => css`
+}: typeof DefaultTheme) => `
   .${prefix}-checkbox {
     --checkbox-transition: all ${transitions.duration.shortest}ms
       ${transitions.easing.sharp};

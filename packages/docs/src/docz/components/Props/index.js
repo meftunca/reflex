@@ -1,11 +1,10 @@
 /** @jsx jsx */
-import { Collapse, IconButton, jsx, Text, Box } from "@re-flex/ui";
-import { useState } from "react";
+import { Box, Collapse, IconButton, jsx, Text } from "@re-flex/ui";
+import React, { useState } from "react";
 import { ChevronDown } from "../Icons";
 import * as styles from "./styles";
-import React from "react";
-
 export const getDefaultValue = ({ defaultValue, type, flowType }) => {
+  const [] = React.useState("");
   const propType = flowType ? flowType : type;
   if (!defaultValue || !defaultValue.value) return null;
   if (defaultValue.value === "''") {

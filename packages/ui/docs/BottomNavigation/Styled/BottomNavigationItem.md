@@ -1,6 +1,0 @@
-`BottomNavigationItem` (component)
-==================================
-
-
-
-

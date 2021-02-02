@@ -1,5 +1,5 @@
-import React, { useRef, useLayoutEffect } from "react";
 import { useTheme } from "@emotion/react";
+import React, { useCallback, useRef } from "react";
 
 export type Props = {
   onLongPress?: () => void;
@@ -10,16 +10,17 @@ export type Props = {
 const Ripple: React.FC<Props> = ({}) => {
   const theme = useTheme();
   const ref = useRef<HTMLSpanElement>(null);
-  useLayoutEffect(() => {
-    let btn = ref.current;
-    if (btn !== null) {
-      btn.addEventListener("mousedown", function(rest) {
-        if (btn !== null) addRipple(rest, btn);
-      });
-    }
-  }, [ref.current]);
+  const onRipple = useCallback((event) => {
+    addRipple(event, event.currentTarget);
+  }, []);
 
-  return <span className={theme.prefix + "-ripple-container"} ref={ref}></span>;
+  return (
+    <span
+      className={theme.prefix + "-ripple-container"}
+      onMouseDown={onRipple}
+      ref={ref}
+    ></span>
+  );
 };
 function addRipple(event: MouseEvent, attach: HTMLSpanElement) {
   const self: HTMLSpanElement = attach;
@@ -40,7 +41,7 @@ function addRipple(event: MouseEvent, attach: HTMLSpanElement) {
     opacity: "0",
   };
   Object.entries(style).forEach(([key, value]) => (span.style[key] = value));
-  span.style.animationDuration = 0.4 + "s";
+  span.style.animationDuration = 0.45 + "s";
   self.append(span);
   span.onanimationend = () => span.remove();
 }

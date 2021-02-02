@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
+import styled from "@emotion/styled";
+import React from "react";
 export type CollapseProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -22,7 +22,7 @@ const StyledCollapse = styled.div<styledProps>(
 const Collapse: React.FC<CollapseProps> = ({
   children,
   open = false,
-  // starterHeight=0,
+  starterHeight = 0,
   ...rest
 }) => {
   const theme = useTheme();
@@ -32,9 +32,13 @@ const Collapse: React.FC<CollapseProps> = ({
     const content = collapseRef.current;
     if (content === null) return;
     if (open === false) {
-      setMaxHeight("0");
+      setMaxHeight(starterHeight + "px" || "0");
+      // const height =
+      //   maxHeight === starterHeight + "px" ? "0" : starterHeight + "px" || "0";
+      // content.style.maxHeight = height;
     } else {
       setMaxHeight(content.scrollHeight + "px");
+      // content.style.maxHeight = content.scrollHeight + "px";
     }
   }, [open, children]);
   return (

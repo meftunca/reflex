@@ -106,6 +106,7 @@ declare type Easing = {
     easeOut: string;
     easeIn: string;
     sharp: string;
+    linear: string;
 };
 declare type Typography = {
     importFonts: string;
@@ -165,6 +166,7 @@ declare type ZIndex = {
     tooltip: number;
 };
 import "@emotion/react";
+import { Dayjs } from "dayjs";
 declare module "@emotion/react" {
     interface Theme {
         prefix: string;
@@ -180,6 +182,7 @@ declare module "@emotion/react" {
         shape: Shape;
         transitions: Transitions;
         zIndex: ZIndex;
+        dayjs?: Dayjs;
     }
 }
 export default interface Theme {
@@ -196,5 +199,6 @@ export default interface Theme {
     shape: Shape;
     transitions: Transitions;
     zIndex: ZIndex;
+    dayjs?: Dayjs;
 }
 export {};

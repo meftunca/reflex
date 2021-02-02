@@ -1,5 +1,4 @@
 import DefaultTheme from "../../../utils/theme/defaultTheme";
-import { css } from "@emotion/react";
 const ListItemLineVariables = ({
   prefix,
   transitions,
@@ -36,7 +35,7 @@ const ListItemLineVariables = ({
 };
 
 const ListItemLineInitial = ({ prefix }: typeof DefaultTheme) =>
-  css`
+  `
     .${prefix}-list-item {
       --list-item-padding: 12px 24px;
       --list-item-font-size: 14px;

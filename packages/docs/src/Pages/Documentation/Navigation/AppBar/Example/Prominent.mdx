@@ -9,14 +9,12 @@ import { AppBar, Button, Text } from "@re-flex/ui";
 
 ```js live=true column=true
 <AppBar
-  css={{
+  style={{
     height: 125,
-    ">": {
-      alignSelf: "flex-start",
-    },
+    alignItems: "flex-start",
   }}
 >
-  <Button>Menu</Button>
+  <Button css={{ marginRight: 12 }}>Menu</Button>
   <Text
     style={{ alignSelf: "flex-end", margin: "0 16px", flexGrow: 1 }}
     variant="subtitle1"

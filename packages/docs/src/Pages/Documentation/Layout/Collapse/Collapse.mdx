@@ -15,14 +15,14 @@ import CollapseSimple from "./";
 function Example() {
   const [open, setOpen] = React.useState(false);
   return (
-    <>
+    <div>
       <Button onClick={() => setOpen(!open)}>Toggle Collapse</Button>
-      <Collapse open={open}>
-        <Box bgColor="#f0f0f0" p={40} radius={6} m={[24, 12]}>
+      <Collapse open={open} starterHeight={20}>
+        <Box bgColor="#f0f0f0" p={40} radius={6}>
           <Text>Collapse Content</Text>
         </Box>
       </Collapse>
-    </>
+    </div>
   );
 }
 ```

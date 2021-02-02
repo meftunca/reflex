@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
+import styled from "@emotion/styled";
+import React from "react";
 import { isObject } from "../utils/helpers/is";
 import { camelToKebabCase } from "../utils/helpers/stringFormat";
 export type TextVariant =
@@ -31,7 +31,20 @@ export type TextProps = {
   className?: string | string[];
   tag?: TextTagList;
   variant?: TextVariant;
-  weight?: number | "normal";
+  weight?:
+    | number
+    | "normal"
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900"
+    | "bold"
+    | "semibold";
   size?: number | string;
   family?: string;
   align?: "left" | "center" | "right" | "justify";

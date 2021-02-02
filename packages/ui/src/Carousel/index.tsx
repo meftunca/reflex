@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import React, { useEffect, useMemo } from "react";
-import { styled } from "../utils/theme/styled";
+import React, { memo, useCallback, useEffect, useMemo } from "react";
 import Button from "../Button";
+import { styled } from "../utils/theme/styled";
 import useSwipeable from "./useSwipable";
 
 const CarouselContainer = styled.div`
@@ -57,15 +57,15 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
     }
   };
 
-  onSwipe = (element, swipeX: number, swipeY: number) => {
+  onSwipe = useCallback((element, swipeX: number, swipeY: number) => {
     if (element) {
       const cWidth = element.clientWidth / countChild;
       element.style.transitionDuration = "0ms";
       const translateX = Math.min(cWidth * -index - swipeX, 100);
       setPosition(element, translateX);
     }
-  };
-  onSwipeEnd = (element, swipeX: number, swipeY: number) => {
+  }, []);
+  onSwipeEnd = useCallback((element, swipeX: number, swipeY: number) => {
     element.style.transitionDuration = "200ms";
     if (element) {
       const cWidth = element.clientWidth / countChild;
@@ -81,9 +81,9 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
         setPosition(element, translateX);
       }
     }
-  };
+  }, []);
 
-  const goTo = (defIndex: number) => {
+  const goTo = useCallback((defIndex: number) => {
     // Set the index to the next index or the first index
     if (container) {
       index = defIndex % (countChild - 1);
@@ -91,9 +91,9 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
       const translateX = Math.min(cWidth * -defIndex, 0);
       setPosition(container, translateX);
     }
-  };
+  }, []);
 
-  const next = () => {
+  const next = useCallback(() => {
     // Set the index to the next index or the first index
     const nextIndex = Math.min(index + 1, countChild - 1);
     index = nextIndex === countChild - 1 ? 0 : nextIndex;
@@ -102,9 +102,9 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
       const translateX = Math.min(cWidth * -index, 0);
       setPosition(container, translateX);
     }
-  };
+  }, []);
 
-  const prev = () => {
+  const prev = useCallback(() => {
     // Set the index to the prev index or the last index
     const prevIndex = Math.max(index - 1, 0);
     index = prevIndex || countChild - 1;
@@ -113,7 +113,7 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
       const translateX = Math.min(cWidth * -index, 0);
       setPosition(container, translateX);
     }
-  };
+  }, []);
 
   const slideList = useMemo(() => {
     if (!container) return [];
@@ -140,4 +140,4 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
   );
 };
 
-export default Carousel;
+export default memo(Carousel);

@@ -1,10 +1,15 @@
 import { Global } from "@emotion/react";
 import { MDXProvider } from "@mdx-js/react";
 import { css, darkTheme, defaultTheme, ThemeProvider } from "@re-flex/ui";
+import dayjs from "dayjs";
+import weekDay from "dayjs/plugin/weekday";
 import React, { useLayoutEffect, useState } from "react";
 import components from "./components";
 import Wrapper from "./wrapper";
 
+dayjs.extend(weekDay);
+
+window.dayjs = dayjs;
 const globalStyles = css`
   html,
   body {
@@ -67,3 +72,13 @@ const DocumentationProvider = ({ children }) => {
 };
 
 export default DocumentationProvider;
+
+/* 
+
+  TODO Önemli
+
+  -> Component Örneklerini scripts klasörü içinde bir fonksiyon yazarak kopyalayıp public/examples dizinine taşı
+  -> Sonra Örneklerin çıktılarını Playground Componetini özelleştirerek fetch ile text olarak çekerek içine göm
+  @Örnek fetch("/examples/alerts/Danger.tsx") gibi
+
+*/

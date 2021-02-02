@@ -1,11 +1,11 @@
 //@ts-nocheck
 /** @jsx jsx */
+import { useTheme } from "@emotion/react";
 import React from "react";
 import Ripple from "../Ripple";
-import { jsx } from "../utils/theme/styled";
-import { useTheme } from "@emotion/react";
 import Text from "../Typography";
-import StyledButton from "./Styled/styledButton";
+import { jsx } from "../utils/theme/styled";
+import StyledButton from "./styledButton";
 
 /* 
 

@@ -1,6 +1,0 @@
-`CircularProgressbar` (component)
-=================================
-
-
-
-

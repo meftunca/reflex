@@ -1,6 +1,0 @@
-`LinearProgressbar` (component)
-===============================
-
-
-
-

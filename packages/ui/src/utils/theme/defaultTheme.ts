@@ -1,6 +1,14 @@
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import weekDay from "dayjs/plugin/weekday";
+
+dayjs.extend(relativeTime);
+dayjs.extend(weekDay);
+
 const DefaultTheme = {
   prefix: "reflex",
   breakpoints: { xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920 },
+  dayjs: dayjs,
   space: {
     default: 8,
     dense: 4,
@@ -242,6 +250,7 @@ const DefaultTheme = {
       easeOut: "cubic-bezier(0.0, 0, 0.2, 1)",
       easeIn: "cubic-bezier(0.4, 0, 1, 1)",
       sharp: "cubic-bezier(0.4, 0, 0.6, 1)",
+      linear: "linear",
     },
     duration: {
       shortest: 150,

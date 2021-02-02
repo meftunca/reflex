@@ -3,6 +3,7 @@ import { BoxProps } from "../Box";
 declare const Popper: React.FC<Props>;
 export default Popper;
 declare type Props = {
+    duration?: number;
     disablePortal?: boolean;
     keepMounted?: boolean;
     modifiers?: object;

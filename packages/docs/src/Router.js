@@ -1,1 +1,33 @@
-import{lazy}from"react";export default{"/blog":lazy(()=>import("./Pages/Blog/index.mdx")),"/getting-started":lazy(()=>import("./Pages/index.mdx")),"/documentation/data-display/avatar":lazy(()=>import("./Pages/Documentation/DataDisplay/Avatar/index.mdx")),"/documentation/data-display/card":lazy(()=>import("./Pages/Documentation/DataDisplay/Card/Card.mdx")),"/documentation/data-display/Carousel":lazy(()=>import("./Pages/Documentation/DataDisplay/Carousel/Carousel.mdx")),"/documentation/data-display/chip":lazy(()=>import("./Pages/Documentation/DataDisplay/Chip/Chip.mdx")),"/documentation/data-display/list":lazy(()=>import("./Pages/Documentation/DataDisplay/List/List.mdx")),"/documentation/data-display/progressbar":lazy(()=>import("./Pages/Documentation/DataDisplay/Progressbar/Progressbar.mdx")),"/documentation/data-display/table":lazy(()=>import("./Pages/Documentation/DataDisplay/Table/index.mdx")),"/documentation/data-display/Text":lazy(()=>import("./Pages/Documentation/DataDisplay/Text/Text.mdx")),"/documentation/inputs/buttons":lazy(()=>import("./Pages/Documentation/Inputs/Button/Buttons.mdx")),"/documentation/inputs/checkbox":lazy(()=>import("./Pages/Documentation/Inputs/Checkbox/Checkbox.mdx")),"/documentation/inputs/input":lazy(()=>import("./Pages/Documentation/Inputs/Input/Input.mdx")),"/documentation/inputs/radio":lazy(()=>import("./Pages/Documentation/Inputs/Radio/Radio.mdx")),"/documentation/inputs/Slider":lazy(()=>import("./Pages/Documentation/Inputs/Slider/Slider.mdx")),"/documentation/inputs/switch":lazy(()=>import("./Pages/Documentation/Inputs/Switch/Switch.mdx")),"/documentation/layout/box":lazy(()=>import("./Pages/Documentation/Layout/Box/Box.mdx")),"/documentation/layout/collapse":lazy(()=>import("./Pages/Documentation/Layout/Collapse/Collapse.mdx")),"/documentation/layout/grid":lazy(()=>import("./Pages/Documentation/Layout/Grid/Grid.mdx")),"/documentation/layout/Transition":lazy(()=>import("./Pages/Documentation/Layout/Transition/Transition.mdx")),"/documentation/navigation/app-bar":lazy(()=>import("./Pages/Documentation/Navigation/AppBar/index.mdx")),"/documentation/navigation/bottom-navigation":lazy(()=>import("./Pages/Documentation/Navigation/BottomNavigation/index.mdx")),"/documentation/navigation/drawer":lazy(()=>import("./Pages/Documentation/Navigation/Drawer/index.mdx")),"/documentation/navigation/stepper":lazy(()=>import("./Pages/Documentation/Navigation/Stepper/index.mdx")),"/documentation/popup/dialog":lazy(()=>import("./Pages/Documentation/Popups/Dialog/Dialog.mdx")),"/documentation/popup/menu":lazy(()=>import("./Pages/Documentation/Popups/Menu/Menu.mdx")),"/documentation/popup/tooltip":lazy(()=>import("./Pages/Documentation/Popups/Tooltip/Tooltip.mdx")),}
+
+import { lazy} from "react";
+export default  {
+  "/blog": lazy(() => import("./Pages/Blog/index.mdx")),
+"/getting-started": lazy(() => import("./Pages/index.mdx")),
+"/documentation/data-display/avatar": lazy(() => import("./Pages/Documentation/DataDisplay/Avatar/index.mdx")),
+"/documentation/data-display/card": lazy(() => import("./Pages/Documentation/DataDisplay/Card/Card.mdx")),
+"/documentation/data-display/Carousel": lazy(() => import("./Pages/Documentation/DataDisplay/Carousel/Carousel.mdx")),
+"/documentation/data-display/chip": lazy(() => import("./Pages/Documentation/DataDisplay/Chip/Chip.mdx")),
+"/documentation/data-display/list": lazy(() => import("./Pages/Documentation/DataDisplay/List/List.mdx")),
+"/documentation/data-display/progressbar": lazy(() => import("./Pages/Documentation/DataDisplay/Progressbar/Progressbar.mdx")),
+"/documentation/data-display/table": lazy(() => import("./Pages/Documentation/DataDisplay/Table/index.mdx")),
+"/documentation/data-display/Text": lazy(() => import("./Pages/Documentation/DataDisplay/Text/Text.mdx")),
+"/documentation/inputs/buttons": lazy(() => import("./Pages/Documentation/Inputs/Button/Buttons.mdx")),
+"/documentation/inputs/checkbox": lazy(() => import("./Pages/Documentation/Inputs/Checkbox/Checkbox.mdx")),
+"/documentation/inputs/datepicker": lazy(() => import("./Pages/Documentation/Inputs/Datepicker/DatePicker.mdx")),
+"/documentation/inputs/input": lazy(() => import("./Pages/Documentation/Inputs/Input/Input.mdx")),
+"/documentation/inputs/radio": lazy(() => import("./Pages/Documentation/Inputs/Radio/Radio.mdx")),
+"/documentation/inputs/Slider": lazy(() => import("./Pages/Documentation/Inputs/Slider/Slider.mdx")),
+"/documentation/inputs/switch": lazy(() => import("./Pages/Documentation/Inputs/Switch/Switch.mdx")),
+"/documentation/layout/box": lazy(() => import("./Pages/Documentation/Layout/Box/Box.mdx")),
+"/documentation/layout/collapse": lazy(() => import("./Pages/Documentation/Layout/Collapse/Collapse.mdx")),
+"/documentation/layout/grid": lazy(() => import("./Pages/Documentation/Layout/Grid/Grid.mdx")),
+"/documentation/layout/Transition": lazy(() => import("./Pages/Documentation/Layout/Transition/Transition.mdx")),
+"/documentation/navigation/app-bar": lazy(() => import("./Pages/Documentation/Navigation/AppBar/index.mdx")),
+"/documentation/navigation/bottom-navigation": lazy(() => import("./Pages/Documentation/Navigation/BottomNavigation/index.mdx")),
+"/documentation/navigation/drawer": lazy(() => import("./Pages/Documentation/Navigation/Drawer/index.mdx")),
+"/documentation/navigation/stepper": lazy(() => import("./Pages/Documentation/Navigation/Stepper/index.mdx")),
+"/documentation/popup/dialog": lazy(() => import("./Pages/Documentation/Popups/Dialog/Dialog.mdx")),
+"/documentation/popup/menu": lazy(() => import("./Pages/Documentation/Popups/Menu/Menu.mdx")),
+"/documentation/popup/tooltip": lazy(() => import("./Pages/Documentation/Popups/Tooltip/Tooltip.mdx")),
+     }
+      

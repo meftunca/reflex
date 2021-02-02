@@ -6,10 +6,13 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 firebase-debug.*.log*
-
+docs/
+packages/ui/types
+packages/ui/dist
+packages/ui/docs
 # Firebase cache
 .firebase/
-
+*.lock
 # Firebase config
 
 # Uncomment this if you'd like others to create their own Firebase project.

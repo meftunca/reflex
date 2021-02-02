@@ -48,14 +48,20 @@ const responsiveFontSize = css`
 export const AppBaseLineInitialStyle = (
   theme: typeof defaultTheme = defaultTheme
 ) => {
-  const { prefix } = theme;
+  const {
+    prefix,
+    transitions: {
+      duration: { enteringScreen },
+      easing: { easeInOut },
+    },
+  } = theme;
   return css`
     ${ResetCss}
 
     html,body {
       font-family: var(--typography-font-family);
       background-color: var(--body-background);
-      transition: background-color, color, letter-spacing, font-size 75ms linear;
+      transition: background-color ${enteringScreen} ${easeInOut}, color ${enteringScreen} ${easeInOut}, letter-spacing ${enteringScreen} ${easeInOut}, font-size ${enteringScreen} ${easeInOut};
     }
         /* Set Responsive Media Query */
     ${responsiveFontSize}
@@ -68,10 +74,10 @@ export const AppBaseLineInitialStyle = (
       font-style: var(--typography-font-style);
       font-weight: var(--typography-font-weight);
       font-stretch: var(--typography-font-stretch);
-      text-align: var(--typography-align);
+      text-align: var(--typography-text-align);
       text-transform: var(--typography-text-transform);
       opacity: var(--typography-opacity);
-      transition: color, letter-spacing, font-size 75ms linear;
+      transition: color ${enteringScreen} ${easeInOut}, letter-spacing ${enteringScreen} ${easeInOut}, font-size ${enteringScreen} ${easeInOut};
     }
 
     ${ButtonBaseLine.ButtonBaseLineInitial(theme)}
@@ -100,7 +106,7 @@ export const AppBaseLineVariableStyle = (
       --typography-font-weight: ${typography.fontWeight};
       --typography-font-stretch: ${typography.fontStretch};
       --typography-opacity: ${typography.opacity};
-      --typography-align: var(--direction);
+      --typography-text-align: var(--direction);
 
       /* Body Variable Declaration */
       --body-background: ${palette.background.default};

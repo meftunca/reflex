@@ -1,5 +1,5 @@
+import { Theme } from "@emotion/react";
 import { readableColorIsBlack } from "color2k";
-import Theme from "../theme/Types";
 
 type parseColorType = { isDark: boolean; color: string };
 

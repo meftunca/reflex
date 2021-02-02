@@ -11,6 +11,8 @@ declare type DialogProps = {
     height: number;
     enableCloseIcon?: boolean;
     containerProps?: BoxProps;
+    role: "dialog" | "drawer";
+    drawerPosition: "left" | "right" | "top" | "bottom";
     header?: (props: any) => React.ReactNode;
     headerProps?: BoxProps;
     content?: (props: any) => React.ReactNode;

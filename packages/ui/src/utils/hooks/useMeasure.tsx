@@ -1,6 +1,4 @@
-//@ts-ignore
-import { useState, useMemo, useLayoutEffect } from "react";
-import ResizeObserver from "resize-observer-polyfill";
+import { useLayoutEffect, useMemo, useState } from "react";
 
 export type UseMeasureRect = Pick<
   DOMRectReadOnly,
@@ -25,9 +23,9 @@ const defaultState: UseMeasureRect = {
   right: 0,
 };
 
-const useMeasure = <E extends HTMLElement = HTMLElement>(): UseMeasureResult<
-  E
-> => {
+const useMeasure = <
+  E extends HTMLElement = HTMLElement
+>(): UseMeasureResult<E> => {
   const [element, ref] = useState<E | null>(null);
   const [rect, setRect] = useState<UseMeasureRect>(defaultState);
 

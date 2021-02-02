@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-nocheck
 type Breakpoints = {
   xs: number;
   sm: number;
@@ -122,6 +122,7 @@ type Easing = {
   easeOut: string;
   easeIn: string;
   sharp: string;
+  linear: string;
 };
 
 type Typography = {
@@ -187,6 +188,7 @@ type ZIndex = {
 };
 
 import "@emotion/react";
+import { Dayjs } from "dayjs";
 declare module "@emotion/react" {
   export interface Theme {
     prefix: string;
@@ -202,6 +204,7 @@ declare module "@emotion/react" {
     shape: Shape;
     transitions: Transitions;
     zIndex: ZIndex;
+    dayjs?: Dayjs;
   }
 }
 
@@ -219,4 +222,5 @@ export default interface Theme {
   shape: Shape;
   transitions: Transitions;
   zIndex: ZIndex;
+  dayjs?: Dayjs;
 }

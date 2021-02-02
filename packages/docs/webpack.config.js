@@ -18,6 +18,7 @@ module.exports = {
   node: {},
   devtool: "inline-source-map",
   entry: "./src/index.js",
+  target: "web",
   module: {
     rules: [
       {
@@ -59,6 +60,7 @@ module.exports = {
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
+
       {
         test: /\.mdx?$/,
         use: [
@@ -98,9 +100,9 @@ module.exports = {
   devServer: {
     contentBase: ["./public", "./dist"],
     // writeToDisk: true,
-    disableHostCheck: true,
+    // disableHostCheck: true,
     historyApiFallback: true,
-    port: 3000,
+    port: 3333,
     hot: true,
   },
 

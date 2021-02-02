@@ -83,11 +83,10 @@ const StyledBox = styled.div((props: BoxProps) => {
   if (props.display) obj["--box-display"] = props.display;
   // if (props.bgColor) obj["--box-background-color"] = props.bgColor;
   // if (props.background) obj["--box-background"] = props.background;
-  if (props.radius)
-    obj["--box-border-radius"] = boxMarginPaddingGenerator(props.radius);
+  if (props.radius) obj.borderRadius = boxMarginPaddingGenerator(props.radius);
   if (props.color) obj["--box-color"] = props.color;
   if (props.shadow && props.theme.shadows) {
-    obj["--box-shadow"] =
+    obj.boxShadow =
       typeof props.shadow === "number"
         ? props.theme.shadows[props.shadow]
         : props.shadow;
@@ -95,18 +94,18 @@ const StyledBox = styled.div((props: BoxProps) => {
 
   if (props.p || props.pt || props.pr || props.pb || props.pl) {
     if (props.p) {
-      obj["--box-padding"] = boxMarginPaddingGenerator(props.p);
+      obj.padding = boxMarginPaddingGenerator(props.p);
     } else {
-      obj["--box-padding"] =
+      obj.padding =
         boxMarginPaddingGenerator([props.pt, props.pr, props.pb, props.pl]) +
         " !important;";
     }
   }
   if (props.m || props.mt || props.mr || props.mb || props.ml) {
     if (props.m) {
-      obj["--box-margin"] = boxMarginPaddingGenerator(props.m);
+      obj.margin = boxMarginPaddingGenerator(props.m);
     } else {
-      obj["--box-margin"] =
+      obj.margin =
         boxMarginPaddingGenerator([props.mt, props.mr, props.mb, props.ml]) +
         " !important;";
     }
@@ -129,5 +128,7 @@ const Box: React.FC<BoxProps> = ({ children, className, ...rest }) => {
     </StyledBox>
   );
 };
+
+Box.displayName = "Box";
 
 export default Box;

@@ -1,6 +1,0 @@
-`BottomNavigationWrapper` (component)
-=====================================
-
-
-
-

@@ -1,9 +1,8 @@
 /** @jsx jsx */
-import React from "react";
+import { css, jsx, keyframes, useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import { jsx, css, keyframes } from "@emotion/react";
+import React, { useMemo } from "react";
 import Generator from "./Generator";
-import { useTheme } from "@emotion/react";
 
 type animationObjectType = {
   [key: string]: number | string;
@@ -35,9 +34,9 @@ export type TransitionProps = {
 export type Ref = HTMLDivElement;
 
 const TransitionBase = styled.div(
-  css`
+  `
     position: relative;
-    display: none;
+    display:none;
     &.in,
     &.out {
       display: inherit;
@@ -57,26 +56,29 @@ const Transition: React.FC<TransitionProps> = React.forwardRef<
   (
     {
       children,
-      animation,
+      animation: userDefinedAnimation,
       infinite = false,
       duration = 200,
       delay = 0,
       onStartIn,
       onStartOut,
       onEndIn,
-      direction,
+      direction = "Top",
       effect = "Slide",
       onEndOut,
+
       ...rest
     },
     ref
   ) => {
     const theme = useTheme();
     const { in: restIn = true, ...props } = rest;
-    if (animation === undefined && restIn !== null) {
-      animation = Generator[effect][direction || "default"];
-    }
-
+    const animation = useMemo(() => {
+      if (userDefinedAnimation === undefined || restIn !== null) {
+        return Generator[effect][direction || "default"];
+      }
+      return userDefinedAnimation;
+    }, [effect, direction]);
     return (
       <TransitionBase
         {...props}
@@ -89,12 +91,14 @@ const Transition: React.FC<TransitionProps> = React.forwardRef<
         css={css`
           &.in {
             animation: ${keyframes(animation && animation.in)} ${duration}ms
-              ${theme.transitions.easing.easeIn} ${infinite ? "infinite" : ""};
+              ${theme.transitions.easing.easeInOut}
+              ${infinite ? "infinite" : ""};
             animation-delay: ${delay}ms;
           }
           &.out {
             animation: ${keyframes(animation && animation.out)} ${duration}ms
-              ${theme.transitions.easing.easeOut} ${infinite ? "infinite" : ""};
+              ${theme.transitions.easing.easeInOut}
+              ${infinite ? "infinite" : ""};
             animation-delay: ${delay}ms;
           }
         `}

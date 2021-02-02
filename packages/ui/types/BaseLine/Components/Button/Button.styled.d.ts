@@ -8,6 +8,7 @@ declare const _default: {
             lg: number;
             xl: number;
         };
+        dayjs: typeof import("dayjs");
         space: {
             default: number;
             dense: number;
@@ -234,6 +235,7 @@ declare const _default: {
                 easeOut: string;
                 easeIn: string;
                 sharp: string;
+                linear: string;
             };
             duration: {
                 shortest: number;
@@ -254,7 +256,7 @@ declare const _default: {
             snackbar: number;
             tooltip: number;
         };
-    }) => import("@emotion/utils").SerializedStyles;
+    }) => string;
     ButtonBaseLineInitial: ({ prefix, transitions, }: {
         prefix: string;
         breakpoints: {
@@ -264,6 +266,7 @@ declare const _default: {
             lg: number;
             xl: number;
         };
+        dayjs: typeof import("dayjs");
         space: {
             default: number;
             dense: number;
@@ -490,6 +493,7 @@ declare const _default: {
                 easeOut: string;
                 easeIn: string;
                 sharp: string;
+                linear: string;
             };
             duration: {
                 shortest: number;
@@ -510,6 +514,6 @@ declare const _default: {
             snackbar: number;
             tooltip: number;
         };
-    }) => import("@emotion/utils").SerializedStyles;
+    }) => string;
 };
 export default _default;

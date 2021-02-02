@@ -1,7 +1,5 @@
-import { styled, css } from "../../utils/theme/styled";
-import { camelToKebabCase } from "../../utils/helpers/stringFormat";
-import { isObject } from "../../utils/helpers/is";
 import { lighten } from "color2k";
+import { css, styled } from "../../utils/theme/styled";
 type Props = {
   colorDepth?: "light" | "main" | "dark";
   size?: number;
