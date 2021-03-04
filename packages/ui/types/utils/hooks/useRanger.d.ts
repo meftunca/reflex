@@ -1,10 +1,8 @@
-export declare function useRanger({ interpolator, tickSize, values, min, max, ticks: controlledTicks, steps, onChange, onDrag, stepSize, }: any): {
+export declare function useRanger({ trackElRef, interpolator, tickSize, values, min, max, ticks: controlledTicks, steps, onChange, onDrag, stepSize, }: any): {
     activeHandleIndex: null;
-    getTrackProps: ({ style, ref, ...rest }?: {
+    getTrackProps: ({ style, ...rest }?: {
         style?: {} | undefined;
-        ref: any;
     }) => {
-        ref: (el: any) => void;
         style: {
             position: string;
             userSelect: string;

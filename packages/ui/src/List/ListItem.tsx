@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import React from "react";
+import React, { CSSProperties } from "react";
 import Ripple, { Props as RippleProps } from "../Ripple";
 import Text from "../Typography";
 import StyledListItem from "./Styled/listItem.styled";
@@ -27,6 +27,7 @@ export interface Props {
     | string;
   rippleProps?: RippleProps;
   className?: string | string[];
+  style?: CSSProperties
 }
 
 const ListItem: React.FC<Props> = ({

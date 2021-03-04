@@ -14,6 +14,7 @@ export { default as Box } from "./Box";
 export { default as Button } from "./Button";
 export { default as ButtonBase } from "./ButtonBase";
 export { default as Card } from "./Card";
+export { default as Hidden } from "./Hidden";
 // export { default as ClickAwayListener } from "./ClickAwayListener";
 export { default as Carousel } from "./Carousel";
 export { default as Chip } from "./Chip";

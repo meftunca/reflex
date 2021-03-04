@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { Props as RippleProps } from "../Ripple";
 export interface Props {
     title: string | React.ReactNode;
@@ -12,6 +12,7 @@ export interface Props {
     color?: "primary" | "secondary" | "error" | "warning" | "info" | "success" | string;
     rippleProps?: RippleProps;
     className?: string | string[];
+    style?: CSSProperties;
 }
 declare const ListItem: React.FC<Props>;
 export default ListItem;

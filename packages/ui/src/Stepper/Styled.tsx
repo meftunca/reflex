@@ -19,7 +19,8 @@ export const StepHeaderBaseDivider = styled.div(({ theme }) => ({
   "& span": {
     width: "100%",
     height: 2,
-    backgroundColor: "#0003",
+    backgroundColor: "var(--typography-color)",
+    opacity: .2
   },
 }));
 export const StepContentBase = styled.div(({ theme }) => ({

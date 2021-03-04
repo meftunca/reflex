@@ -66,7 +66,7 @@ export default ({
                   height: "100%",
                   display: "flex",
                   justifyContent: "center",
-                  overflow: "hidden",
+                  // overflow: "hidden",
                   alignItems: "center",
                   "> *": {
                     margin: 4,

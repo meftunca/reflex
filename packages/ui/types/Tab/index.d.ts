@@ -1,2 +1,2 @@
-declare const _default: () => import("@emotion/react/types/jsx-namespace").EmotionJSX.Element;
+declare const _default: () => import("@emotion/react/jsx-runtime").JSX.Element;
 export default _default;

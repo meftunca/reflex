@@ -33,7 +33,7 @@ export const MenuPage = () => {
               {Array(2 + Math.floor((Math.random() * 999) % 6))
                 .fill("")
                 .map((i, k2) => (
-                  <List.Item key={k2} button title={`Menu Item ${k2 + 1}`} />
+                  <List.Item style={{ minWidth: 300 }} size={12} key={k2} button title={`Menu Item ${k2 + 1}`} />
                 ))}
             </List>
           }

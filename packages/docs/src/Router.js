@@ -21,6 +21,7 @@ export default  {
 "/documentation/layout/box": lazy(() => import("./Pages/Documentation/Layout/Box/Box.mdx")),
 "/documentation/layout/collapse": lazy(() => import("./Pages/Documentation/Layout/Collapse/Collapse.mdx")),
 "/documentation/layout/grid": lazy(() => import("./Pages/Documentation/Layout/Grid/Grid.mdx")),
+"/documentation/layout/hidden": lazy(() => import("./Pages/Documentation/Layout/Hidden/Hidden.mdx")),
 "/documentation/layout/Transition": lazy(() => import("./Pages/Documentation/Layout/Transition/Transition.mdx")),
 "/documentation/navigation/app-bar": lazy(() => import("./Pages/Documentation/Navigation/AppBar/index.mdx")),
 "/documentation/navigation/bottom-navigation": lazy(() => import("./Pages/Documentation/Navigation/BottomNavigation/index.mdx")),

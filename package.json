@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap && lerna exec yarn &&  lerna link",
-    "publish": "lerna publish --force-publish",
+    "publish": "git add .; git commit -m 'auto publish'; git push -u; lerna publish --force-publish",
     "test": "lerna run test",
     "start": "yarn bootstrap && lerna run start  --stream --parallel",
     "serve": "yarn bootstrap && lerna exec serve -s build  --scope=@re-flex/docs",
@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "gh-pages": "^3.1.0",
-    "lerna": "^3.22.1"
+    "lerna": "^4.0.0"
   }
 }

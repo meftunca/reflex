@@ -209,7 +209,7 @@ const Dialog: React.FC<DialogProps> = React.forwardRef<
       // enableCloseIcon = true,
       footer,
       width = 678,
-      height,
+      height = 500,
       headerProps = {},
       containerProps = {},
       contentProps = {},

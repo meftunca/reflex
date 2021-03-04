@@ -77,6 +77,7 @@ const Stepper: React.FC<Props> = ({ direction, contents, headers }) => {
               <Button
                 onClick={() => forward(k)}
                 css={{ padding: 8 }}
+                color={step === k ? "primary" : "default"}
                 {...buttonProps}
               >
                 <div css={{ display: "flex", alignItems: "center" }}>
