@@ -1,4 +1,6 @@
-import { useTheme } from "@emotion/react";
+// import { useTheme } from "@emotion/react";
+import { useTheme } from "../../utils/theme/styled";
+
 import styled from "@emotion/styled";
 import React from "react";
 

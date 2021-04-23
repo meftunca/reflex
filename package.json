@@ -11,7 +11,7 @@
     "packages/*"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap && lerna exec yarn &&  lerna link",
+    "bootstrap": "lerna bootstrap  --force-local && lerna exec yarn &&  lerna link",
     "publish": "git add .; git commit -m 'auto publish'; git push -u; lerna publish --force-publish",
     "test": "lerna run test",
     "start": "yarn bootstrap && lerna run start  --stream --parallel",
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "gh-pages": "^3.1.0",
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "prettier": "1.19.1"
   }
 }

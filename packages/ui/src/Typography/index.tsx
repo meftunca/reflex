@@ -1,6 +1,7 @@
-import { useTheme } from "@emotion/react";
+// import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
+import { useTheme } from "../utils/theme/styled";
 import { isObject } from "../utils/helpers/is";
 import { camelToKebabCase } from "../utils/helpers/stringFormat";
 export type TextVariant =

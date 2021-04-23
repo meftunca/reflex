@@ -4,20 +4,40 @@ menu: Data Display
 route: /documentation/data-display/avatar
 ---
 
-import Docs from "docz/components";
 import { Avatar } from "@re-flex/ui";
-import Size from "./AvatarSize.mdx";
-import AvatarImage from "./AvatarImage.mdx";
-import AvatarIcon from "./AvatarIcon.mdx";
 import { FiCamera } from "react-icons/fi";
 import { image } from "faker/locale/en";
+import AvatarIcon from "./AvatarIcon.tsx";
+import AvatarImage from "./AvatarImage.tsx";
+import AvatarLabel from "./AvatarLabel.tsx";
 
-# Introduction
 
-<Size />
-<AvatarImage />
-<AvatarIcon />
+
+## Label
+
+<Playground jsFile={require("!raw-loader!./AvatarLabel.jsx").default} tsFile={require("!raw-loader!./AvatarLabel.tsx").default}>
+<AvatarLabel/>
+</Playground>
+
+## Images
+
+<Playground jsFile={require("!raw-loader!./AvatarImage.jsx").default} tsFile={require("!raw-loader!./AvatarImage.tsx").default}>
+<AvatarImage/>
+</Playground>
+
+
+## Icons
+
+<Playground jsFile={require("!raw-loader!./AvatarIcon.jsx").default} tsFile={require("!raw-loader!./AvatarIcon.tsx").default}>
+<AvatarIcon/>
+</Playground>
+
+
+
+
+
+
 
 ## Properties
 
-<Docs.Props props={Avatar.__docgenInfo} />
+<Props of={Avatar} />

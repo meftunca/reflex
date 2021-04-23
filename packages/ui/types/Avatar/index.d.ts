@@ -1,6 +1,6 @@
 import React from "react";
 import { TextVariant } from "../Typography";
-declare type AvatarBaseProps = {
+declare type AvatarBaseProps = React.ClassAttributes<HTMLDivElement> & React.HTMLProps<HTMLDivElement> & {
     radius?: number;
     size?: number;
     color?: string;

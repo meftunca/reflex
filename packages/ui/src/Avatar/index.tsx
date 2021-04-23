@@ -12,12 +12,13 @@ const AvatarTextNormalize = (label: string): string =>
     .map((i) => i[0])
     .join("");
 
-type AvatarBaseProps = {
-  radius?: number;
-  size?: number;
-  color?: string;
-  textColor?: string;
-};
+type AvatarBaseProps = React.ClassAttributes<HTMLDivElement> &
+  React.HTMLProps<HTMLDivElement> & {
+    radius?: number;
+    size?: number;
+    color?: string;
+    textColor?: string;
+  };
 
 const AvatarBase = styled.div<AvatarBaseProps>(
   ({ radius, size = 40, color, textColor = "white" }) => `
@@ -32,6 +33,7 @@ const AvatarBase = styled.div<AvatarBaseProps>(
     align-items: center;
     justify-content: center;
     overflow:hidden;
+    user-select:none;
     svg{
         color:${textColor};
         font-size:${size / 2}px

@@ -1,9 +1,9 @@
 //@ts-nocheck
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { List, Button, Text, IconButton, Popper } from "@re-flex/ui";
-export default () => {
+const Tooltip: React.FC = () => {
   return (
-    <>
+    <Fragment>
       <Text variant="h2">Tooltips</Text>
       <Popper placement="top-start" content="hi">
         <Button>Reference</Button>
@@ -38,6 +38,8 @@ export default () => {
       >
         <Button>Open Menu</Button>
       </Popper>
-    </>
+    </Fragment>
   );
 };
+
+export default Tooltip;

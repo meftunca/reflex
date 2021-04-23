@@ -7,7 +7,7 @@ export declare type Props = {
     color?: "textPrimary" | "textSecondary" | "primary" | "secondary" | "error" | "warning" | "info" | "success" | string;
     variant?: "outlined" | "contained" | "text";
     ripple?: typeof Ripple.defaultProps | null;
-    label?: string;
+    label: string | React.ReactNode;
     avatar?: React.ReactNode;
     icon?: React.ReactNode;
     deleteIcon?: React.ReactNode;

@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 
 export const BoxVarsStyled = (theme: typeof defaultTheme = defaultTheme) => {
   const { prefix } = theme;
-  return css`
+  return `
     .${prefix}-collapse-content {
       --collapse-cursor: pointer;
       --collapse-padding: 0;
@@ -17,7 +17,7 @@ export const BoxVarsStyled = (theme: typeof defaultTheme = defaultTheme) => {
 
 export const BoxInitialStyled = (theme: typeof defaultTheme = defaultTheme) => {
   const { prefix } = theme;
-  return css`
+  return `
     .${prefix}-collapse-content {
       cursor: var(--collapse-cursor);
       padding: var(--collapse-padding);

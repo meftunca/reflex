@@ -1,6 +1,6 @@
 //@ts-nocheck
-import { Box, Text, Button, Collapse } from "@re-flex/ui";
-import { CollapseProps } from "@re-flex/ui/Effect/Collapse";
+import { Box, Text, Button, Collapse, List, Icon } from "@re-flex/ui";
+import { CollapseProps } from "@re-flex/ui/src/Collapse";
 import React, { useState } from "react";
 
 const CollapseSimple: React.FC<CollapseProps> = () => {
@@ -26,16 +26,21 @@ const CollapseSimple: React.FC<CollapseProps> = () => {
 export default CollapseSimple;
 
 const BasicAccordion = () => {
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState<null | number>(null);
   return (
     <div>
       {Array(10)
         .fill("")
         .map((i, k) => (
           <div key={k}>
-            <Button onClick={() => setOpen(open === k ? null : k)}>
-              Toggle Collapse Item {k}
-            </Button>
+            <List.Item
+              button
+              title={`Toggle Collapse Item {k}`}
+              onClick={() => setOpen(open === k ? null : k)}
+              rightItem={
+                <Icon>{open !== k ? "expand_more" : "expand_less"}</Icon>
+              }
+            ></List.Item>
             <Collapse open={open === k}>
               <Box bgColor="#f0f0f0" p={40} radius={6} />
             </Collapse>

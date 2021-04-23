@@ -18,7 +18,7 @@ const breakPointsVarGenerator = (
   );
 };
 
-const responsiveFontSize = css`
+const responsiveFontSize = `
   @media screen and (max-width: var(--breakpoint-sm)) {
     html,
     body {
@@ -55,7 +55,7 @@ export const AppBaseLineInitialStyle = (
       easing: { easeInOut },
     },
   } = theme;
-  return css`
+  return `
     ${ResetCss}
 
     html,body {
@@ -90,7 +90,7 @@ export const AppBaseLineVariableStyle = (
   theme: typeof defaultTheme = defaultTheme
 ) => {
   const { typography, palette, direction, breakpoints } = theme;
-  return css`
+  return `
     :root {
       /* SetUp */
       --direction: ${direction === "rtl" ? "right" : "left"};

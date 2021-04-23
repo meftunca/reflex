@@ -1,31 +1,31 @@
 import React from "react";
 export declare const Track: import("@emotion/styled").StyledComponent<{
     theme?: import("@emotion/react").Theme | undefined;
-    as?: import("react").ElementType<any> | undefined;
-} & SliderProps, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+    as?: React.ElementType<any> | undefined;
+} & SliderProps, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
 export declare const Tick: import("@emotion/styled").StyledComponent<{
     theme?: import("@emotion/react").Theme | undefined;
-    as?: import("react").ElementType<any> | undefined;
-}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+    as?: React.ElementType<any> | undefined;
+}, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
 export declare const TickLabel: import("@emotion/styled").StyledComponent<{
     theme?: import("@emotion/react").Theme | undefined;
-    as?: import("react").ElementType<any> | undefined;
-}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+    as?: React.ElementType<any> | undefined;
+}, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
 export declare const Segment: import("@emotion/styled").StyledComponent<{
     theme?: import("@emotion/react").Theme | undefined;
-    as?: import("react").ElementType<any> | undefined;
+    as?: React.ElementType<any> | undefined;
 } & {
     backgroundColor: string;
-}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+}, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
 export declare const Handle: import("@emotion/styled").StyledComponent<{
     theme?: import("@emotion/react").Theme | undefined;
-    as?: import("react").ElementType<any> | undefined;
+    as?: React.ElementType<any> | undefined;
 } & {
     active: boolean;
     size: number;
     activeSize: number;
     color?: string | undefined;
-}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+}, React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
 declare type SliderProps = {
     disabled?: boolean;
     color?: string;

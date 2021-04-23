@@ -1,11 +1,20 @@
 import * as React from "react";
-declare type Props = HTMLInputElement & {
+import { BoxProps } from "../Box";
+export declare type InputProps = {
+    fieldProps?: BoxProps;
     variant?: "outlined" | "filled";
     startAdornment?: React.ReactNode;
     endAdornment?: React.ReactNode;
-    tag?: "div" | "input" | "textarea";
+    tag?: "div" | "input" | "textarea" | "button";
     size?: number;
     label?: string;
+    readOnly?: boolean;
+    disabled?: boolean;
+    value?: string | number | boolean;
+    onChange?: (ev: React.ChangeEvent<HTMLInputElement>) => void;
+    inputProps?: HTMLInputElement;
+    htmlFor?: string;
+    wrapperClassName: string;
 };
-declare const TextField: React.FC<Props>;
+declare const TextField: React.FC<InputProps>;
 export default TextField;

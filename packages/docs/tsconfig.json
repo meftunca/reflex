@@ -1,16 +1,18 @@
 {
+  // "include": ["../ui/src/**/*.tsx"],
   "compilerOptions": {
     "types": ["@emotion/react", "@types/resize-observer-browser"],
     "strict": false,
     "target": "esnext",
     "module": "esnext",
+    "jsxImportSource": "@emotion/react",
     "lib": ["dom", "esnext"],
     "sourceMap": false,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "alwaysStrict": true,
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowJs": false,
     "skipLibCheck": true,
@@ -18,6 +20,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": false
   }
 }

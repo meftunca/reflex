@@ -5,7 +5,8 @@ import React from "react";
 export const TextFieldFilledActive = (prefix: string) => css`
   /* background-color: black; */
   padding-bottom: calc(var(--textfield-input-base-padding));
-  &:focus + label {
+  &:focus + label,
+  label:active {
     color: var(--textfield-active-color);
     transform: translate(
         calc(var(--textfield-input-base-padding) / 2 * -1),
@@ -78,9 +79,10 @@ const TextFieldFilledBase = styled.div`
 `;
 
 type Props = { label: string; prefix: string };
-const TextFieldFilled: React.FC<Props> = ({ label, prefix }) => (
+const TextFieldFilled: React.FC<Props> = ({ label, prefix, children }) => (
   <>
     <FilledLabel>{label}</FilledLabel>
+    {children}
     <TextFieldFilledBase className={"text-field-line-ripple"} />
   </>
 );

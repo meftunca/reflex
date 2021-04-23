@@ -10,7 +10,10 @@ declare type Props = {
     open?: boolean;
     placement?: "bottom-end" | "bottom-start" | "bottom" | "left-end" | "left-start" | "left" | "right-end" | "right-start" | "right" | "top-end" | "top-start" | "top" | "auto" | "auto-start" | "auto-end" | undefined;
     popperOptions?: object;
-    popperRef?: React.Ref<any>;
+    popperRef?: React.Ref<{
+        open: () => void;
+        close: () => void;
+    }>;
     style?: object;
     transition?: boolean;
     paperProps?: BoxProps;

@@ -1,3 +1,4 @@
+import { Dayjs } from "dayjs";
 declare type Breakpoints = {
     xs: number;
     sm: number;
@@ -165,26 +166,6 @@ declare type ZIndex = {
     snackbar: number;
     tooltip: number;
 };
-import "@emotion/react";
-import { Dayjs } from "dayjs";
-declare module "@emotion/react" {
-    interface Theme {
-        prefix: string;
-        breakpoints: Breakpoints;
-        space: Space;
-        direction: string;
-        mixins: Mixins;
-        overrides: Overrides;
-        palette: Palette;
-        props: Overrides;
-        shadows: string[];
-        typography: Typography;
-        shape: Shape;
-        transitions: Transitions;
-        zIndex: ZIndex;
-        dayjs?: Dayjs;
-    }
-}
 export default interface Theme {
     prefix: string;
     breakpoints: Breakpoints;

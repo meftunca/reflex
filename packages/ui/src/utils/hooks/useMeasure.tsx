@@ -31,7 +31,7 @@ const useMeasure = <
 
   const observer = useMemo(
     () =>
-      new ResizeObserver((entries) => {
+      new ResizeObserver((entries: any) => {
         if (entries[0]) {
           const {
             x,

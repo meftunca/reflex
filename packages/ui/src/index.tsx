@@ -1,4 +1,16 @@
 /// <reference types="@emotion/react/types/css-prop" />
+import "@emotion/react";
+
+import EmotionTheme from "./utils/theme/Types";
+
+declare module "@emotion/react" {
+  export interface Theme extends EmotionTheme {}
+}
+export * from "./utils/hooks";
+export { default as darkTheme } from "./utils/theme/darkTheme";
+export { default as defaultTheme } from "./utils/theme/defaultTheme";
+export * from "./utils/theme/styled";
+export { ThemeProvider } from "./utils/theme/theming";
 
 // @ UTILS
 export { default as AppBar } from "./AppBar";
@@ -45,6 +57,7 @@ export {
 export { default as Radio } from "./SelectionControl/Radio";
 export { default as Slider } from "./SelectionControl/Slider";
 export { default as Switch } from "./SelectionControl/Switch";
+export { default as Select } from "./Select";
 export { default as Sheet } from "./Sheet";
 export { default as Snackbar } from "./Snackbar";
 export { default as Stepper } from "./Stepper";
@@ -55,8 +68,5 @@ export { default as TimePicker } from "./TimePicker";
 export { default as Tooltip } from "./Tooltip";
 export { default as Transition } from "./Transition";
 export { default as Text } from "./Typography";
-export * from "./utils/hooks";
-export { default as darkTheme } from "./utils/theme/darkTheme";
-export { default as defaultTheme } from "./utils/theme/defaultTheme";
-export * from "./utils/theme/styled";
-export { ThemeProvider } from "./utils/theme/theming";
+
+export { default as Icon } from "./Icon";

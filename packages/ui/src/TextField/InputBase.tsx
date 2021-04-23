@@ -10,21 +10,25 @@ const InputBase = styled(
     variant = "outlined",
     theme,
     ...props
-  }: {
-    as: "div" | "textarea" | "input";
+  }: HTMLInputElement & {
+    as: "div" | "textarea" | "input" | "button" | React.ReactNode;
     variant?: "filled" | "outlined";
     className: string;
     placeholder: string;
     theme: any;
+    //@ts-ignore
   }) => <T {...props} />
 )(
-  ({ variant = "outlined", theme }) => css`
+  ({ variant = "outlined", theme, as }) => css`
     display: flex;
-    padding: calc(var(--textfield-input-base-padding))
-      calc(var(--textfield-input-base-padding) / 2);
     border: none !important;
     outline: none;
     background-color: #0000;
+        padding: ${
+          as === "div" || as === "button"
+            ? `calc(var(--textfield-input-base-padding) / 4)`
+            : "inherit"
+        };
     z-index: 1;
     caret-color: #6200ee;
     -moz-osx-font-smoothing: grayscale;
@@ -44,18 +48,10 @@ const InputBase = styled(
     border-radius: 0;
     background: none;
     appearance: none;
-    ${variant === "filled"
-      ? TextFieldFilledActive(theme.prefix)
-      : TextFieldOutlinedActive(
-          theme.prefix
-        )} /* &:focus + &-textfield-notched-outline {
-      &-textfield-notched-outline-label {
-        border-top-color: transparent;
-        label {
-          transform: translateY(calc(var(--textfield-input-base-padding) * -1))
-            scale(0.75);
-        }
-      }
+    /* ${
+      variant === "filled"
+        ? TextFieldFilledActive(theme.prefix)
+        : TextFieldOutlinedActive(theme.prefix)
     } */
   `
 );

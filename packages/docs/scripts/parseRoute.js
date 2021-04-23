@@ -1,32 +1,36 @@
-const extract = require("remark-extract-frontmatter");
-const frontmatter = require("remark-frontmatter");
-const compiler = require("remark-stringify");
-const { readSync } = require("to-vfile");
-const unified = require("remark");
-const yaml = require("yaml").parse;
 const glob = require("glob");
 const fs = require("fs-extra");
 const groupby = require("lodash/groupBy");
 const watch = require("glob-watcher");
-const parser = require("remark-parse");
-const yamlConfig = require("remark-yaml-config");
+const slug = require("remark-slug");
+const remark2rehype = require("remark-rehype");
+const matter = require("gray-matter");
 
-const parseFile = async (filePath, push) => {
-  unified()
-    // .use(parser)
-    .use(compiler)
-    .use(frontmatter, ["yaml"])
-    // .use(yamlConfig)
-    .use(extract, { yaml: yaml })
-    // .use(logger)
-    .process(await readSync(filePath), function(err, file) {
-      if (err) console.error("Error: ", err);
-      push({
-        ...file.data,
-        cwd: file.cwd,
-        filePath: filePath.replace("src/", "./"),
+function logger() {
+  return console.dir;
+}
+
+const parseFile = (filePath) => {
+  return new Promise((resolve, reject) => {
+    try {
+      fs.readFile(filePath, "utf-8", function(err, file) {
+        if (err) {
+          console.error("Error: ", err);
+          reject(error);
+        }
+        const { content, data } = matter(file);
+
+        resolve({
+          ...data,
+          content,
+          cwd: file.cwd,
+          filePath: filePath.replace("src/", "./"),
+        });
       });
-    });
+    } catch (error) {
+      reject(error);
+    }
+  });
 };
 const watcher = watch(["src/Pages/**/*.mdx"]);
 const parseFunc = function(files, stat) {
@@ -42,12 +46,11 @@ const parseFunc = function(files, stat) {
     : typeof files === "string"
     ? [files]
     : [];
-  const meta = [];
   Promise.all(
     files.map((file) => {
       return parseFile(file, (path) => meta.push(path));
     })
-  ).then(() => {
+  ).then((meta) => {
     let parseMeta = groupby(
       meta.filter((i) => i?.route),
       (r) => r.menu
@@ -66,7 +69,6 @@ const parseFunc = function(files, stat) {
         if (err) console.log(err);
       }
     );
-
     const RouteJS = `
 import { lazy} from "react";
 export default  {
@@ -86,11 +88,8 @@ export default  {
     .join(",\n")},
      }
       `;
-    // .replace(/(\s|\r|\n)/gim, "")
-    // .replace("exportdefault", "export default");
 
     fs.writeFile("./src/Router.js", RouteJS, console.log);
-    console.timeEnd("Create");
   });
 };
 glob("src/Pages/**/*.mdx", parseFunc);

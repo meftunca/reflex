@@ -1,17 +1,20 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const remarkCodeImport = require("remark-code-import");
+// const remarkCodeImport = require("remark-code-import");
+const remarkCodeImport = require("./scripts/codeImport");
 const remarkEmbed = require("remark-oembed");
 const remarkCodeSandbox = require("remark-codesandbox");
 const remarkCodeMirror = require("remark-react-codemirror");
-const remarkFM = require("remark-frontmatter");
 const remarkToc = require("remark-toc");
 const remarkSlug = require("remark-slug");
 const remarkPar = require("remark-squeeze-paragraphs");
 const CopyPlugin = require("copy-webpack-plugin");
 const { TsConfigPathsPlugin } = require("awesome-typescript-loader");
 const ResourceHintWebpackPlugin = require("resource-hints-webpack-plugin");
+const ReactDocgenTypescriptPlugin = require("react-docgen-typescript-plugin")
+  .default;
+
 // const ProgressiveManifest = require("webpack-pwa-manifest");
 
 module.exports = {
@@ -24,36 +27,41 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: [
-          { loader: "awesome-typescript-loader" },
+          "ts-loader",
           {
             loader: require.resolve("react-docgen-typescript-loader"),
             options: {
               // Provide the path to your tsconfig.json so that your stories can
               // display types from outside each individual story.
-              // tsconfigPath: path.resolve(__dirname, "../ui/tsconfig.json"),
-              // savePropValueAsString: true,
-              // shouldExtractLiteralValuesFromEnum: true,
-              // // shouldRemoveUndefinedFromOptional: true,
-              // skipPropsWithoutDoc: true,
-              // shouldExtractValuesFromUnion: true,
               tsconfigPath: path.resolve(__dirname, "../ui/tsconfig.json"),
+              // tsconfigPath: path.resolve(__dirname, "./tsconfig.json"),
+              // docgenCollectionName: "__docgenInfo",
+              // typePropName: "__docgenInfo",
+              // shouldExtractLiteralValuesFromEnum: true,
+              // setDisplayName: true,
               propFilter: (prop, component) => {
-                if (!prop.parent) {
-                  return true;
+                if (
+                  prop.declarations !== undefined &&
+                  prop.declarations.length > 0
+                ) {
+                  const hasPropAdditionalDescription = prop.declarations.find(
+                    (declaration) => {
+                      return !declaration.fileName.includes("node_modules");
+                    }
+                  );
+                  return Boolean(hasPropAdditionalDescription);
                 }
-
-                return prop.parent.fileName.includes("@re-flex")
-                  ? true
-                  : !prop.parent.fileName.includes("node_modules");
+                return true;
               },
             },
           },
         ],
+        // exclude: /node_modules/,
         include: [
+          // /node_modules/,
           path.resolve(__dirname, "../ui/src"),
           path.resolve(__dirname, "src"),
         ],
-        // exclude: /node_modules/,
       },
       {
         test: /\.(js|jsx)$/,
@@ -64,22 +72,22 @@ module.exports = {
       {
         test: /\.mdx?$/,
         use: [
-          { loader: "babel-loader" },
+          "babel-loader",
           {
             loader: "@mdx-js/loader",
             options: {
               remarkPlugins: [
-                remarkCodeImport,
                 remarkEmbed,
                 remarkCodeSandbox,
                 remarkCodeMirror,
-                remarkFM,
                 remarkToc,
                 remarkSlug,
                 remarkPar,
+                remarkCodeImport,
               ],
             },
           },
+          path.join(__dirname, "./scripts/mdx_webpack_frontmatter_loader.js"),
         ],
       },
     ],
@@ -107,6 +115,27 @@ module.exports = {
   },
 
   plugins: [
+    // new ReactDocgenTypescriptPlugin({
+    //   tsconfigPath: "../ui/tsconfig.json",
+    //   docgenCollectionName: "RE_FLEX_UI",
+    //   // exclude: ["./src/**/**.tsx", "./src/**/**.mdx", "./src/**/**.jsx"],
+    //   include: ["../ui/src/**/*.tsx"],
+    //   typePropName: "props",
+    //   propFilter: (prop, component) => {
+    //     console.log(`component`, component);
+    //     if (prop.declarations !== undefined && prop.declarations.length > 0) {
+    //       const hasPropAdditionalDescription = prop.declarations.find(
+    //         (declaration) => {
+    //           return !declaration.fileName.includes("node_modules");
+    //         }
+    //       );
+
+    //       return Boolean(hasPropAdditionalDescription);
+    //     }
+
+    //     return true;
+    //   },
+    // }),
     new CopyPlugin({
       patterns: [{ from: "public", to: "dist" }],
     }),

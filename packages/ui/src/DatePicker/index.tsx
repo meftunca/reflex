@@ -38,8 +38,12 @@ const DatePickerBase: React.FC<DatePickerBaseProps> = ({}) => {
           padding: 12,
         })}
       >
-        <IconButton onClick={() => controls.prevYear(-1)}>{"<<"}</IconButton>
-        <IconButton onClick={() => controls.prevMonth(-1)}>{"<"}</IconButton>
+        <IconButton onClick={() => controls.prevYear(-1)} size={13}>
+          <span className="material-icons">first_page</span>
+        </IconButton>
+        <IconButton onClick={() => controls.prevMonth(-1)} size={13}>
+          <span className="material-icons">chevron_left</span>
+        </IconButton>
         <div css={css({ flexGrow: 1 })} />
         <Text align="center">
           {mode === "range" && (
@@ -52,8 +56,12 @@ const DatePickerBase: React.FC<DatePickerBaseProps> = ({}) => {
             : previewDate[0].format("MMM, YYYY")}
         </Text>
         <div css={css({ flexGrow: 1 })} />
-        <IconButton onClick={() => controls.nextMonth(1)}>{">"}</IconButton>
-        <IconButton onClick={() => controls.nextYear(1)}>{">>"}</IconButton>
+        <IconButton onClick={() => controls.nextMonth(1)} size={13}>
+          <span className="material-icons">chevron_right</span>
+        </IconButton>
+        <IconButton onClick={() => controls.nextYear(1)} size={13}>
+          <span className="material-icons">last_page</span>
+        </IconButton>
       </Box>
       <div css={css({ display: "inline-flex" })}>
         <Table

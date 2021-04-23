@@ -1,6 +1,6 @@
 import React from "react";
 
-import { List, Button, Text, IconButton, Popper } from "@re-flex/ui";
+import { List, Button, Text, IconButton, Popper } from "@re-flex/ui/src";
 
 const placement = [
   "top-start",
@@ -27,14 +27,20 @@ export const MenuPage = () => {
         <Popper
           placement={i}
           key={k}
-          paperProps={{ p: [4, 0], bgColor: "white", color: "black" }}
+          // paperProps={{ p: [4, 0], bgColor: "white", color: "black" }}
           content={
             <List>
-              {Array(2 + Math.floor((Math.random() * 999) % 6))
+              {/* {Array(2 + Math.floor((Math.random() * 999) % 6))
                 .fill("")
                 .map((i, k2) => (
-                  <List.Item style={{ minWidth: 300 }} size={12} key={k2} button title={`Menu Item ${k2 + 1}`} />
-                ))}
+                  <List.Item
+                    // style={{ minWidth: 300 }}
+                    size={12}
+                    key={k2}
+                    button
+                    title={`Menu Item ${k2 + 1}`}
+                  />
+                ))} */}
             </List>
           }
         >

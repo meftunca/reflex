@@ -5,7 +5,6 @@ const remarkCodeImport = require("remark-code-import");
 const remarkEmbed = require("remark-oembed");
 const remarkCodeSandbox = require("remark-codesandbox");
 const remarkCodeMirror = require("remark-react-codemirror");
-const remarkFM = require("remark-frontmatter");
 const remarkToc = require("remark-toc");
 const remarkSlug = require("remark-slug");
 const remarkPar = require("remark-squeeze-paragraphs");
@@ -20,7 +19,8 @@ const ResourceHintWebpackPlugin = require("resource-hints-webpack-plugin");
 // const ProgressiveManifest = require("webpack-pwa-manifest");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
-
+const ReactDocgenTypescriptPlugin = require("react-docgen-typescript-plugin")
+  .default;
 module.exports = {
   node: {},
   devtool: "inline-source-map",
@@ -31,29 +31,29 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           { loader: "awesome-typescript-loader" },
-          {
-            loader: require.resolve("react-docgen-typescript-loader"),
-            options: {
-              // Provide the path to your tsconfig.json so that your stories can
-              // display types from outside each individual story.
-              // tsconfigPath: path.resolve(__dirname, "../ui/tsconfig.json"),
-              // savePropValueAsString: true,
-              // shouldExtractLiteralValuesFromEnum: true,
-              // // shouldRemoveUndefinedFromOptional: true,
-              // skipPropsWithoutDoc: true,
-              // shouldExtractValuesFromUnion: true,
-              tsconfigPath: path.resolve(__dirname, "../ui/tsconfig.json"),
-              // propFilter: (prop, component) => {
-              //   if (!prop.parent) {
-              //     return true;
-              //   }
+          // {
+          //   loader: require.resolve("react-docgen-typescript-loader"),
+          //   options: {
+          //     // Provide the path to your tsconfig.json so that your stories can
+          //     // display types from outside each individual story.
+          //     // tsconfigPath: path.resolve(__dirname, "../ui/tsconfig.json"),
+          //     // savePropValueAsString: true,
+          //     // shouldExtractLiteralValuesFromEnum: true,
+          //     // // shouldRemoveUndefinedFromOptional: true,
+          //     // skipPropsWithoutDoc: true,
+          //     // shouldExtractValuesFromUnion: true,
+          //     tsconfigPath: path.resolve(__dirname, "../ui/tsconfig.json"),
+          //     // propFilter: (prop, component) => {
+          //     //   if (!prop.parent) {
+          //     //     return true;
+          //     //   }
 
-              //   return prop.parent.fileName.includes("@re-flex")
-              //     ? true
-              //     : !prop.parent.fileName.includes("node_modules");
-              // },
-            },
-          },
+          //     //   return prop.parent.fileName.includes("@re-flex")
+          //     //     ? true
+          //     //     : !prop.parent.fileName.includes("node_modules");
+          //     // },
+          //   },
+          // },
         ],
         include: [
           path.resolve(__dirname, "../ui/src"),
@@ -69,7 +69,7 @@ module.exports = {
       {
         test: /\.mdx?$/,
         use: [
-          { loader: "babel-loader" },
+          "babel-loader",
           {
             loader: "@mdx-js/loader",
             options: {
@@ -78,13 +78,13 @@ module.exports = {
                 remarkEmbed,
                 remarkCodeSandbox,
                 remarkCodeMirror,
-                remarkFM,
                 remarkToc,
                 remarkSlug,
                 remarkPar,
               ],
             },
           },
+          path.join(__dirname, "./scripts/mdx_webpack_frontmatter_loader.js"),
         ],
       },
     ],
@@ -157,6 +157,7 @@ module.exports = {
       transpileOnly: true,
       useBabel: true,
     }),
+    new ReactDocgenTypescriptPlugin({ tsconfigPath: "../ui/tsconfig.json" }),
     new BundleAnalyzerPlugin(),
     // new WebpackPwaManifest({
     //   name: "Re-Flex UI",

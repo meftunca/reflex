@@ -4,15 +4,11 @@ hidden: true
 ---
 
 import { Avatar, Box } from "@re-flex/ui";
+import AvatarIcon from "./AvatarIcon.tsx";
 
 ## Icons
 
-```js live=true
-<Box>
-  <Avatar icon={<FiCamera />} size={24} />
-  <Avatar icon={<FiAlertTriangle />} size={30} />
-  <Avatar icon={<FiAward />} size={40} />
-  <Avatar icon={<FiArrowDownCircle />} size={50} />
-  <Avatar icon={<FiBell />} size={50} />
-</Box>
-```
+<Playground jsFile={require("!raw-loader!./AvatarIcon.jsx").default} tsFile={require("!raw-loader!./AvatarIcon.tsx").default}>
+<AvatarIcon/>
+</Playground>
+

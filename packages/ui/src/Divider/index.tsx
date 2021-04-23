@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Divider = styled.div<Props>(
-  ({ strong, spacing = 8, color = "#454545", direction = "horizontal" }) => css`
+  ({ strong, spacing = 8, color = "silver", direction = "horizontal" }) => css`
     display: flex;
     width: ${direction === "vertical" ? strong + "px" : "100%"};
     height: ${direction === "horizontal" ? strong + "px" : "100%"};
@@ -18,6 +18,7 @@ const Divider = styled.div<Props>(
       .flat()
       .map((i) => i + "px")
       .join(" ")};
+    height: 1px;
   `
 );
 

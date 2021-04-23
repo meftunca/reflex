@@ -1,8 +1,9 @@
 /** @jsx jsx */
-import { css, jsx, keyframes, useTheme } from "@emotion/react";
-import styled from "@emotion/styled";
-import React, { useMemo } from "react";
-import Generator from "./Generator";
+import { css, jsx } from "@emotion/react";
+import React, { CSSProperties, useState } from "react";
+import { useCallback } from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 type animationObjectType = {
   [key: string]: number | string;
@@ -22,93 +23,104 @@ export type TransitionProps = {
   infinite?: boolean;
   effect?: "Slide" | "Fade" | "Zoom";
   direction?: "Top" | "Left" | "Right" | "Up";
+  defaultStyle: CSSProperties;
+  from: CSSProperties;
+  to: CSSProperties;
   //   list?: animationListType;
   duration?: number | string;
   delay?: number | string;
   in?: boolean | null;
-  onStartIn?: (e: any) => void;
-  onEndIn?: (e: any) => void;
-  onStartOut?: (e: any) => void;
-  onEndOut?: (e: any) => void;
+  onStart?: (...e: any) => void;
+  onEnter?: (...e: any) => void;
+  onLeave?: (...e: any) => void;
+  onEnd?: (...e: any) => void;
+  onCancel?: (...e: any) => void;
+  children?: React.ReactNode;
 };
 export type Ref = HTMLDivElement;
 
-const TransitionBase = styled.div(
-  `
-    position: relative;
-    display:none;
-    &.in,
-    &.out {
-      display: inherit;
+const Transition: React.FC<TransitionProps> = ({
+  defaultStyle = {},
+  in: isActive,
+  from = {},
+  to = {},
+  onStart,
+  onCancel = () => console.log("cancelled"),
+  onEnter,
+  onLeave,
+  onEnd,
+  duration = 200,
+  children,
+  delay = 0,
+
+  ...otherProps
+}) => {
+  const [style, setStyle] = useState({});
+  const [state, setState] = useState<
+    "entered" | "entering" | "exited" | "exiting"
+  >("exited");
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const element = ref.current;
+    if (element) {
+      element.ontransitioncancel = cancelTransition;
+      element.ontransitionstart = startTransition;
+      element.ontransitionend = endTransition;
+      element.ontransitionrun = runTransition;
+      const style = isActive ? to : from;
+      setStyle({ ...style });
     }
-  `,
-  () => {
-    let style = {};
-    // style["--transition-name"] = name;
-    return style;
-  }
-);
+  }, [ref.current, isActive]);
 
-const Transition: React.FC<TransitionProps> = React.forwardRef<
-  Ref,
-  TransitionProps
->(
-  (
-    {
-      children,
-      animation: userDefinedAnimation,
-      infinite = false,
-      duration = 200,
-      delay = 0,
-      onStartIn,
-      onStartOut,
-      onEndIn,
-      direction = "Top",
-      effect = "Slide",
-      onEndOut,
-
-      ...rest
-    },
-    ref
-  ) => {
-    const theme = useTheme();
-    const { in: restIn = true, ...props } = rest;
-    const animation = useMemo(() => {
-      if (userDefinedAnimation === undefined || restIn !== null) {
-        return Generator[effect][direction || "default"];
+  const cancelTransition = useCallback(
+    (...rest) => {
+      if (onCancel) {
+        onCancel(...rest);
       }
-      return userDefinedAnimation;
-    }, [effect, direction]);
-    return (
-      <TransitionBase
-        {...props}
-        ref={ref}
-        className={
-          theme.prefix +
-          "-transitions " +
-          (restIn === true ? "in" : restIn === false ? "out" : "")
-        }
-        css={css`
-          &.in {
-            animation: ${keyframes(animation && animation.in)} ${duration}ms
-              ${theme.transitions.easing.easeInOut}
-              ${infinite ? "infinite" : ""};
-            animation-delay: ${delay}ms;
-          }
-          &.out {
-            animation: ${keyframes(animation && animation.out)} ${duration}ms
-              ${theme.transitions.easing.easeInOut}
-              ${infinite ? "infinite" : ""};
-            animation-delay: ${delay}ms;
-          }
-        `}
-        onAnimationEnd={restIn ? onEndIn : onEndOut}
-        onAnimationStart={restIn ? onStartIn : onStartOut}
-      >
-        {children}
-      </TransitionBase>
-    );
-  }
-);
+      if (onEnd) onEnd(...rest);
+      setState("exiting");
+    },
+    [isActive]
+  );
+  const startTransition = useCallback(
+    (...rest) => {
+      if (onStart) onStart(onStart);
+    },
+    [isActive]
+  );
+  const endTransition = useCallback(
+    (...rest) => {
+      if (onEnd) onEnd(...rest);
+      setState(isActive ? "entered" : "exited");
+    },
+    [isActive]
+  );
+  const runTransition = useCallback(
+    (...rest) => {
+      if (isActive === false) {
+        if (onLeave) onLeave(...rest);
+        setState("exiting");
+      } else {
+        if (onEnter) onEnter(...rest);
+        setState("entering");
+      }
+    },
+    [isActive]
+  );
+
+  return (
+    <div
+      {...otherProps}
+      style={Object.assign({}, defaultStyle, style)}
+      css={css`
+        transition: all ${duration}ms linear;
+        will-change: transform;
+      `}
+      ref={ref}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default Transition;

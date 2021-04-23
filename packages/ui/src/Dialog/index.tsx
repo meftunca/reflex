@@ -9,6 +9,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { CSSProperties } from "react";
 import Box, { BoxProps } from "../Box";
 import Portal from "../Portal";
 import Transition from "../Transition";
@@ -25,30 +26,29 @@ const DialogBase = styled.div(
     align-items: center;
     display: none;
     opacity: 0;
-    &.default-dialog {
-      left: 0px;
-      right: 0px;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+
+    >.drawer {
+    }
+    >.drawer-left {
       top: 0;
+     // left: 0;
       bottom: 0;
     }
-    &.drawer {
-    }
-    &.drawer-left {
-      top: 0;
-      left: 0;
-      bottom: 0;
-    }
-    &.drawer-right {
+    >.drawer-right {
       top: 0;
       right: 0;
       bottom: 0;
     }
-    &.drawer-top {
+    >.drawer-top {
       left: 0;
       right: 0;
       top: 0;
     }
-    &.drawer-bottom {
+    >.drawer-bottom {
       left: 0;
       right: 0;
       bottom: 0;
@@ -76,7 +76,7 @@ const DialogBase = styled.div(
   })
 );
 
-/* 
+/*
 
 @Usage
 ```jsx
@@ -134,46 +134,29 @@ const dialogTransition = {
     to: { top: 100, opacity: 0 },
   },
 };
-const drawerTransitionGenerator = (width: number, height: number) => ({
+const drawerTransitionGenerator = (
+  width: number,
+  height: number
+): {
+  [key in "left" | "right" | "top" | "bottom"]: {
+    [key in "from" | "to"]: CSSProperties;
+  };
+} => ({
   left: {
-    in: {
-      from: { left: -width },
-      to: { left: 0 },
-    },
-    out: {
-      from: { left: 0 },
-      to: { left: -width },
-    },
+    from: { left: 0, transform: `translateX(${-width}px)` },
+    to: { left: 0, transform: `translateX(${0}px)` },
   },
   right: {
-    in: {
-      from: { right: -width },
-      to: { right: 0 },
-    },
-    out: {
-      from: { right: 0 },
-      to: { right: -width },
-    },
+    from: { right: 0, transform: `translateX(${width}px)` },
+    to: { right: 0, transform: `translateX(${0}px)` },
   },
   top: {
-    in: {
-      from: { top: -height },
-      to: { top: 0 },
-    },
-    out: {
-      from: { top: 0 },
-      to: { top: -height },
-    },
+    from: { top: 0, transform: `translateY(${-height}px)` },
+    to: { top: 0, transform: `translateY(${0}px)` },
   },
   bottom: {
-    in: {
-      from: { bottom: -height },
-      to: { bottom: 0 },
-    },
-    out: {
-      from: { bottom: 0 },
-      to: { bottom: -height },
-    },
+    from: { bottom: 0, transform: `translateY(${height}px)` },
+    to: { bottom: 0, transform: `translateY(${0}px)` },
   },
 });
 
@@ -202,7 +185,7 @@ const Dialog: React.FC<DialogProps> = React.forwardRef<
       role = "dialog",
       drawerPosition = "left",
       radius = 4,
-      duration = 250,
+      duration = 150,
       children,
       header,
       content,
@@ -221,23 +204,27 @@ const Dialog: React.FC<DialogProps> = React.forwardRef<
     const [visible, setVisible] = useState<boolean | null>(null);
     const dialogRef = useRef<HTMLDivElement | null>(null);
 
-    const open = useCallback(() => {
+    const open = () => {
       setVisible(true);
-    }, []);
-    const close = useCallback(() => {
+    };
+    const close = () => {
       setVisible(false);
-    }, []);
+    };
+    const destroy = () => {
+      setVisible(null);
+    };
 
     useImperativeHandle(ref, () => ({
       //@ts-ignore
       open,
       close,
+      destroy,
     }));
     const drawerTransitions = useMemo(() => {
       return drawerTransitionGenerator(width, height);
     }, [width, height]);
-    const onClose = useCallback(() => setVisible(null), []);
     return (
+      //visible === null ? false :
       <Portal enable={true}>
         <DialogBase
           role={role}
@@ -245,9 +232,6 @@ const Dialog: React.FC<DialogProps> = React.forwardRef<
           className={[
             theme.prefix + "-dialog",
             visible === null ? "" : "active",
-            role === "dialog"
-              ? "default-dialog"
-              : `drawer drawer-${drawerPosition}`,
           ].join(" ")}
           css={css`
             z-index: 99999;
@@ -255,16 +239,20 @@ const Dialog: React.FC<DialogProps> = React.forwardRef<
         >
           <section className="backdrop" onClick={close} />
           <Transition
-            duration={duration}
-            animation={
-              role === "drawer"
-                ? drawerTransitions[drawerPosition]
-                : dialogTransition
+            //@ts-ignore
+            className={
+              role === "dialog"
+                ? "default-dialog"
+                : `drawer drawer-${drawerPosition}`
             }
-            // effect="Fade"
-            // direction="Top"
-            css={{ width, height }}
-            onEndOut={onClose}
+            duration={duration}
+            from={drawerTransitions[drawerPosition].from}
+            to={drawerTransitions[drawerPosition].to}
+            defaultStyle={{
+              position: "absolute",
+              ...drawerTransitions[drawerPosition].from,
+            }}
+            onEnd={!visible ? destroy : undefined}
             in={visible}
           >
             <Box

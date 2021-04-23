@@ -15,6 +15,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { useImperativeHandle } from "react";
 import Box, { BoxProps } from "../Box";
 import Portal from "../Portal";
 import Transition from "../Transition";
@@ -54,6 +55,7 @@ const Popper: React.FC<Props> = ({
   paperProps = {},
   onClickAway,
   duration = 200,
+  popperRef,
 }) => {
   const [portalEnable, setPortalEnable] = useState<boolean>(false);
   // const theme = useTheme();
@@ -110,9 +112,40 @@ const Popper: React.FC<Props> = ({
       document.removeEventListener("touchmove", handleEvents);
     };
   }, [visible]);
+
+  useImperativeHandle(popperRef, () => ({
+    open: () => {
+      setPortalEnable(true);
+      setTimeout(() => {
+        setVisible(!visible);
+      }, 30);
+    },
+    close: () => {
+      setVisible(false);
+      setTimeout(() => {
+        setPortalEnable(false);
+      }, 30);
+    },
+  }));
+
   return (
     <Fragment>
-      {getRef}
+      {/* @ts-ignore */}
+      <div
+        css={{ display: "inline-block" }}
+        {...{
+          ref: referenceElement,
+          onClick: () => {
+            setPortalEnable(true);
+            setTimeout(() => {
+              setVisible(!visible);
+            }, 30);
+          },
+        }}
+      >
+        {children}
+      </div>
+      {/* {getRef} */}
       <Portal enable={portalEnable}>
         <div
           ref={popperElement}
@@ -121,23 +154,26 @@ const Popper: React.FC<Props> = ({
           data-show={visible !== null}
         >
           <Transition
-            animation={{
-              in: {
-                from: { top: 50, opacity: 0 },
-                to: { top: 0, opacity: 1 },
-              },
-              out: {
-                from: { top: 0, opacity: 1 },
-                to: { top: 50, opacity: 0 },
-              },
-            }}
+            // animation={{
+            //   in: {
+            //     from: { top: 50, opacity: 0 },
+            //     to: { top: 0, opacity: 1 },
+            //   },
+            //   out: {
+            //     from: { top: 0, opacity: 1 },
+            //     to: { top: 50, opacity: 0 },
+            //   },
+            // }}
+            defaultStyle={{ transform: `translateY(${-20}px)`, opacity: 0 }}
+            from={{ transform: `translateY(${-20}px)`, opacity: 0 }}
+            to={{ transform: `translateY(${0}px)`, opacity: 1 }}
             in={visible}
             duration={duration}
-            onEndOut={() => {}}
+            // onEnd={()   =>   setVisible(false)}
           >
             <StyledPopper
               bgColor={"paper"}
-              p={[5, 12]}
+              // p={[5, 12]}
               // color="white"
               shadow={2}
               radius={6}
@@ -218,7 +254,7 @@ type Props = {
   /**
    * A ref that points to the used popper instance.
    */
-  popperRef?: React.Ref<any>;
+  popperRef?: React.Ref<{ open: () => void; close: () => void }>;
   /**
    * @ignore
    */

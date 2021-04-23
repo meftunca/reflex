@@ -29,9 +29,9 @@ export const TextFieldOutlinedActive = (prefix: string) => css`
 
 const TextFieldOutlinedBase = styled.div`
   display: flex;
-  position: absolute;
-  right: 0;
-  left: 0;
+  position: relative;
+  /* right: 0;
+  left: 0; */
   width: 100%;
   max-width: 100%;
   height: 100%;
@@ -41,7 +41,8 @@ const TextFieldOutlinedBase = styled.div`
   .label,
   .label label,
   .trailing {
-    transition: border-color, color, border-width 0.1s linear;
+    transition: border-color 0.1s linear, color 0.1s linear,
+      border-width 0.1s linear;
   }
 
   .leading {
@@ -83,14 +84,26 @@ const TextFieldOutlinedBase = styled.div`
   }
 `;
 
-type Props = { label: string; prefix: string };
-const TextFieldOutlined: React.FC<Props> = ({ label, prefix }) => (
+type Props = {
+  label: string;
+  prefix: string;
+  startAdornment: React.ReactNode;
+  endAdornment: React.ReactNode;
+};
+const TextFieldOutlined: React.FC<Props> = ({
+  label,
+  prefix,
+  children,
+  startAdornment,
+  endAdornment,
+}) => (
   <TextFieldOutlinedBase className={prefix + "-textfield-notched-outline"}>
-    <div className={"leading"}></div>
+    <div className={"leading"}>{startAdornment}</div>
     <div className={"label"}>
+      {children}
       <label>{label}</label>
     </div>
-    <div className={"trailing"}></div>
+    <div className={"trailing"}>{endAdornment}</div>
   </TextFieldOutlinedBase>
 );
 export default TextFieldOutlined;

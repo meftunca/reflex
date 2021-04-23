@@ -4,18 +4,18 @@ import * as React from "react";
 const ChipPage = () => {
   return (
     <div>
-      <Text variant="h2">Chips</Text>
+      <Text variant="h5">Chips</Text>
       <br />
-      <Text variant="h3">Simple</Text>
+      <Text variant="h6">Simple</Text>
       <Chip label={"Test"} />
       <Chip label={"Test"} onDelete={() => console.info("Silindi")} />
       <br />
       <br />
       <br />
-      <Text variant="h3">Variants/Actions</Text>
+      <Text variant="h5">Variants/Actions</Text>
       <br />
       <br />
-      <Text variant="h4">Deletable</Text>
+      <Text variant="h6">Deletable</Text>
       <br />
       <Chip
         label={"contained"}
@@ -35,7 +35,7 @@ const ChipPage = () => {
       />
       <br />
       <br />
-      <Text variant="h4">Selectable</Text>
+      <Text variant="h6">Selectable</Text>
       <br />
       <Chip
         label={"contained"}

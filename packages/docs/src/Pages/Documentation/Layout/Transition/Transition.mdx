@@ -12,23 +12,18 @@ import TransitionSimple from "./";
 ```js live=true
 <>
   <Transition
-    animation={{
-      in: {
-        from: { top: 50, opacity: 0 },
-        to: { top: 0, opacity: 1 },
-      },
-      out: {
-        from: { top: 0, opacity: 1 },
-        to: { top: 50, opacity: 0 },
-      },
-    }}
-    delay={1000}
-  >
-    <Box bgColor="red" width={200} height="200px"></Box>
-  </Transition>
-  <Transition delay={1000} effect="Slide" direction="Top" in={true}>
-    <Box bgColor="orange" width={200} height="200px"></Box>
-  </Transition>
+          delay={1000}
+          in={true}
+          effect="Slide"
+          direction="Top"
+          defaultStyle={{position:"relative"}}
+          from={{top:150}}
+          to={{top:0}}
+        >
+          <Box bgColor="orange" width={200} height="200px">
+            <span>Test</span>
+          </Box>
+        </Transition>
 </>
 ```
 

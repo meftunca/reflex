@@ -5,12 +5,12 @@ import Ripple, { Props as RippleProps } from "../Ripple";
 import Text from "../Typography";
 import StyledListItem from "./Styled/listItem.styled";
 import { useTheme, jsx } from "@emotion/react";
-export interface Props {
+export type Props = HTMLLIElement & {
   /** OnLongPress */
   // onLongPress?: () => void;
   // longPressDelay?: number;
-  title: string | React.ReactNode;
-  description?: string | React.ReactNode;
+  title: React.ReactNode;
+  description?: React.ReactNode;
   colorDepth?: "light" | "main" | "dark";
   leftItem?: React.ReactNode;
   rightItem?: React.ReactNode;
@@ -27,8 +27,8 @@ export interface Props {
     | string;
   rippleProps?: RippleProps;
   className?: string | string[];
-  style?: CSSProperties
-}
+  style?: CSSProperties;
+};
 
 const ListItem: React.FC<Props> = ({
   children,
@@ -44,6 +44,7 @@ const ListItem: React.FC<Props> = ({
 }) => {
   const theme = useTheme();
   return (
+    //@ts-ignore
     <StyledListItem
       className={[
         theme.prefix + "-list-item",
