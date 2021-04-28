@@ -14,8 +14,21 @@ import Menu from "./index.tsx";
 
 <Menu />
 
-```js live=true
-<div></div>
+```jsx
+<Popper
+  paperProps={{ p: [4, 0], radius: 0 }}
+  content={
+    <List>
+      {Array(2 + Math.floor((Math.random() * 999) % 6))
+        .fill("")
+        .map((i, k) => (
+          <List.Item size={12} key={k} button title={`Menu Item ${k + 1}`} />
+        ))}
+    </List>
+  }
+>
+  <Button>Menu Example</Button>
+</Popper>
 ```
 
 <!-- ## Using different kinds

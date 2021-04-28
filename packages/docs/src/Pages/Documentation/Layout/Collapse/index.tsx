@@ -38,7 +38,16 @@ const BasicAccordion = () => {
               title={`Toggle Collapse Item {k}`}
               onClick={() => setOpen(open === k ? null : k)}
               rightItem={
-                <Icon>{open !== k ? "expand_more" : "expand_less"}</Icon>
+                <Icon
+                  sx={{
+                    color: "palette.error.main",
+                    mr: { xs: 24, md: 24 },
+                    lg: { color: "blue" },
+                    bg: "palette.primary.light",
+                  }}
+                >
+                  {open !== k ? "expand_more" : "expand_less"}
+                </Icon>
               }
             ></List.Item>
             <Collapse open={open === k}>

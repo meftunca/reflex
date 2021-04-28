@@ -1,27 +1,30 @@
 /// <reference types="@emotion/react/types/css-prop" />
 import "@emotion/react";
-
 import EmotionTheme from "./utils/theme/Types";
 
 declare module "@emotion/react" {
   export interface Theme extends EmotionTheme {}
 }
+
+// @ UTILS
 export * from "./utils/hooks";
 export { default as darkTheme } from "./utils/theme/darkTheme";
 export { default as defaultTheme } from "./utils/theme/defaultTheme";
 export * from "./utils/theme/styled";
 export { ThemeProvider } from "./utils/theme/theming";
-
-// @ UTILS
-export { default as AppBar } from "./AppBar";
-// @Components
-export { default as Avatar } from "./Avatar";
-export { default as Backdrop } from "./Backdrop";
-export { default as Banner } from "./Banner";
 //@Content
 export { default as BaseLine } from "./BaseLine";
 export { default as BottomNavigation } from "./BottomNavigation";
+// @Components
+
+export { default as AppBar } from "./AppBar";
+export { default as Avatar } from "./Avatar";
+export { default as Backdrop } from "./Backdrop";
+export { default as Banner } from "./Banner";
+
 //@Layout
+export { default as SXBase } from "./Styled/SX";
+export { default as BackgroundImage } from "./BackgroundImage";
 export { default as Box } from "./Box";
 export { default as Button } from "./Button";
 export { default as ButtonBase } from "./ButtonBase";

@@ -1,4 +1,5 @@
 declare type Props = {
+    variant: "contained" | "text" | "outlined";
     colorDepth?: "light" | "main" | "dark";
     size?: number;
     button?: boolean;

@@ -1,4 +1,3 @@
-//@ts-nocheck
 /** @jsx jsx */
 import { useTheme } from "@emotion/react";
 import React from "react";
@@ -7,7 +6,7 @@ import Text from "../Typography";
 import { jsx } from "../utils/theme/styled";
 import StyledButton from "./styledButton";
 
-/* 
+/*
 
 const StyledButton: StyledComponent<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, buttonVariables & {
     colorDepth: "light" | "main" | "dark";

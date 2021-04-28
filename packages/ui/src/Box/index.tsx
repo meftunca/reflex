@@ -1,8 +1,12 @@
+import { css, cx } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useMemo } from "react";
+import sxPropGenerator, { sxType } from "../utils/theme/sx";
 import { isObject } from "../utils/helpers/is";
 import { boxMarginPaddingGenerator } from "../utils/helpers/stringFormat";
+import { CSSObject } from "@emotion/css";
+import SXBase from "../Styled/SX";
 
 type overflowType =
   | "hidden"
@@ -18,10 +22,11 @@ type overflowPlacementType = {
 export type BoxProps = {
   theme?: any;
   className?: string | string[];
-  overflow?: overflowType | overflowPlacementType;
+  overflow?: CSSObject["overflow"];
   transition?: string;
   width?: string | number;
   height?: string | number;
+  sx?: sxType;
   pt?: number;
   pl?: number;
   pr?: number;
@@ -57,34 +62,45 @@ export type BoxProps = {
   // sx?: object;
 };
 
-// const sx = (props: BoxProps) => css(props.sx)(props.theme);
-
-const StyledBox = styled.div((props: BoxProps) => {
-  let obj: any = {};
+export const StyledBox = styled(SXBase)((props: BoxProps) => {
+  const { shadows, transitions } = props.theme;
+  let obj: CSSObject = {
+    overflow: "hidden",
+    margin: 0,
+    padding: 0,
+    display: "block",
+    backgroundColor: "transparent",
+    borderRadius: 0,
+    shadow: `0 0 10px 0 ${shadows[0]}`,
+    color: `var(--typography-color)`,
+    width: "100%",
+    transition: `all ${transitions.duration.enteringScreen}
+        ${transitions.easing.easeInOut}`,
+    position: "relative",
+  };
   if (props.bgColor) {
     if (
       props.bgColor.match(/(primary|secondary|info|error|warning|success)/g)
     ) {
-      obj["--box-background-color"] = props.theme.palette[props.bgColor].main;
+      obj.backgroundColor = props.theme.palette[props.bgColor].main;
     } else if (props.bgColor.match(/(paper|background)/g)) {
-      obj["--box-background-color"] =
-        props.theme.palette.background[props.bgColor];
+      obj.backgroundColor = props.theme.palette.background[props.bgColor];
     } else {
-      obj["--box-background-color"] = props.bgColor;
+      obj.backgroundColor = props.bgColor;
     }
   }
   if (props.overflow)
-    obj["--box-overflow"] = isObject(props.overflow)
+    obj.overflow = isObject(props.overflow)
       ? Object.values(props.overflow).join(" ")
       : props.overflow;
   if (props.transition) obj["--box-transition"] = props.transition;
   if (props.width) obj.width = props.width;
   if (props.height) obj.height = props.height;
-  if (props.display) obj["--box-display"] = props.display;
+  if (props.display) obj.display = props.display;
   // if (props.bgColor) obj["--box-background-color"] = props.bgColor;
   // if (props.background) obj["--box-background"] = props.background;
   if (props.radius) obj.borderRadius = boxMarginPaddingGenerator(props.radius);
-  if (props.color) obj["--box-color"] = props.color;
+  if (props.color) obj.color = props.color;
   if (props.shadow && props.theme.shadows) {
     obj.boxShadow =
       typeof props.shadow === "number"
@@ -114,16 +130,11 @@ const StyledBox = styled.div((props: BoxProps) => {
   return obj;
 });
 
-const Box: React.FC<BoxProps> = ({ children, className, ...rest }) => {
+const Box: React.FC<BoxProps> = ({ children, className, sx, ...rest }) => {
   const theme = useTheme();
+
   return (
-    <StyledBox
-      className={[
-        theme.prefix + "-box",
-        Array.isArray(className) ? className.join(" ") : className,
-      ].join(" ")}
-      {...rest}
-    >
+    <StyledBox className={cx(theme.prefix + "-box", className)} {...rest}>
       {children}
     </StyledBox>
   );

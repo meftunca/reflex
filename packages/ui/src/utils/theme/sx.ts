@@ -1,6 +1,11 @@
-import Theme from "./Types";
+import Theme, { Breakpoints } from "./Types";
+import { CSSObject } from "@emotion/css";
+import getValueWithObjectPath from "../helpers/getValueWithObjectPath";
+import { isObject } from "../helpers/is";
+
 type anyObject = { [key: string]: any };
 // based on https://github.com/developit/dlv
+
 export const get = (
   obj: anyObject,
   key: string | number,
@@ -11,20 +16,15 @@ export const get = (
   let keyArr: (number | string)[] =
     typeof key === "string" && key.split ? key.split(".") : [key];
   for (p = 0; p < keyArr.length; p++) {
-    obj = obj ? obj[key[p]] : undef;
+    obj = obj ? obj[keyArr[p]] : undef;
   }
   return obj === undef ? def : obj;
 };
 
-const defaultBreakpoints = [40, 52, 64].map((n) => n + "em");
-
-const defaultTheme = {
-  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
-  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
-};
-
 const aliases = {
   bg: "backgroundColor",
+  w: "width",
+  h: "height",
   m: "margin",
   mt: "marginTop",
   mr: "marginRight",
@@ -41,7 +41,34 @@ const aliases = {
   py: "paddingY",
 };
 
+export type sxType = CSSObject & {
+  //BreakPoints
+  xs?: CSSObject;
+  sm?: CSSObject;
+  md?: CSSObject;
+  lg?: CSSObject;
+  xl?: CSSObject;
+  // ------------
+  bg?: string | Breakpoints;
+  w?: string | number | Breakpoints;
+  h?: string | number | Breakpoints;
+  m?: string | number | Breakpoints;
+  mt?: string | number | Breakpoints;
+  mr?: string | number | Breakpoints;
+  mb?: string | number | Breakpoints;
+  ml?: string | number | Breakpoints;
+  mx?: string | number | Breakpoints;
+  my?: string | number | Breakpoints;
+  p?: string | number | Breakpoints;
+  pt?: string | number | Breakpoints;
+  pr?: string | number | Breakpoints;
+  pb?: string | number | Breakpoints;
+  pl?: string | number | Breakpoints;
+  px?: string | number | Breakpoints;
+  py?: string | number | Breakpoints;
+};
 const multiples = {
+  bg: ["backgroundColor"],
   marginX: ["marginLeft", "marginRight"],
   marginY: ["marginTop", "marginBottom"],
   paddingX: ["paddingLeft", "paddingRight"],
@@ -123,7 +150,7 @@ const scales = {
   stroke: "colors",
 };
 
-const positiveOrNegative = (scale: anyObject, value: number) => {
+const positiveOrNegative = (scale: sxType, value: number) => {
   if (typeof value !== "number" || value >= 0) {
     return get(scale, value, value);
   }
@@ -152,45 +179,81 @@ const transforms = [
   }),
   {}
 );
+const transformList = {
+  bg: "backgroundColor",
+  w: "width",
+  h: "height",
+  m: "margin",
+  mt: "marginTop",
+  mr: "marginRight",
+  mb: "marginBottom",
+  ml: "marginLeft",
+  mx: "marginInline",
+  my: "marginBlock",
+  p: "padding",
+  pt: "paddingTop",
+  pr: "paddingRight",
+  pb: "paddingBottom",
+  pl: "paddingLeft",
+  px: "paddingInline",
+  py: "paddingBlock",
+};
 
-export const responsive = (styles: anyObject) => (theme: anyObject) => {
+export const responsive = (styles: (theme: Theme) => sxType | sxType) => (
+  theme: Theme
+) => {
   const next = {};
-  const breakpoints = get(theme, "breakpoints", defaultBreakpoints);
-  const mediaQueries = [
+  const breakpoints = Object.values(theme.breakpoints.values);
+  const mediaQueriesList = [
     null,
-    ...breakpoints.map((n: string) => `@media screen and (min-width: ${n})`),
+    ...breakpoints.map(
+      (n) =>
+        `@media screen and (min-width: ${typeof n === "number" ? n + "px" : n})`
+    ),
   ];
+  const mediaQueriesObject = Object.fromEntries(
+    Object.entries(theme.breakpoints.values).map(([k, v]) => [
+      k,
+      `@media screen and (min-width: ${typeof v === "number" ? v + "px" : v})`,
+    ])
+  );
 
   for (const key in styles) {
     const value =
       typeof styles[key] === "function" ? styles[key](theme) : styles[key];
 
-    if (value == null) continue;
-    if (!Array.isArray(value)) {
+    if (value === null) continue;
+
+    if (
+      isObject(value) &&
+      Object.keys(theme.breakpoints.values).includes(key)
+    ) {
+      next[mediaQueriesObject[key]] = sxPropInitialiter(value)(theme);
+    } else if (Array.isArray(value)) {
+      for (let i = 0; i < value.slice(0, mediaQueriesList.length).length; i++) {
+        const media = mediaQueriesList[i];
+        if (!media) {
+          next[key] = value[i];
+          continue;
+        }
+        next[media] = next[media] || {};
+        if (value[i] === null) continue;
+        next[media][key] = value[i];
+      }
+    } else {
       next[key] = value;
       continue;
     }
-    for (let i = 0; i < value.slice(0, mediaQueries.length).length; i++) {
-      const media = mediaQueries[i];
-      if (!media) {
-        next[key] = value[i];
-        continue;
-      }
-      next[media] = next[media] || {};
-      if (value[i] == null) continue;
-      next[media][key] = value[i];
-    }
   }
-
   return next;
 };
 
-export const sxPropInitialiter = (args: anyObject) => (
-  props: anyObject = {}
+export const sxPropInitialiter = (args: (theme: Theme) => sxType | sxType) => (
+  theme: Theme
 ) => {
-  const theme: anyObject = { ...defaultTheme, ...(props.theme || props) };
   let result = {};
   const obj = typeof args === "function" ? args(theme) : args;
+  //  @ts-ignore
   const styles = responsive(obj)(theme);
 
   for (const key in styles) {
@@ -203,9 +266,34 @@ export const sxPropInitialiter = (args: anyObject) => (
       continue;
     }
 
-    if (val && typeof val === "object") {
-      result[key] = sxPropInitialiter(val)(theme);
-      continue;
+    if (isObject(val)) {
+      if (
+        Object.keys(val).some((a) =>
+          Object.keys(theme.breakpoints.values).includes(a)
+        )
+      ) {
+        for (const breakPointType of Object.keys(val)) {
+          //@ts-ignore
+          let breakPointKey = theme.breakpoints.up(breakPointType);
+          if (isObject(result[breakPointKey])) {
+            result[breakPointKey] = Object.assign({}, result[breakPointKey], {
+              [transformList[key] || key]: sxPropInitialiter(val)(theme)[
+                breakPointType
+              ],
+            });
+            if (transformList[key]) {
+              delete result[breakPointKey][key];
+            }
+          } else {
+            result[breakPointKey] = {
+              [key]: sxPropInitialiter(val)(theme),
+            };
+          }
+        }
+      } else {
+        result[key] = sxPropInitialiter(val)(theme);
+        continue;
+      }
     }
 
     const prop = get(aliases, key, key);
@@ -216,12 +304,26 @@ export const sxPropInitialiter = (args: anyObject) => (
 
     if (multiples[prop]) {
       const dirs = multiples[prop];
-
+      console.log(`dirs`, dirs);
       for (let i = 0; i < dirs.length; i++) {
-        result[dirs[i]] = value;
+        result[dirs[i]] =
+          typeof value === "string" && value.includes(".")
+            ? getValueWithObjectPath(theme, value)
+            : value;
       }
     } else {
-      result[prop] = value;
+      if (
+        isObject(value) &&
+        Object.keys(value).some((a) =>
+          Object.keys(theme.breakpoints.values).includes(a)
+        )
+      ) {
+      } else {
+        result[prop] =
+          typeof value === "string" && value.includes(".")
+            ? getValueWithObjectPath(theme, value)
+            : value;
+      }
     }
   }
 

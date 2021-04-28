@@ -2,11 +2,15 @@ declare const _default: {
     ButtonBaseLineVariables: ({ prefix, palette, transitions, shadows, }: {
         prefix: string;
         breakpoints: {
-            xs: number;
-            sm: number;
-            md: number;
-            lg: number;
-            xl: number;
+            values: {
+                xs: number;
+                sm: number;
+                md: number;
+                lg: number;
+                xl: number;
+            };
+            up(breakPoint: string): string;
+            down(breakPoint: string): string;
         };
         dayjs: typeof import("dayjs");
         space: {
@@ -256,15 +260,19 @@ declare const _default: {
             snackbar: number;
             tooltip: number;
         };
-    }) => string;
+    }) => import("@emotion/utils").SerializedStyles;
     ButtonBaseLineInitial: ({ prefix, transitions, }: {
         prefix: string;
         breakpoints: {
-            xs: number;
-            sm: number;
-            md: number;
-            lg: number;
-            xl: number;
+            values: {
+                xs: number;
+                sm: number;
+                md: number;
+                lg: number;
+                xl: number;
+            };
+            up(breakPoint: string): string;
+            down(breakPoint: string): string;
         };
         dayjs: typeof import("dayjs");
         space: {
@@ -514,6 +522,6 @@ declare const _default: {
             snackbar: number;
             tooltip: number;
         };
-    }) => string;
+    }) => import("@emotion/utils").SerializedStyles;
 };
 export default _default;

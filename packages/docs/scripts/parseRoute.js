@@ -72,6 +72,7 @@ const parseFunc = function(files, stat) {
     const RouteJS = `
 import { lazy} from "react";
 export default  {
+    "/": lazy(() => import("./Pages/index.mdx")),
   ${parseMeta
     ?.map(({ route, filePath, menu }) => {
       if (!menu) {

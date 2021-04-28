@@ -1,4 +1,5 @@
 import { lighten } from "color2k";
+import { css } from "@emotion/react";
 import DefaultTheme from "../../../utils/theme/defaultTheme";
 const ButtonBaseLineVariables = ({
   prefix,
@@ -7,7 +8,7 @@ const ButtonBaseLineVariables = ({
   shadows,
 }: typeof DefaultTheme) => {
   const transitionTiming = `${transitions.duration.shorter}ms ${transitions.easing.easeInOut}`;
-  return `
+  return css`
     button,
     input[type="button"],
     .${prefix}-btn {
@@ -36,9 +37,7 @@ const ButtonBaseLineVariables = ({
 const ButtonBaseLineInitial = ({
   prefix,
   transitions,
-}: typeof DefaultTheme) => `
-  /* button,
-  input[type="button"], */
+}: typeof DefaultTheme) => css`
   .${prefix}-btn {
     position: relative;
     user-select: none;
@@ -89,15 +88,15 @@ const ButtonBaseLineInitial = ({
     position: absolute;
     border-radius: inherit;
   }
-  .${prefix}-ripple-container > .ripples {
+  .${prefix}-ripple-container > .${prefix}-ripples {
     display: block;
     position: absolute;
     background: currentcolor;
     border-radius: 100%;
     pointer-events: none;
     animation-name: useRippleAnimation;
-    animation-duration: ${transitions.duration.standard}ms;
-    animation-timing-function: ${transitions.easing.easeIn};
+    animation-duration: ${transitions.duration.complex}ms;
+    animation-timing-function:linear;
     z-index: 1;
   }
 

@@ -1,26 +1,30 @@
 import { Dayjs } from "dayjs";
 
-type Breakpoints = {
-  xs: number;
-  sm: number;
-  md: number;
-  lg: number;
-  xl: number;
+export type Breakpoints = {
+  values: {
+    xs: number | "string";
+    sm: number | "string";
+    md: number | "string";
+    lg: number | "string";
+    xl: number | "string";
+  };
+  up: (breakPointType: "xs" | "sm" | "md" | "lg" | "xl") => string;
+  down: (breakPointType: "xs" | "sm" | "md" | "lg" | "xl") => string;
 };
 
-type Mixins = {
+export type Mixins = {
   [key: string]: MixinsField;
 };
 
-type MixinsField = {
+export type MixinsField = {
   [key: string]: string | number | object;
 };
 
-type Overrides = {
+export type Overrides = {
   [key: string]: object;
 };
 
-type Palette = {
+export type Palette = {
   common: Common;
   type: string;
   primary: ColorDepth;
@@ -38,7 +42,7 @@ type Palette = {
   action: Action;
 };
 
-type Action = {
+export type Action = {
   active: string;
   hover: string;
   hoverOpacity: number;
@@ -52,24 +56,24 @@ type Action = {
   activatedOpacity: number;
 };
 
-type Background = {
+export type Background = {
   paper: string;
   default: string;
 };
 
-type Common = {
+export type Common = {
   black: string;
   white: string;
 };
 
-type ColorDepth = {
+export type ColorDepth = {
   light: string;
   main: string;
   dark: string;
   contrastText: string;
 };
 
-type Grey = {
+export type Grey = {
   the50: string;
   the100: string;
   the200: string;
@@ -86,29 +90,29 @@ type Grey = {
   a700: string;
 };
 
-type Text = {
+export type Text = {
   primary: string;
   secondary: string;
   disabled: string;
   hint: string;
 };
 
-type Shape = {
+export type Shape = {
   borderRadius: number;
 };
 
-type Space = {
+export type Space = {
   default: number;
   dense: number;
   large: number;
 };
 
-type Transitions = {
+export type Transitions = {
   easing: Easing;
   duration: Duration;
 };
 
-type Duration = {
+export type Duration = {
   shortest: number;
   shorter: number;
   short: number;
@@ -118,7 +122,7 @@ type Duration = {
   leavingScreen: number;
 };
 
-type Easing = {
+export type Easing = {
   easeInOut: string;
   easeOut: string;
   easeIn: string;
@@ -126,7 +130,7 @@ type Easing = {
   linear: string;
 };
 
-type Typography = {
+export type Typography = {
   importFonts: string;
   htmlFontSize: number;
   fontFamily: string;
@@ -156,7 +160,7 @@ type Typography = {
   overline: TypographyTag;
 };
 
-type TypographyTag = {
+export type TypographyTag = {
   textTransform: TextTransform;
   fontSize: number;
   fontWeight: number;
@@ -165,12 +169,12 @@ type TypographyTag = {
   opacity?: number;
 };
 
-enum TextTransform {
+export enum TextTransform {
   Capitalize = "capitalize",
   Uppercase = "uppercase",
 }
 
-type H6 = {
+export type H6 = {
   opacity: number;
   textTransform: TextTransform;
   fontSize: number;
@@ -178,7 +182,7 @@ type H6 = {
   letterSpacing: number;
 };
 
-type ZIndex = {
+export type ZIndex = {
   mobileStepper: number;
   speedDial: number;
   appBar: number;

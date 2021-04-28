@@ -1,4 +1,6 @@
-const ResetCss = `
+import { css } from "@emotion/react";
+
+const ResetCss = css`
   html,
   body,
   body div,

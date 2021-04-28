@@ -1,4 +1,5 @@
 import React from "react";
+import { sxType } from "../utils/theme/sx";
 export declare type TextVariant = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "subtitle1" | "subtitle2" | "body1" | "body2" | "caption" | "overline" | "button";
 export declare type TextTagList = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "caption";
 export declare type TextProps = {
@@ -14,6 +15,7 @@ export declare type TextProps = {
     color?: "textPrimary" | "textSecondary" | "primary" | "secondary" | "error" | "warning" | "info" | "success" | string;
     vars?: {};
     gutter?: number | number[];
+    sx?: sxType;
 };
 declare const Text: React.FC<TextProps>;
 export default Text;

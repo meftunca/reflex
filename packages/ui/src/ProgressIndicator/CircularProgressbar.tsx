@@ -2,10 +2,39 @@
 
 import React from "react";
 import styled from "@emotion/styled";
-import { jsx, css } from "../utils/theme/styled";
+import { jsx, css } from "@emotion/react";
 import { useTheme } from "@emotion/react";
+import { darken, lighten } from "color2k";
+import ProgressbarBase from "./ProgressbarBase";
 
-const Progressbar = styled.div(css``);
+const Progressbar = styled(ProgressbarBase)(
+  ({ theme: { prefix, palette, transitions } }) => css`
+    &.circular {
+      display: inline-block;
+      &.indeterminate {
+        animation: ${prefix}-circular-progressbar-rotate
+          calc(var(--progressbar-duration) * 5.5) linear infinite;
+      }
+
+      svg {
+        display: block;
+        circle {
+          color: var(--progressbar-color);
+          &.determinate {
+            transition: all var(--progressbar-duration)
+              var(--progressbar-timing-function);
+          }
+          &.indeterminate {
+            animation: ${prefix}-circular-progressbar-dash
+              calc(var(--progressbar-duration) * 5.5) ease-in-out infinite;
+            stroke-dasharray: 80px, 200px;
+            stroke-dashoffset: 0px;
+          }
+        }
+      }
+    }
+  `
+);
 
 type Props = {
   className?: string;

@@ -1,21 +1,25 @@
 import { Dayjs } from "dayjs";
-declare type Breakpoints = {
-    xs: number;
-    sm: number;
-    md: number;
-    lg: number;
-    xl: number;
+export declare type Breakpoints = {
+    values: {
+        xs: number | "string";
+        sm: number | "string";
+        md: number | "string";
+        lg: number | "string";
+        xl: number | "string";
+    };
+    up: (breakPointType: "xs" | "sm" | "md" | "lg" | "xl") => string;
+    down: (breakPointType: "xs" | "sm" | "md" | "lg" | "xl") => string;
 };
-declare type Mixins = {
+export declare type Mixins = {
     [key: string]: MixinsField;
 };
-declare type MixinsField = {
+export declare type MixinsField = {
     [key: string]: string | number | object;
 };
-declare type Overrides = {
+export declare type Overrides = {
     [key: string]: object;
 };
-declare type Palette = {
+export declare type Palette = {
     common: Common;
     type: string;
     primary: ColorDepth;
@@ -32,7 +36,7 @@ declare type Palette = {
     background: Background;
     action: Action;
 };
-declare type Action = {
+export declare type Action = {
     active: string;
     hover: string;
     hoverOpacity: number;
@@ -45,21 +49,21 @@ declare type Action = {
     focusOpacity: number;
     activatedOpacity: number;
 };
-declare type Background = {
+export declare type Background = {
     paper: string;
     default: string;
 };
-declare type Common = {
+export declare type Common = {
     black: string;
     white: string;
 };
-declare type ColorDepth = {
+export declare type ColorDepth = {
     light: string;
     main: string;
     dark: string;
     contrastText: string;
 };
-declare type Grey = {
+export declare type Grey = {
     the50: string;
     the100: string;
     the200: string;
@@ -75,25 +79,25 @@ declare type Grey = {
     a400: string;
     a700: string;
 };
-declare type Text = {
+export declare type Text = {
     primary: string;
     secondary: string;
     disabled: string;
     hint: string;
 };
-declare type Shape = {
+export declare type Shape = {
     borderRadius: number;
 };
-declare type Space = {
+export declare type Space = {
     default: number;
     dense: number;
     large: number;
 };
-declare type Transitions = {
+export declare type Transitions = {
     easing: Easing;
     duration: Duration;
 };
-declare type Duration = {
+export declare type Duration = {
     shortest: number;
     shorter: number;
     short: number;
@@ -102,14 +106,14 @@ declare type Duration = {
     enteringScreen: number;
     leavingScreen: number;
 };
-declare type Easing = {
+export declare type Easing = {
     easeInOut: string;
     easeOut: string;
     easeIn: string;
     sharp: string;
     linear: string;
 };
-declare type Typography = {
+export declare type Typography = {
     importFonts: string;
     htmlFontSize: number;
     fontFamily: string;
@@ -138,7 +142,7 @@ declare type Typography = {
     caption: TypographyTag;
     overline: TypographyTag;
 };
-declare type TypographyTag = {
+export declare type TypographyTag = {
     textTransform: TextTransform;
     fontSize: number;
     fontWeight: number;
@@ -146,18 +150,18 @@ declare type TypographyTag = {
     letterSpacing: number;
     opacity?: number;
 };
-declare enum TextTransform {
+export declare enum TextTransform {
     Capitalize = "capitalize",
     Uppercase = "uppercase"
 }
-declare type H6 = {
+export declare type H6 = {
     opacity: number;
     textTransform: TextTransform;
     fontSize: number;
     fontWeight: string;
     letterSpacing: number;
 };
-declare type ZIndex = {
+export declare type ZIndex = {
     mobileStepper: number;
     speedDial: number;
     appBar: number;
@@ -182,4 +186,3 @@ export default interface Theme {
     zIndex: ZIndex;
     dayjs?: Dayjs;
 }
-export {};

@@ -1,6 +1,20 @@
 const DarkTheme = {
   prefix: "reflex",
-  breakpoints: { xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920 },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+    up(breakPoint: string) {
+      return `@media screen and (min-width: ${this.values[breakPoint] + "px"})`;
+    },
+    down(breakPoint: string) {
+      return `@media screen and (max-width: ${this.values[breakPoint] + "px"})`;
+    },
+  },
   space: {
     default: 8,
     dense: 4,

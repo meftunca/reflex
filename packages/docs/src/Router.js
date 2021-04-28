@@ -1,6 +1,7 @@
 
 import { lazy} from "react";
 export default  {
+    "/": lazy(() => import("./Pages/index.mdx")),
   "/blog": lazy(() => import("./Pages/Blog/index.mdx")),
 "/getting-started": lazy(() => import("./Pages/index.mdx")),
 "/documentation/data-display/avatar": lazy(() => import("./Pages/Documentation/DataDisplay/Avatar/index.mdx")),

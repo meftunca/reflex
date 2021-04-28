@@ -1,16 +1,14 @@
 import React from "react";
-declare type overflowType = "hidden" | "initial" | "inherit" | "visible" | "scroll" | "auto";
-declare type overflowPlacementType = {
-    x?: overflowType;
-    y?: overflowType;
-};
+import { sxType } from "../utils/theme/sx";
+import { CSSObject } from "@emotion/css";
 export declare type BoxProps = {
     theme?: any;
     className?: string | string[];
-    overflow?: overflowType | overflowPlacementType;
+    overflow?: CSSObject["overflow"];
     transition?: string;
     width?: string | number;
     height?: string | number;
+    sx?: sxType;
     pt?: number;
     pl?: number;
     pr?: number;
@@ -29,5 +27,15 @@ export declare type BoxProps = {
     spacing?: number | number[];
     style?: {};
 };
+export declare const StyledBox: import("@emotion/styled").StyledComponent<React.ClassAttributes<HTMLElement> & React.HTMLAttributes<HTMLElement> & {
+    sx?: sxType | undefined;
+    as?: HTMLElementTagNameMap | undefined;
+} & {
+    children?: React.ReactNode;
+} & {
+    theme?: import("@emotion/react").Theme | undefined;
+} & {
+    children?: import("react").ReactNode;
+} & BoxProps, {}, {}>;
 declare const Box: React.FC<BoxProps>;
 export default Box;

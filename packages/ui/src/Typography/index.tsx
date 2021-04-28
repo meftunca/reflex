@@ -1,9 +1,10 @@
-// import { useTheme } from "@emotion/react";
+import { css, useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import React from "react";
-import { useTheme } from "../utils/theme/styled";
+import React, { useMemo } from "react";
+import getValueWithObjectPath from "../utils/helpers/getValueWithObjectPath";
 import { isObject } from "../utils/helpers/is";
 import { camelToKebabCase } from "../utils/helpers/stringFormat";
+import sxPropGenerator, { sxType } from "../utils/theme/sx";
 export type TextVariant =
   | "h1"
   | "h2"
@@ -63,10 +64,15 @@ export type TextProps = {
     | string;
   vars?: {};
   gutter?: number | number[];
+  sx?: sxType;
 };
 
-const Text: React.FC<TextProps> = ({ children, ...props }) => {
-  const { typography, palette, prefix } = useTheme();
+const Text: React.FC<TextProps> = ({ children, sx, ...props }) => {
+  const theme = useTheme();
+  const { typography, palette, prefix } = theme;
+  const sxClass = useMemo(() => {
+    return css(sxPropGenerator({ sx, theme }));
+  }, [sx, theme]);
   const {
     className,
     tag = "h2",
@@ -82,11 +88,10 @@ const Text: React.FC<TextProps> = ({ children, ...props }) => {
     gutter = 0,
     ...rest
   } = props;
-  let obj = {};
-  let variabless = {};
+  let obj = { textOverflow: "clip", overflow: "hidden" };
   if (typography && typography.fontFamily === undefined)
     return (
-      <p className={prefix + "-typography"} {...rest}>
+      <p className={prefix + "-typography"} css={sxClass} {...rest}>
         {children}
       </p>
     );
@@ -101,29 +106,38 @@ const Text: React.FC<TextProps> = ({ children, ...props }) => {
     Object.entries(vars).forEach(
       ([key, value]) => (obj[camelToKebabCase(key, "--typography-")] = value)
     );
-    // palette.primary.main
-    if (color) {
-      obj["--typography-color"] = color.match(/(textPrimary|textSecondary)/g)
-        ? palette.text[color.replace("text", "").toLowerCase()]
-        : color.match(/(primary|secondary|error|warning|info|success)/gim)
-        ? palette[color][colorDepth]
-        : color;
+    if (color !== undefined) {
+      if (color.includes(".")) {
+        obj["--typography-color"] = getValueWithObjectPath(palette, color);
+      } else {
+        obj["--typography-color"] = color;
+      }
     }
-    if (weight) obj["--typography-font-weight"] = weight;
-    if (size)
-      obj["--typography-font-size"] =
-        typeof size === "number" ? size + "px" : size;
-    if (family) obj["--typography-font-family"] = family;
-    if (align) obj["--typography-text-align"] = align;
-    if (lineHeight) obj["--typography-line-height"] = lineHeight;
+    if (weight !== undefined) {
+      obj["--typography-font-weight"] = weight;
+    }
+    if (size !== undefined) {
+      let fontSize = typeof size === "number" ? size + "px" : size;
+      obj["--typography-font-size"] = fontSize;
+    }
+    if (family !== undefined) {
+      obj["--typography-font-family"] = family;
+    }
+    if (align !== undefined) {
+      obj["--typography-text-align"] = align;
+    }
+    if (lineHeight !== undefined) {
+      obj["--typography-line-height"] = lineHeight;
+    }
   }
-  const StyledComp = styled(tag)(variabless, obj);
+  const StyledComp = styled(tag)(obj);
   return (
     <StyledComp
       className={[
         prefix + "-typography",
         Array.isArray(className) ? className.join(" ") : className,
       ].join(" ")}
+      css={sxClass}
       {...rest}
     >
       {children}

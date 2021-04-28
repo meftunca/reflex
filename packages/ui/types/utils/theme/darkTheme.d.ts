@@ -1,11 +1,15 @@
 declare const DarkTheme: {
     prefix: string;
     breakpoints: {
-        xs: number;
-        sm: number;
-        md: number;
-        lg: number;
-        xl: number;
+        values: {
+            xs: number;
+            sm: number;
+            md: number;
+            lg: number;
+            xl: number;
+        };
+        up(breakPoint: string): string;
+        down(breakPoint: string): string;
     };
     space: {
         default: number;

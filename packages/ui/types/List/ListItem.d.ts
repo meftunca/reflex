@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react";
 import { Props as RippleProps } from "../Ripple";
-export declare type Props = HTMLLIElement & {
+export declare type Props = React.HTMLProps<HTMLElement> & {
     title: React.ReactNode;
     description?: React.ReactNode;
     colorDepth?: "light" | "main" | "dark";

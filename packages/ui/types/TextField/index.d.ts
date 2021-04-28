@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { BoxProps } from "../Box";
 export declare type InputProps = {
     fieldProps?: BoxProps;
@@ -15,6 +15,7 @@ export declare type InputProps = {
     inputProps?: HTMLInputElement;
     htmlFor?: string;
     wrapperClassName: string;
+    fullWidth: boolean;
 };
 declare const TextField: React.FC<InputProps>;
 export default TextField;

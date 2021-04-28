@@ -28,33 +28,33 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           "ts-loader",
-          {
-            loader: require.resolve("react-docgen-typescript-loader"),
-            options: {
-              // Provide the path to your tsconfig.json so that your stories can
-              // display types from outside each individual story.
-              tsconfigPath: path.resolve(__dirname, "../ui/tsconfig.json"),
-              // tsconfigPath: path.resolve(__dirname, "./tsconfig.json"),
-              // docgenCollectionName: "__docgenInfo",
-              // typePropName: "__docgenInfo",
-              // shouldExtractLiteralValuesFromEnum: true,
-              // setDisplayName: true,
-              propFilter: (prop, component) => {
-                if (
-                  prop.declarations !== undefined &&
-                  prop.declarations.length > 0
-                ) {
-                  const hasPropAdditionalDescription = prop.declarations.find(
-                    (declaration) => {
-                      return !declaration.fileName.includes("node_modules");
-                    }
-                  );
-                  return Boolean(hasPropAdditionalDescription);
-                }
-                return true;
-              },
-            },
-          },
+          // {
+          //   loader: require.resolve("react-docgen-typescript-loader"),
+          //   options: {
+          //     // Provide the path to your tsconfig.json so that your stories can
+          //     // display types from outside each individual story.
+          //     tsconfigPath: path.resolve(__dirname, "../ui/tsconfig.json"),
+          //     // tsconfigPath: path.resolve(__dirname, "./tsconfig.json"),
+          //     // docgenCollectionName: "__docgenInfo",
+          //     // typePropName: "__docgenInfo",
+          //     // shouldExtractLiteralValuesFromEnum: true,
+          //     // setDisplayName: true,
+          //     propFilter: (prop, component) => {
+          //       if (
+          //         prop.declarations !== undefined &&
+          //         prop.declarations.length > 0
+          //       ) {
+          //         const hasPropAdditionalDescription = prop.declarations.find(
+          //           (declaration) => {
+          //             return !declaration.fileName.includes("node_modules");
+          //           }
+          //         );
+          //         return Boolean(hasPropAdditionalDescription);
+          //       }
+          //       return true;
+          //     },
+          //   },
+          // },
         ],
         // exclude: /node_modules/,
         include: [

@@ -131,7 +131,8 @@ const Popper: React.FC<Props> = ({
   return (
     <Fragment>
       {/* @ts-ignore */}
-      <div
+
+      {/* <div
         css={{ display: "inline-block" }}
         {...{
           ref: referenceElement,
@@ -144,8 +145,8 @@ const Popper: React.FC<Props> = ({
         }}
       >
         {children}
-      </div>
-      {/* {getRef} */}
+      </div> */}
+      {getRef}
       <Portal enable={portalEnable}>
         <div
           ref={popperElement}

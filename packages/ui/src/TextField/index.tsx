@@ -1,24 +1,41 @@
 /** @jsx jsx */
-import { jsx, useTheme } from "@emotion/react";
+import { css, jsx, useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
-import * as React from "react";
-import { useState } from "react";
-import { useMemo } from "react";
+import React, { useState } from "react";
 import Box, { BoxProps } from "../Box";
 import ButtonBase from "../ButtonBase";
 import { mergeClassNames } from "../utils/helpers/stringFormat";
-import useMeasure from "../utils/hooks/useMeasure";
 import FieldBase from "./FieldBase";
-import TextFieldFilled from "./Filled";
 import InputBase from "./InputBase";
-import TextFieldOutlined from "./Outlined";
 
 // Create Wrapper Component
-const TextFieldBase = styled(Box)((theme) => ({
-  display: "flex",
-  padding: theme.spacing,
-  alignItems: "center",
-}));
+const TextFieldBase = styled(Box)(
+  ({ theme: { palette, transitions } }) => css`
+    --textfield-helper-color: ${palette.text.secondary};
+    --textfield-color: ${palette.text.primary};
+    --textfield-active-color: ${palette.primary.main};
+    --textfield-transitions: ${transitions.duration.shortest}ms
+      ${transitions.easing.easeInOut};
+    --textfield-border-color: #00000061;
+    --textfield-input-base-padding: 16px;
+    --textfield-adornment-start-width: 8px;
+    --textfield-adornment-end-width: 8px;
+    --textfield-padding-x: calc(var(--textfield-input-base-padding, 8px) / 4);
+    --textfield-padding-y: calc(var(--textfield-input-base-padding, 8px) / 4);
+    position: relative;
+    justify-content: space-between;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    will-change: opacity, transform, color;
+    transition: all 0.2s linear;
+    border-radius: 4px;
+    padding: 0; //calc(var(--textfield-input-base-padding) / 4);
+  `
+);
 
 /** A TextField with a configurable any think. */
 export type InputProps = {
@@ -42,6 +59,7 @@ export type InputProps = {
   inputProps?: HTMLInputElement;
   htmlFor?: string;
   wrapperClassName: string;
+  fullWidth: boolean;
 };
 
 const TextField: React.FC<InputProps> = ({
@@ -59,13 +77,11 @@ const TextField: React.FC<InputProps> = ({
   inputProps,
   htmlFor = Number(Date.now()).toString(16),
   wrapperClassName,
+  fullWidth,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const theme = useTheme();
-  const TextFieldEffectBase = useMemo(
-    () => (variant === "filled" ? TextFieldFilled : TextFieldOutlined),
-    [variant]
-  );
+
   return (
     <TextFieldBase
       className={mergeClassNames(
@@ -73,6 +89,7 @@ const TextField: React.FC<InputProps> = ({
         theme.prefix + "-textfield-" + variant
       )}
       overflow="visible"
+      css={css({ width: fullWidth ? "100%" : "auto" })}
       {...fieldProps}
     >
       <FieldBase
@@ -93,6 +110,7 @@ const TextField: React.FC<InputProps> = ({
             : true
         } //label'ı aktif eder
       >
+        {/* @ts-ignore */}
         <InputBase
           as={tag === "button" ? ButtonBase : tag}
           variant={variant}
@@ -109,7 +127,6 @@ const TextField: React.FC<InputProps> = ({
             : tag === "input"
             ? { value }
             : { children: value })}
-          //@ts-ignore
           onFocus={() => {
             setIsFocused(true);
           }}

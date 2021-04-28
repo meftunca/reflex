@@ -12,11 +12,8 @@ const TextFieldBase = styled(Box)<{ size: number }>`
   height: 100%;
   padding: calc(var(--textfield-input-base-padding) / 2);
   border-bottom: 1px solid var(--textfield-border-color);
-  transition: all 150ms ease-in-out;
-  &.outlined {
-    border: 1px solid var(--textfield-border-color);
-    border-radius: 4px;
-  }
+  transition: var(--textfield-transitions);
+
   .leading,
   .trailing {
     padding: calc(var(--textfield-input-base-padding) / 4);
@@ -30,7 +27,7 @@ const TextFieldBase = styled(Box)<{ size: number }>`
     label {
       user-select: none;
       position: absolute;
-      transition: all 125ms ease-in-out;
+      transition: var(--textfield-transitions);
       color: rgba(var(--textfield-color), 0.6);
       display: inline-block;
       max-width: 100%;
@@ -38,7 +35,11 @@ const TextFieldBase = styled(Box)<{ size: number }>`
       font-size: ${({ size = 16 }) => size}px;
     }
   }
+  label {
+    transform: translateY(calc(var(--textfield-input-base-padding, 16px) / 4));
+  }
   &.outlined {
+    border-radius: 4px;
     border: none;
     fieldset {
       text-align: left;
@@ -53,7 +54,7 @@ const TextFieldBase = styled(Box)<{ size: number }>`
       overflow: hidden;
       min-width: 0%;
       border-color: var(--textfield-border-color);
-      transition: all 0.1s ease-in-out;
+      transition: var(--textfield-transitions);
       legend {
         display: block;
         width: auto;
@@ -62,8 +63,30 @@ const TextFieldBase = styled(Box)<{ size: number }>`
         visibility: hidden;
         max-width: 0.01px;
         opacity: 0;
-        transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1);
+        transition: var(--textfield-transitions);
       }
+    }
+  }
+  &.filled {
+    &::before {
+      content: " ";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background-color: var(--textfield-active-color);
+      transition: var(--textfield-transitions);
+    }
+
+    .reflex-input-base {
+      padding-top: calc(var(--textfield-input-base-padding) / 2);
+      padding-bottom: 2px;
+    }
+    label {
+      transform: translateY(
+        calc(var(--textfield-input-base-padding) / 2 - 2px)
+      );
     }
   }
   /* Active Style */
@@ -87,14 +110,24 @@ const TextFieldBase = styled(Box)<{ size: number }>`
       }
       label {
         color: var(--textfield-active-color);
-        transform: translateY(calc(var(--textfield-input-base-padding) * -1.2));
+        transform: translateY(
+          calc(var(--textfield-input-base-padding) * -1 - 2px)
+        );
         font-size: ${({ size = 16 }) => (size / 4) * 3}px;
       }
     }
 
-    &.filled .content {
+    &.filled {
+      &::before {
+        left: 0%;
+        width: 100%;
+        height: 1px;
+        background-color: var(--textfield-active-color);
+      }
       label {
-        transform: translateY(calc(var(--textfield-input-base-padding) * -1));
+        transform: translateY(
+          calc(var(--textfield-input-base-padding) * -1 + 8px)
+        );
       }
     }
   }

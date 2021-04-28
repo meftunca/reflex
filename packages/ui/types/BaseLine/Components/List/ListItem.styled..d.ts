@@ -256,7 +256,7 @@ declare const _default: {
             snackbar: number;
             tooltip: number;
         };
-    }) => string;
+    }) => import("@emotion/utils").SerializedStyles;
     ListItemLineInitial: ({ prefix }: {
         prefix: string;
         breakpoints: {
@@ -514,6 +514,6 @@ declare const _default: {
             snackbar: number;
             tooltip: number;
         };
-    }) => string;
+    }) => import("@emotion/utils").SerializedStyles;
 };
 export default _default;

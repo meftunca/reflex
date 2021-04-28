@@ -27,7 +27,7 @@ const AvatarBase = styled.div<AvatarBaseProps>(
     width: ${size}px;
     height: ${size}px;
     border-radius: ${radius}px;
-    margin: ${size / 8}px;
+    // margin: ${size / 8}px;
     display: inline-flex;
     align-self: center;
     align-items: center;
@@ -66,7 +66,12 @@ const Avatar: React.FC<AvatarProps> = ({
       {src ? (
         <img alt={label} src={src} width={size} height={size} />
       ) : label ? (
-        <Text variant={textVariant} tag="span" size={(size * 2) / 5}>
+        <Text
+          variant={textVariant}
+          tag="span"
+          size={(size * 2) / 5}
+          lineHeight={1}
+        >
           {AvatarTextNormalize(label).substr(0, showChar)}
         </Text>
       ) : icon ? (

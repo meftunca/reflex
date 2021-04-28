@@ -1,6 +1,6 @@
 import React from "react";
-declare const InputBase: import("@emotion/styled").StyledComponent<HTMLInputElement & {
-    as: "div" | "textarea" | "input" | "button" | React.ReactNode;
+declare const InputBase: import("@emotion/styled").StyledComponent<React.HTMLProps<HTMLInputElement> & {
+    as: any;
     variant?: "outlined" | "filled" | undefined;
     className: string;
     placeholder: string;

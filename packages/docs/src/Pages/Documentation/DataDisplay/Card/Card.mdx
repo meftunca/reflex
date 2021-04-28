@@ -5,46 +5,56 @@ route: /documentation/data-display/card
 ---
 
 import { Card, Avatar, Button, Text } from "@re-flex/ui";
+import BasicCard from "./Examples/JS/Basic.jsx"
+import ImageCard from "./Examples/JS/Image.jsx"
+
 
 ## Introduction
 
-### Example
 
-```js live=true
-<Card shadow={1} width={300}>
-  <Card.Header>
-    <Avatar label="User Name" />
-    <Text variant="body2">User Name</Text>
-  </Card.Header>
-  <Card.Content>
-    <Text variant="subtitle1">Deneme Yazısı</Text>
-    <Text variant="body2">
-      Lorem ipsum is placeholder text commonly used in the graphic, print, and
-      publishing industries for previewing layouts and visual mockups.
-    </Text>
-  </Card.Content>
-  <Card.Footer>
-    <Button>Action</Button>
-  </Card.Footer>
-</Card>
-```
+## dataDisplay.card.titles.basic
+
+<Playground description="dataDisplay.card.descriptions.basic" jsFile={require("!raw-loader!./Examples/JS/Basic.jsx").default} tsFile={require("!raw-loader!./Examples/TS/Basic.tsx").default}>
+<div style={{display:"flex",justifyContent:"center"}}>
+  <div style={{maxWidth:320,}}>
+  <BasicCard/>
+  </div>
+</div>
+</Playground>
+
+
+
+## dataDisplay.card.titles.image
+
+<Playground description="dataDisplay.card.descriptions.image" jsFile={require("!raw-loader!./Examples/JS/Image.jsx").default} tsFile={require("!raw-loader!./Examples/TS/Image.tsx").default}>
+<div style={{display:"flex",justifyContent:"center"}}>
+  <div style={{maxWidth:320,}}>
+  <ImageCard/>
+  </div>
+</div>
+</Playground>
+
+
+
 
 ### Use shadow
 
-> Şuan 25 seviyeye kadar otomatik gölgelendirmeyi `shadow={0...24}` aralığında girerek yapabilirsiniz.
-> Yakın zamanda gölge oluşturucu entegre edilerek teorik olarak sonsuz gölgelendirmeyi projeye kazandıracağız.
-> Ayrıca Gölge oluşturucu ile yaklaşık 800byte alan kazanmamızı da sağlayacaktır
+- Şuan 25 seviyeye kadar otomatik gölgelendirmeyi `shadow={0...24}` aralığında girerek yapabilirsiniz.
+- Yakın zamanda gölge oluşturucu entegre edilerek teorik olarak sonsuz gölgelendirmeyi projeye kazandıracağız.
+- Ayrıca Gölge oluşturucu ile yaklaşık 800byte alan kazanmamızı da sağlayacaktır
 
 ```js live=true column=true
-<div
+<div style={{overflowX:"hidden",maxWidth:"40vw"}}>
+  <div
   style={{
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
+    overflowX:"overlay"
   }}
 >
-  {new Array(25).fill("").map((_, shadowLevel) => (
+  {new Array(6).fill("").map((_, shadowLevel) => (
     <Card
       shadow={shadowLevel}
       width={120}
@@ -56,6 +66,7 @@ import { Card, Avatar, Button, Text } from "@re-flex/ui";
       <Text>Level:{shadowLevel}</Text>
     </Card>
   ))}
+</div>
 </div>
 ```
 

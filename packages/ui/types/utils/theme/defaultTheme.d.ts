@@ -2,11 +2,15 @@ import dayjs from "dayjs";
 declare const DefaultTheme: {
     prefix: string;
     breakpoints: {
-        xs: number;
-        sm: number;
-        md: number;
-        lg: number;
-        xl: number;
+        values: {
+            xs: number;
+            sm: number;
+            md: number;
+            lg: number;
+            xl: number;
+        };
+        up(breakPoint: string): string;
+        down(breakPoint: string): string;
     };
     dayjs: typeof dayjs;
     space: {

@@ -1,24 +1,16 @@
 import { css } from "@emotion/react";
 import defaultTheme from "../utils/theme/defaultTheme";
 import ButtonBaseLine from "./Components/Button/Button.styled";
-import CheckboxStyled from "./Components/Forms/Checkbox";
-import RadioStyled from "./Components/Forms/Radio";
-import SwitchStyled from "./Components/Forms/Switch";
-import TextFieldStyled from "./Components/Forms/TextField";
-import ListItemStyled from "./Components/List/ListItem.styled.";
-import ProgressbarStyled from "./Components/ProgressIndicator";
-import { BoxInitialStyled, BoxVarsStyled } from "./Layout/box.styled";
-import ResetCss from "./reset";
 
 const breakPointsVarGenerator = (
-  breakpoints: any = defaultTheme.breakpoints
+  breakpoints: any = defaultTheme.breakpoints.values
 ) => {
   return Object.entries(breakpoints).map(
     ([key, value]) => `--breakpoint-${key}: ${value}px;`
   );
 };
 
-const responsiveFontSize = `
+const responsiveFontSize = css`
   @media screen and (max-width: var(--breakpoint-sm)) {
     html,
     body {
@@ -55,15 +47,13 @@ export const AppBaseLineInitialStyle = (
       easing: { easeInOut },
     },
   } = theme;
-  return `
-    ${ResetCss}
+  return css`
 
     html,body {
       font-family: var(--typography-font-family);
       background-color: var(--body-background);
       transition: background-color ${enteringScreen} ${easeInOut}, color ${enteringScreen} ${easeInOut}, letter-spacing ${enteringScreen} ${easeInOut}, font-size ${enteringScreen} ${easeInOut};
     }
-        /* Set Responsive Media Query */
     ${responsiveFontSize}
 
     .${prefix}-typography {
@@ -81,8 +71,6 @@ export const AppBaseLineInitialStyle = (
     }
 
     ${ButtonBaseLine.ButtonBaseLineInitial(theme)}
-    ${BoxInitialStyled(theme)}
-    ${ListItemStyled.ListItemLineInitial(theme)}
   `;
 };
 
@@ -90,14 +78,11 @@ export const AppBaseLineVariableStyle = (
   theme: typeof defaultTheme = defaultTheme
 ) => {
   const { typography, palette, direction, breakpoints } = theme;
-  return `
+  return css`
     :root {
-      /* SetUp */
       --direction: ${direction === "rtl" ? "right" : "left"};
-      /* BreakPoints */
-      ${breakPointsVarGenerator(breakpoints)}
+      ${breakPointsVarGenerator(breakpoints.values)}
 
-      /* Typography Variable Declaration */
       --typography-color: ${palette.text.primary};
       --typography-letter-spacing: ${typography.letterSpacing}px;
       --typography-font-size: ${typography.htmlFontSize}px;
@@ -108,19 +93,11 @@ export const AppBaseLineVariableStyle = (
       --typography-opacity: ${typography.opacity};
       --typography-text-align: var(--direction);
 
-      /* Body Variable Declaration */
       --body-background: ${palette.background.default};
       --component-background: ${palette.background.paper};
     }
 
     ${ButtonBaseLine.ButtonBaseLineVariables(theme)}
-    ${BoxVarsStyled(theme)}
-    ${ListItemStyled.ListItemLineVariables(theme)}
-    ${CheckboxStyled(theme)}
-    ${SwitchStyled(theme)}
-    ${RadioStyled(theme)}
-    ${TextFieldStyled(theme)}
-    ${ProgressbarStyled(theme)}
 
   `;
 };

@@ -16,7 +16,7 @@ type HiddenProps = {
 
 const HiddenBase = styled.div<HiddenProps>((props) => {
   let style = {};
-  const breakpoints = Object.entries(props.theme.breakpoints); //[xs,520] gibi
+  const breakpoints = Object.entries(props.theme.breakpoints.values); //[xs,520] gibi
   for (let [size, width] of breakpoints) {
     if (size + "Up" in props) {
       style[`@media screen and (min-width: ${width}px)`] = {

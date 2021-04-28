@@ -83,6 +83,8 @@ const ChipBase = styled(Box)(
     padding: 6px 2px;
     margin: 2px;
     border: 1px solid var(--chip-border-color);
+    width:auto;
+    align-self:flex-start;
     .${prefix}-chip-label {
       margin: 0 12px;
       --typography-color: var(--chip-color);
@@ -142,10 +144,8 @@ const ChipBase = styled(Box)(
     }
     // variant
     if (variant === "text") {
-      obj["--chip-background-color"] = isLight
-        ? "rgba(0,0,0,.1)"
-        : "rgba(255,255,255,.1)";
-      obj["--chip-chil-color"] = color;
+      obj["--chip-background-color"] = "transparent";
+      obj["--chip-color"] = color;
       obj["--chip-border"] = "none";
       obj["--chip-box-shadow"] = "none";
       obj["--chip-action-bg"] = isLight
@@ -153,7 +153,7 @@ const ChipBase = styled(Box)(
         : "rgba(255,255,255,.2)";
     } else if (variant === "outlined") {
       obj["--chip-background-color"] = "transparent";
-      obj["--chip-chil-color"] = color;
+      obj["--chip-color"] = color;
       obj.borderColor = "var(--chip-color) !important";
       obj["--chip-box-shadow"] = "none";
       obj["--chip-action-bg"] = isLight

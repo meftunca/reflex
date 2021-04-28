@@ -1,4 +1,4 @@
-import { useTheme } from "@emotion/react";
+import { css, useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 export type CollapseProps = React.DetailedHTMLProps<
@@ -8,15 +8,17 @@ export type CollapseProps = React.DetailedHTMLProps<
   open: boolean;
   starterHeight?: number;
 };
-type styledProps = { maxHeight: string };
-const StyledCollapse = styled.div<styledProps>(
-  {
-    willChange: "max-height",
+const StyledCollapse = styled.div(
+  ({
+    theme: {
+      transitions: { duration, easing },
+    },
+  }) => ({
+    display: "block",
+    willChange: "height",
     overflow: "hidden",
-    transition: "max-height 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-  },
-  (props: any) => ({
-    maxHeight: props.maxHeight,
+    transition: `height ${duration.shortest}ms ${easing.easeInOut} `,
+    width: "100%",
   })
 );
 const Collapse: React.FC<CollapseProps> = ({
@@ -30,26 +32,21 @@ const Collapse: React.FC<CollapseProps> = ({
   const [maxHeight, setMaxHeight] = React.useState("0");
   React.useEffect(() => {
     const content = collapseRef.current;
-    if (content === null) return;
-    if (open === false) {
-      setMaxHeight(starterHeight + "px" || "0");
-      // const height =
-      //   maxHeight === starterHeight + "px" ? "0" : starterHeight + "px" || "0";
-      // content.style.maxHeight = height;
-    } else {
+    if (content !== null && open) {
       setMaxHeight(content.scrollHeight + "px");
-      // content.style.maxHeight = content.scrollHeight + "px";
     }
-  }, [open, children]);
+  }, [open]);
   return (
-    <StyledCollapse
-      className={theme.prefix + "-collapse-content"}
-      ref={collapseRef}
-      maxHeight={maxHeight}
-      {...rest}
-    >
-      {children}
-    </StyledCollapse>
+    <div>
+      <StyledCollapse
+        className={theme.prefix + "-collapse-content"}
+        ref={collapseRef}
+        css={css({ height: open ? maxHeight : starterHeight + "px" || "0" })}
+        {...rest}
+      >
+        {children}
+      </StyledCollapse>
+    </div>
   );
 };
 

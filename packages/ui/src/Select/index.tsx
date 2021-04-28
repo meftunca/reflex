@@ -2,12 +2,12 @@ import React from "react";
 import { useRef, useCallback } from "react";
 import { useMemo } from "react";
 import IconButton from "../IconButton/IconButton";
-import Box from "../Box";
 import Chip from "../Chip";
 import Divider from "../Divider";
 import ListItem from "../List/ListItem";
 import Popper from "../Popper";
 import TextField, { InputProps } from "../TextField";
+import { css } from "@emotion/react";
 
 type SelectInputProps = Partial<HTMLElement> & {
   onChange?: (...values: any) => void;
@@ -44,7 +44,7 @@ const Select: React.FC<Props> = ({
   variant = "select",
   previewType = "text",
   renderInput = TextField,
-  renderValue = ({ title }) => <Chip label={title} size={5} />,
+  renderValue = ({ title }) => <Chip label={title} size={12} />,
   inputProps = { variant: "outlined" },
   fieldKeyName = "value",
   children,
@@ -128,41 +128,50 @@ const Select: React.FC<Props> = ({
     return inputValue.length === 0 ? null : inputValue.map(renderValue);
   }, [value, dataSource]);
   return (
-    <Popper popperRef={popperRef} content={selectOptionList} placement="bottom">
-      {renderInput &&
-        //@ts-ignore
-        renderInput({
-          onChange,
-          value: renderInputValue,
-          tag: "button",
-          readOnly: true,
-          ...inputProps,
-          endAdornment: (
-            <div css={{ display: "flex", placeItems: "center" }}>
-              <IconButton
-                size={12}
-                //@ts-ignore
-                onClick={() => onChange(mode === "multiple" ? [] : null)}
-              >
-                <span
-                  className="material-icons"
-                  hidden={
-                    mode === "multiple"
-                      ? Array.isArray(value) && value.length > 0
+    <Popper popperRef={popperRef} content={selectOptionList} placement="auto">
+      <div
+        css={css({
+          display: "flex",
+          flexWrap: "wrap",
+          width: "100%",
+        })}
+      >
+        {renderInput &&
+          //@ts-ignore
+          renderInput({
+            onChange,
+            value: renderInputValue,
+            tag: "button",
+            readOnly: true,
+            fullWidth: true,
+            ...inputProps,
+            endAdornment: (
+              <div css={{ display: "flex", placeItems: "center" }}>
+                <IconButton
+                  size={12}
+                  //@ts-ignore
+                  onClick={() => onChange(mode === "multiple" ? [] : null)}
+                >
+                  <span
+                    className="material-icons"
+                    hidden={
+                      mode === "multiple"
+                        ? Array.isArray(value) && value.length > 0
+                          ? false
+                          : true
+                        : value !== undefined && value !== null && value !== ""
                         ? false
                         : true
-                      : value !== undefined && value !== null && value !== ""
-                      ? false
-                      : true
-                  }
-                >
-                  clear
-                </span>
-              </IconButton>
-              <span className="material-icons">arrow_drop_down</span>
-            </div>
-          ),
-        })}
+                    }
+                  >
+                    clear
+                  </span>
+                </IconButton>
+                <span className="material-icons">arrow_drop_down</span>
+              </div>
+            ),
+          })}
+      </div>
     </Popper>
   );
 };

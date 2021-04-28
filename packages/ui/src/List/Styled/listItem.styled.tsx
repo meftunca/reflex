@@ -1,6 +1,7 @@
 import { lighten } from "color2k";
 import { css, styled } from "../../utils/theme/styled";
 type Props = {
+  variant: "contained" | "text" | "outlined";
   colorDepth?: "light" | "main" | "dark";
   size?: number;
   button?: boolean;
@@ -15,15 +16,28 @@ type Props = {
 };
 const StyledListItem = styled.div<Props>(
   css`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
     --hover-bgcolor: rgba(0, 0, 0, 0.05);
+
     &:hover,
-    &:active {
+    &:active,
+    &:focus {
       background-color: var(--hover-bgcolor);
     }
   `,
-  (props: any) => {
+
+  ({ theme: { prefix, palette, transitions }, ...props }) => {
+    const transitionTiming = `${transitions.duration.shorter}ms ${transitions.easing.easeInOut}`;
     let obj: any = {
       cursor: props.button ? "pointer" : "inherit",
+      transitionTiming: `all ${transitionTiming}`,
+      padding: "var(--list-item-padding)",
+      fontSize: "var(--list-item-font-size)",
+      backgroundColor: "var(--list-item-background-color)",
     };
     // Object.entries(isObject(props.vars) ? props.vars : {}).forEach(
     //   ([key, value]) => (obj[camelToKebabCase(key, "")] = value)
@@ -33,7 +47,7 @@ const StyledListItem = styled.div<Props>(
         props.color.match(/(primary|secondary|info|error|warning|success)/g)
       ) {
         let depth = props.colorDepth || "main";
-        obj["color"] = props.theme.palette[props.color][depth];
+        obj["color"] = palette[props.color][depth];
       } else {
         obj["color"] = props.color;
       }
@@ -61,8 +75,7 @@ const StyledListItem = styled.div<Props>(
       obj.borderColor = "var(color) !important";
       obj["box-shadow"] = "none";
     } else if (props.variant === "contained") {
-      obj["background-color"] =
-        props.color || props.theme.palette.background.paper;
+      obj["background-color"] = props.color || palette.background.paper;
       obj["border-color"] = props.color
         ? props.colorDepth !== "light"
           ? "white"

@@ -5,7 +5,8 @@ import Ripple, { Props as RippleProps } from "../Ripple";
 import Text from "../Typography";
 import StyledListItem from "./Styled/listItem.styled";
 import { useTheme, jsx } from "@emotion/react";
-export type Props = HTMLLIElement & {
+import styled from "@emotion/styled";
+export type Props = React.HTMLProps<HTMLElement> & {
   /** OnLongPress */
   // onLongPress?: () => void;
   // longPressDelay?: number;
@@ -29,6 +30,40 @@ export type Props = HTMLLIElement & {
   className?: string | string[];
   style?: CSSProperties;
 };
+
+/*
+
+    .${prefix}-list-item-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .${prefix}-list-item-left-content {
+      margin-right: 1rem;
+      z-index: 9;
+    }
+    .${prefix}-list-item-right-content {
+      margin-left: 1rem;
+      z-index: 9;
+    }
+
+*/
+
+const ListItemContent = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ListItemLeftContent = styled.div`
+  margin-right: 1rem;
+  z-index: 9;
+`;
+
+const ListItemRightContent = styled.div`
+  margin-left: 1rem;
+  z-index: 9;
+`;
 
 const ListItem: React.FC<Props> = ({
   children,
@@ -55,11 +90,13 @@ const ListItem: React.FC<Props> = ({
       {...rest}
     >
       {leftItem && (
-        <div className={theme.prefix + "-list-item-left-content"}>
+        <ListItemLeftContent
+          className={theme.prefix + "-list-item-left-content"}
+        >
           {leftItem}
-        </div>
+        </ListItemLeftContent>
       )}
-      <div className={theme.prefix + "-list-item-content"}>
+      <ListItemContent className={theme.prefix + "-list-item-content"}>
         <Text
           // color="textPrimary"
           variant="subtitle1"
@@ -73,11 +110,13 @@ const ListItem: React.FC<Props> = ({
             {description}
           </Text>
         )}
-      </div>
+      </ListItemContent>
       {rightItem && (
-        <div className={theme.prefix + "-list-item-right-content"}>
+        <ListItemRightContent
+          className={theme.prefix + "-list-item-right-content"}
+        >
           {rightItem}
-        </div>
+        </ListItemRightContent>
       )}
       {rippleProps && rest.button && <Ripple {...rippleProps} />}
     </StyledListItem>

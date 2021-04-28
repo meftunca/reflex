@@ -1,2 +1,7 @@
-declare const _default: () => import("@emotion/react/jsx-runtime").JSX.Element;
-export default _default;
+import React from "react";
+import { sxType } from "../utils/theme/sx";
+declare type BackdropProps = React.HTMLProps<HTMLDivElement> & {
+    sx: sxType;
+};
+declare const Backdrop: React.FC<BackdropProps>;
+export default Backdrop;
