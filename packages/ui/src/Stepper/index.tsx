@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/react";
 import React, { Fragment, useCallback, useState } from "react";
 import Button, { Props as ButtonProps } from "../Button";
-import Text, { TextProps } from "../Typography";
+import Text, { TextProps } from "@re-flex/styled/src/Typography";
 import {
   StepContentBase,
   StepContentItemBase,

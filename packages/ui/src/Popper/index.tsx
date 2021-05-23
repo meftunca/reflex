@@ -56,15 +56,18 @@ const Popper: React.FC<Props> = ({
   onClickAway,
   duration = 200,
   popperRef,
+  attachTo,
 }) => {
   const [portalEnable, setPortalEnable] = useState<boolean>(false);
   // const theme = useTheme();
   const isText = typeof content === "string";
   const [visible, setVisible] = React.useState<boolean | null>(null);
-  const referenceElement = React.useRef<Element | VirtualElement>(null);
+  const referenceElement = React.useRef<Element | VirtualElement>(
+    attachTo || null
+  );
   const popperElement = React.useRef<HTMLDivElement | null>(null);
   const { styles, attributes } = usePopper(
-    referenceElement.current,
+    attachTo || referenceElement.current,
     popperElement.current,
     {
       modifiers: [flip, preventOverflow],
@@ -72,6 +75,7 @@ const Popper: React.FC<Props> = ({
     }
   );
   const getRef = useMemo(() => {
+    if (attachTo || !React.isValidElement(children)) return null;
     const childElement = React.Children.only(children);
 
     return React.isValidElement(childElement)
@@ -130,41 +134,15 @@ const Popper: React.FC<Props> = ({
 
   return (
     <Fragment>
-      {/* @ts-ignore */}
-
-      {/* <div
-        css={{ display: "inline-block" }}
-        {...{
-          ref: referenceElement,
-          onClick: () => {
-            setPortalEnable(true);
-            setTimeout(() => {
-              setVisible(!visible);
-            }, 30);
-          },
-        }}
-      >
-        {children}
-      </div> */}
-      {getRef}
+      {attachTo ? children : getRef}
       <Portal enable={portalEnable}>
         <div
           ref={popperElement}
-          // style={styles}
-          // {...attributes}
           data-show={visible !== null}
+          // {...styles}
+          // {...attributes}
         >
           <Transition
-            // animation={{
-            //   in: {
-            //     from: { top: 50, opacity: 0 },
-            //     to: { top: 0, opacity: 1 },
-            //   },
-            //   out: {
-            //     from: { top: 0, opacity: 1 },
-            //     to: { top: 50, opacity: 0 },
-            //   },
-            // }}
             defaultStyle={{ transform: `translateY(${-20}px)`, opacity: 0 }}
             from={{ transform: `translateY(${-20}px)`, opacity: 0 }}
             to={{ transform: `translateY(${0}px)`, opacity: 1 }}
@@ -248,6 +226,7 @@ type Props = {
     | "auto-start"
     | "auto-end"
     | undefined;
+  attachTo?: HTMLElement;
   /**
    * Options provided to the [`popper.js`](https://popper.js.org/docs/v1/) instance.
    */

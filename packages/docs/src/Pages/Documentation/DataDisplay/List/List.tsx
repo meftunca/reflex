@@ -53,11 +53,7 @@ const SimpleList: React.FC<Props> = () => {
             <List.Item
               button
               {...i}
-              rightItem={
-                <Button variant="outlined" size={12}>
-                  Add
-                </Button>
-              }
+              rightItem={<Button variant="outlined">Add</Button>}
             />
           ))}
         </List>

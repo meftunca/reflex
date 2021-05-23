@@ -1,5 +1,5 @@
 import Theme, { Breakpoints } from "./Types";
-import { CSSObject } from "@emotion/css";
+import { CSSObject } from "@emotion/react";
 import getValueWithObjectPath from "../helpers/getValueWithObjectPath";
 import { isObject } from "../helpers/is";
 

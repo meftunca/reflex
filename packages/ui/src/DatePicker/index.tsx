@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useRef } from "react";
+import { useState } from "react";
 import Box from "../Box";
 import Button from "../Button";
 import IconButton from "../IconButton/IconButton";
@@ -38,10 +39,10 @@ const DatePickerBase: React.FC<DatePickerBaseProps> = ({}) => {
           padding: 12,
         })}
       >
-        <IconButton onClick={() => controls.prevYear(-1)} size={13}>
+        <IconButton onClick={() => controls.prevYear(-1)} size={1}>
           <span className="material-icons">first_page</span>
         </IconButton>
-        <IconButton onClick={() => controls.prevMonth(-1)} size={13}>
+        <IconButton onClick={() => controls.prevMonth(-1)} size={1}>
           <span className="material-icons">chevron_left</span>
         </IconButton>
         <div css={css({ flexGrow: 1 })} />
@@ -56,10 +57,10 @@ const DatePickerBase: React.FC<DatePickerBaseProps> = ({}) => {
             : previewDate[0].format("MMM, YYYY")}
         </Text>
         <div css={css({ flexGrow: 1 })} />
-        <IconButton onClick={() => controls.nextMonth(1)} size={13}>
+        <IconButton onClick={() => controls.nextMonth(1)} size={1}>
           <span className="material-icons">chevron_right</span>
         </IconButton>
-        <IconButton onClick={() => controls.nextYear(1)} size={13}>
+        <IconButton onClick={() => controls.nextYear(1)} size={1}>
           <span className="material-icons">last_page</span>
         </IconButton>
       </Box>
@@ -98,23 +99,39 @@ const DatePickerBase: React.FC<DatePickerBaseProps> = ({}) => {
   );
 };
 const DatePickerRange: React.FC = () => {
+  const popperRef = useRef<{
+    open: () => void;
+    close: () => void;
+  }>();
+  const [attachTo, setAttachTo] = useState<HTMLElement | undefined>(undefined);
   const {
     /* @ts-ignore */
     state: { Trigger, containerProps, previewDate },
   } = useDatePicker();
-
   return (
-    <Popper
-      placement="left"
-      content={
-        <Box width="auto" css={css({ display: "flex" })} {...containerProps}>
-          <DatePickerBase />
-        </Box>
-      }
-    >
+    <Fragment>
       {/* @ts-ignore */}
-      <Button>Open</Button>
-    </Popper>
+      <Trigger
+        onClick={(e: any) => {
+          if (!attachTo) setAttachTo(e.target);
+          setTimeout(() => {
+            popperRef?.current?.open();
+          }, 15);
+        }}
+      />
+
+      <Popper
+        attachTo={attachTo}
+        placement="bottom"
+        //@ts-ignore
+        popperRef={popperRef}
+        content={
+          <Box width="auto" css={css({ display: "flex" })} {...containerProps}>
+            <DatePickerBase />
+          </Box>
+        }
+      />
+    </Fragment>
   );
 };
 const DatePickerWrapper: React.FC<DatePickerProps> = (props) => (

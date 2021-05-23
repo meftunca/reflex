@@ -1,5 +1,12 @@
 import { useTheme } from "@emotion/react";
-import React, { useCallback, useRef } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+} from "react";
+import StyledRipple from "@re-flex/styled/src/Ripple/Root";
+export type onRipple = React.MouseEventHandler<HTMLElement> | undefined;
 
 export type Props = {
   onLongPress?: () => void;
@@ -7,16 +14,25 @@ export type Props = {
   color?: string;
 };
 
-const Ripple: React.FC<Props> = ({ color }) => {
-  const theme = useTheme();
-  const ref = useRef<HTMLSpanElement>(null);
-  const onRipple = useCallback(
-    (event) => {
-      const attach: HTMLSpanElement = event.currentTarget;
+const Ripple = forwardRef<{ onRipple: onRipple }, Props>(
+  ({ color }, forwardableRef) => {
+    const theme = useTheme();
+    const ref = useRef<HTMLElement>(null);
+    useImperativeHandle(
+      forwardableRef,
+      () => {
+        return { onRipple };
+      },
+      [color]
+    );
 
+    const onRipple = (event: any) => {
+      if (!ref.current) return;
+
+      const attach: HTMLElement = ref.current;
       // animasyonu bildir
       requestAnimationFrame(() => {
-        const self: HTMLSpanElement = attach;
+        const self: HTMLElement = attach;
         const { left, top } = self.getBoundingClientRect();
         const x = event.clientX - left;
         const y = event.clientY - top;
@@ -25,35 +41,30 @@ const Ripple: React.FC<Props> = ({ color }) => {
             ? self.clientWidth
             : self.clientHeight;
         let span = document.createElement("span");
-        span.id = "ripple" + Number(Date.now()).toString(16);
+        span.id = "ripple" + Number(Date.now()).toString(32);
         span.className = `${theme.prefix}-ripples`;
         let style = {
-          width: rippleSize + "px",
-          height: rippleSize + "px",
-          left: x - rippleSize / 2 + "px",
-          top: y - rippleSize / 2 + "px",
-          transform: "scale(1.25)",
-          opacity: "0",
+          width: rippleSize * 2 + "px",
+          height: rippleSize * 2 + "px",
+          left: x - rippleSize + "px",
+          top: y - rippleSize + "px",
         };
         Object.entries(style).forEach(
           ([key, value]) => (span.style[key] = value)
         );
-        span.style.animationDuration =
-          theme.transitions.duration.complex + 100 + "ms";
         self.append(span);
         span.onanimationend = () => span.remove();
       });
-    },
-    [color]
-  );
+    };
 
-  return (
-    <span
-      className={theme.prefix + "-ripple-container"}
-      onMouseDown={onRipple}
-      ref={ref}
-    ></span>
-  );
-};
+    return (
+      <StyledRipple
+        className={theme.prefix + "-ripple-container"}
+        // onMouseDown={onRipple}
+        ref={ref}
+      ></StyledRipple>
+    );
+  }
+);
 
 export default Ripple;

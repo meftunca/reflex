@@ -1,11 +1,11 @@
 import React from "react";
-import CardWrapper from "./Styled/CardWrapper";
-import CardContent from "./Styled/CardContent";
-import CardFooter from "./Styled/CardFooter";
-import CardHeader from "./Styled/CardHeader";
-import CardRow from "./Styled/CardRow";
+import CardWrapper from "@re-flex/styled/src/Card/CardWrapper";
+import CardContent from "@re-flex/styled/src/Card/CardContent";
+import CardFooter from "@re-flex/styled/src/Card/CardFooter";
+import CardHeader from "@re-flex/styled/src/Card/CardHeader";
+import CardRow from "@re-flex/styled/src/Card/CardRow";
 import { BoxProps } from "../Box";
-import { cx } from "@emotion/css";
+import clsx from "clsx";
 type Props = BoxProps & {};
 
 interface SubComponents {
@@ -23,7 +23,7 @@ const Card: React.FC<Props> & SubComponents = ({
 }) => {
   return (
     <CardWrapper
-      className={cx(`${theme?.prefix || "reflex"}-card`, className)}
+      className={clsx(`${theme?.prefix || "reflex"}-card`, className)}
       {...props}
     >
       {children}

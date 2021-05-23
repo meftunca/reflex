@@ -1,8 +1,8 @@
 import React from "react";
-import CardContent from "./Styled/CardContent";
-import CardFooter from "./Styled/CardFooter";
-import CardHeader from "./Styled/CardHeader";
-import CardRow from "./Styled/CardRow";
+import CardContent from "@re-flex/styled/src/Card/CardContent";
+import CardFooter from "@re-flex/styled/src/Card/CardFooter";
+import CardHeader from "@re-flex/styled/src/Card/CardHeader";
+import CardRow from "@re-flex/styled/src/Card/CardRow";
 import { BoxProps } from "../Box";
 declare type Props = BoxProps & {};
 interface SubComponents {

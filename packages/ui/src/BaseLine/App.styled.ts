@@ -48,11 +48,14 @@ export const AppBaseLineInitialStyle = (
     },
   } = theme;
   return css`
-
-    html,body {
+    html,
+    body {
       font-family: var(--typography-font-family);
       background-color: var(--body-background);
-      transition: background-color ${enteringScreen} ${easeInOut}, color ${enteringScreen} ${easeInOut}, letter-spacing ${enteringScreen} ${easeInOut}, font-size ${enteringScreen} ${easeInOut};
+      transition: background-color ${enteringScreen} ${easeInOut},
+        color ${enteringScreen} ${easeInOut},
+        letter-spacing ${enteringScreen} ${easeInOut},
+        font-size ${enteringScreen} ${easeInOut};
     }
     ${responsiveFontSize}
 
@@ -67,10 +70,10 @@ export const AppBaseLineInitialStyle = (
       text-align: var(--typography-text-align);
       text-transform: var(--typography-text-transform);
       opacity: var(--typography-opacity);
-      transition: color ${enteringScreen} ${easeInOut}, letter-spacing ${enteringScreen} ${easeInOut}, font-size ${enteringScreen} ${easeInOut};
+      transition: color ${enteringScreen} ${easeInOut},
+        letter-spacing ${enteringScreen} ${easeInOut},
+        font-size ${enteringScreen} ${easeInOut};
     }
-
-    ${ButtonBaseLine.ButtonBaseLineInitial(theme)}
   `;
 };
 
@@ -96,8 +99,5 @@ export const AppBaseLineVariableStyle = (
       --body-background: ${palette.background.default};
       --component-background: ${palette.background.paper};
     }
-
-    ${ButtonBaseLine.ButtonBaseLineVariables(theme)}
-
   `;
 };

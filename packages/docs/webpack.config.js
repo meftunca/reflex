@@ -25,7 +25,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)?$/,
         use: [
           "ts-loader",
           // {
@@ -60,6 +60,7 @@ module.exports = {
         include: [
           // /node_modules/,
           path.resolve(__dirname, "../ui/src"),
+          path.resolve(__dirname, "../styled/src"),
           path.resolve(__dirname, "src"),
         ],
       },
@@ -68,7 +69,6 @@ module.exports = {
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
-
       {
         test: /\.mdx?$/,
         use: [

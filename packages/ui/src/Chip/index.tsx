@@ -57,6 +57,7 @@ export type Props = {
   variant?: "outlined" | "contained" | "text";
   ripple?: typeof Ripple.defaultProps | null;
   label: string | React.ReactNode;
+  radius?: number;
   avatar?: React.ReactNode;
   icon?: React.ReactNode;
   deleteIcon?: React.ReactNode;
@@ -115,9 +116,7 @@ const ChipBase = styled(Box)(
       theme: { palette, prefix },
     }: Props = props;
     let obj: any = {};
-    // Object.entries(isObject(props.vars) ? props.vars : {}).forEach(
-    //   ([key, value]) => (obj[camelToKebabCase(key, "--chip-")] = value)
-    // );
+
     const isLight = palette.type === "light";
     if (color.match(/(textPrimary|textSecondary)/g)) {
       color = color.replace("text", "").toLowerCase();
@@ -132,15 +131,6 @@ const ChipBase = styled(Box)(
     if (size && typeof size === "number") {
       obj["--chip-padding"] = `${size / 3}px ${size / 4}px`;
       obj["--chip-border-radius"] = "50%";
-      // obj.width = size + size / 3 + "px";
-      // obj.height = size + size / 3 + "px";
-      // obj["svg"] = {
-      //   fontSize: size + "px",
-      //   width: size + "px",
-      //   height: size + "px",
-      //   margin: 0 + "px !important",
-      //   padding: 0 + "px !important",
-      // };
     }
     // variant
     if (variant === "text") {
@@ -186,7 +176,8 @@ const Chip: React.FC<Props> = ({
   deleteIcon: DeleteIcon = <RiCloseLine />,
   onSelect,
   onDelete,
-  size = 13,
+  size = 1,
+  radius = 30,
   ...rest
 }) => {
   const theme = useTheme();
@@ -197,7 +188,7 @@ const Chip: React.FC<Props> = ({
     <ChipBase
       // role="button"
       bgColor={isLight ? theme.palette.grey[300] : theme.palette.grey[800]}
-      radius={30}
+      radius={radius}
       size={size}
       css={{ "--box-width": "auto" }}
       {...rest}
@@ -211,7 +202,7 @@ const Chip: React.FC<Props> = ({
             e.stopPropagation();
             onSelect(e);
           }}
-          size={size + 3}
+          size={size}
         />
       ) : (
         icon || avatar
@@ -221,7 +212,7 @@ const Chip: React.FC<Props> = ({
         variant="body1"
         tag="span"
         color="textPrimary"
-        size={size}
+        size={theme.space * size * 1.5}
       >
         {label}
       </Text>
@@ -234,7 +225,7 @@ const Chip: React.FC<Props> = ({
             e.stopPropagation();
             onDelete(e);
           }}
-          size={size + 3}
+          size={size}
         />
       )}
       {ripple && <Ripple {...ripple} />}

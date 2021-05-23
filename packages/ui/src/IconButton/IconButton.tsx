@@ -2,9 +2,13 @@ import { useTheme } from "@emotion/react";
 import React from "react";
 import Ripple from "../Ripple";
 import { mergeClassNames } from "../utils/helpers/stringFormat";
-import StyledIconButton from "./styledIconButton";
+import StyledIconButton from "@re-flex/styled/src/IconButton";
+import { ButtonRootProps } from "@re-flex/styled/src/Button/Root";
+import ButtonBase from "../ButtonBase";
 
-type UIIconButton = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+interface UIIconButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    ButtonRootProps {
   onLongPress?: () => void;
   longPressDelay?: number;
   colorDepth?: "light" | "main" | "dark";
@@ -20,10 +24,10 @@ type UIIconButton = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     | string;
   variant?: "outlined" | "contained" | "text";
   ripple?: typeof Ripple.defaultProps | null;
-  classname?: string | string[];
-};
+  isImgButton?: boolean;
+}
 
-const IconButton: React.FC<UIIconButton> = ({
+const IconButton: React.FC<UIIconButtonProps> = ({
   children,
   onLongPress,
   className,
@@ -36,12 +40,12 @@ const IconButton: React.FC<UIIconButton> = ({
   const prefix = theme.prefix;
   return (
     <StyledIconButton
-      theme={theme}
+      as={ButtonBase}
       className={mergeClassNames(`${prefix}-btn ${prefix}-icon-btn`, className)}
+      variant="text"
       {...rest}
     >
       {children || icon}
-      {ripple && <Ripple {...ripple} />}
     </StyledIconButton>
   );
 };

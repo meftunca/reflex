@@ -1,4 +1,3 @@
-
 import styled from "@emotion/styled";
 import React from "react";
 import { useRef } from "react";
@@ -10,7 +9,8 @@ export const Track = styled("div")<SliderProps>((props) => ({
   width: props.width || "100%",
   position: "relative",
   overflow: "visible",
-  borderRadius:typeof props.radius === "number" ? props.radius+"px" : props.radius
+  borderRadius:
+    typeof props.radius === "number" ? props.radius + "px" : props.radius,
 }));
 
 export const Tick = styled("div")`
@@ -35,59 +35,50 @@ export const TickLabel = styled("div")`
 `;
 
 export const Segment = styled("div")<{ backgroundColor: string }>`
-         background-color: ${(props) => props.backgroundColor};
-         height: 100%;
-       `;
+  background-color: ${(props) => props.backgroundColor};
+  height: 100%;
+`;
 
 export const Handle = styled("div")<{
-                active: boolean;
-                size: number;
+  active: boolean;
+  size: number;
   activeSize: number;
-                color?:string
-              }>`
-                background-color: ${props=>props.color||props.theme.palette.primary.main};
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: ${(props) => (props.active ? props.activeSize : props.size)}px;
-                height: ${(props) => (props.active ? props.activeSize : props.size)}px;
-                border-radius: 100%;
-                font-size: ${(props) =>
-                  props.active ? (props.activeSize / 3) * 2 : (props.size / 3) * 2}px;
-                white-space: nowrap;
-                color: white;
-                font-weight: ${(props) => (props.active ? "bold" : "normal")};
-                transform: ${(props) =>
-                  props.active
-         
-                ? "translateY(-100%) scale(1.3)"
-      
-                   : "translateY(0) scale(0.9)"};
-                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-              `;
+  color?: string;
+}>`
+  background-color: ${(props) =>
+    props.color || props.theme.palette.primary.main};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${(props) => (props.active ? props.activeSize : props.size)}px;
+  height: ${(props) => (props.active ? props.activeSize : props.size)}px;
+  border-radius: 100%;
+  font-size: ${(props) =>
+    props.active ? (props.activeSize / 3) * 2 : (props.size / 3) * 2}px;
+  white-space: nowrap;
+  color: white;
+  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+  transform: ${(props) =>
+    props.active ? "translateY(-100%) scale(1.3)" : "translateY(0) scale(0.9)"};
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+`;
 
 type SliderProps = {
-  disabled?: boolean,
-  color?:string,
-  size?: number,
-  activeSize?:number,
-  width?: number,
-  height?:number,
-  step?: number,
-  min?: number,
-  max?: number,
-  radius?: number|string,
-  values?: number[],
-  segmentColors?:string[]
-}
+  disabled?: boolean;
+  color?: string;
+  size?: number;
+  activeSize?: number;
+  width?: number;
+  height?: number;
+  step?: number;
+  min?: number;
+  max?: number;
+  radius?: number | string;
+  values?: number[];
+  segmentColors?: string[];
+};
 
-
-const defaultSegmentColors = [
- "#3e8aff",
- "#00d5c0",
- "#f5c200",
- "#ff6050",
-]
+const defaultSegmentColors = ["#3e8aff", "#00d5c0", "#f5c200", "#ff6050"];
 
 const Slider: React.FC<SliderProps> = ({
   width,
@@ -98,8 +89,8 @@ const Slider: React.FC<SliderProps> = ({
   min = 0,
   max = 10,
   values = [2, 5],
-  radius="6%",
-  segmentColors= defaultSegmentColors,
+  radius = "6%",
+  segmentColors = defaultSegmentColors,
 }) => {
   const sliderRef = useRef(null);
   const { getTrackProps, ticks, segments, handles } = useRanger({

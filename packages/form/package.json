@@ -1,0 +1,77 @@
+{
+  "name": "@re-flex/form",
+  "version": "0.2.3",
+  "author": " <buraksenturk25@gmail.com>",
+  "license": "MIT",
+  "lock": false,
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/meftunca/reflex/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meftunca/reflex.git"
+  },
+  "keywords": [
+    "hooks",
+    "form",
+    "formik",
+    "state",
+    "react"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.tsx",
+  "scripts": {
+    "build": "microbundle --tsconfig tsconfig.build.json",
+    "start-form-state": "microbundle  --tsconfig tsconfig.build.json ",
+    "test": "run-s test:unit test:lint",
+    "test:lint": "tsc && eslint --ext ts,tsx .",
+    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "tsc && react-scripts test --env=jsdom"
+  },
+  "dependencies": {
+    "object-path": "*"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "yuo": "*"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/react-hooks": "^6.0.0",
+    "@testing-library/user-event": "^13.1.9",
+    "@types/jest": "^26.0.23",
+    "@types/object-path": "^0.11.0",
+    "@types/yup": "^0.29.11",
+    "@types/react": "^17.0.6",
+    "@types/react-redux": "^7.1.16",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-config-standard-react": "^11.0.1",
+    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-standard": "^5.0.0",
+    "microbundle": "^0.13.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.0",
+    "react": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
+    "typescript": "4.2.4"
+  },
+  "files": [
+    "dist"
+  ]
+}

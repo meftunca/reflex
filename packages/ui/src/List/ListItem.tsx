@@ -6,6 +6,7 @@ import Text from "../Typography";
 import StyledListItem from "./Styled/listItem.styled";
 import { useTheme, jsx } from "@emotion/react";
 import styled from "@emotion/styled";
+import clsx from "clsx";
 export type Props = React.HTMLProps<HTMLElement> & {
   /** OnLongPress */
   // onLongPress?: () => void;
@@ -72,7 +73,7 @@ const ListItem: React.FC<Props> = ({
   colorDepth = "main",
   leftItem,
   rightItem,
-  size = 14,
+  size = 1,
   title,
   description,
   ...rest
@@ -81,10 +82,7 @@ const ListItem: React.FC<Props> = ({
   return (
     //@ts-ignore
     <StyledListItem
-      className={[
-        theme.prefix + "-list-item",
-        Array.isArray(className) ? className.join(" ") : className,
-      ].join(" ")}
+      className={clsx(theme.prefix + "-list-item", className)}
       colorDepth={colorDepth}
       size={size}
       {...rest}
@@ -98,15 +96,15 @@ const ListItem: React.FC<Props> = ({
       )}
       <ListItemContent className={theme.prefix + "-list-item-content"}>
         <Text
-          // color="textPrimary"
-          variant="subtitle1"
+          color="text.primary"
+          variant="subtitle2"
           tag="span"
           gutter={description ? [0, 0, 8, 0] : 0}
         >
           {title}
         </Text>
         {description && (
-          <Text color="textSecondary" variant="body2" tag="span">
+          <Text color="text.secondary" variant="caption" tag="span">
             {description}
           </Text>
         )}

@@ -8,6 +8,7 @@ export declare type Props = {
     variant?: "outlined" | "contained" | "text";
     ripple?: typeof Ripple.defaultProps | null;
     label: string | React.ReactNode;
+    radius?: number;
     avatar?: React.ReactNode;
     icon?: React.ReactNode;
     deleteIcon?: React.ReactNode;

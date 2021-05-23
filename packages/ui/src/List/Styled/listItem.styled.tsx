@@ -1,5 +1,7 @@
 import { lighten } from "color2k";
+import SXBase from "@re-flex/styled/src/SX";
 import { css, styled } from "../../utils/theme/styled";
+
 type Props = {
   variant: "contained" | "text" | "outlined";
   colorDepth?: "light" | "main" | "dark";
@@ -14,8 +16,8 @@ type Props = {
     | "success"
     | string;
 };
-const StyledListItem = styled.div<Props>(
-  css`
+
+const Base = styled(SXBase)(`
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -28,20 +30,22 @@ const StyledListItem = styled.div<Props>(
     &:focus {
       background-color: var(--hover-bgcolor);
     }
-  `,
+  `);
 
-  ({ theme: { prefix, palette, transitions }, ...props }) => {
+const StyledListItem = styled(Base)<Props>(
+  ({ theme: { prefix, palette, transitions, space }, ...props }) => {
     const transitionTiming = `${transitions.duration.shorter}ms ${transitions.easing.easeInOut}`;
     let obj: any = {
       cursor: props.button ? "pointer" : "inherit",
       transitionTiming: `all ${transitionTiming}`,
-      padding: "var(--list-item-padding)",
+      padding: `${space * 1.5}px ${space * 2}px`,
       fontSize: "var(--list-item-font-size)",
       backgroundColor: "var(--list-item-background-color)",
+      "& > svg": {
+        fontSize: `${space * 3}px`,
+      },
     };
-    // Object.entries(isObject(props.vars) ? props.vars : {}).forEach(
-    //   ([key, value]) => (obj[camelToKebabCase(key, "")] = value)
-    // );
+
     if (props.color && props.variant !== "contained") {
       if (
         props.color.match(/(primary|secondary|info|error|warning|success)/g)
@@ -60,8 +64,9 @@ const StyledListItem = styled.div<Props>(
     obj.width = "100%";
     //size
     if (props.size && typeof props.size === "number") {
-      obj["--list-item-padding"] = `${props.size / 2 + 4}px ${props.size +
-        8}px`;
+      obj["--list-item-padding"] = `${props.size / 2 + 4}px ${
+        props.size + 8
+      }px`;
       obj["--list-item-font-size"] = props.size + "px";
     }
 

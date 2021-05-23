@@ -24,11 +24,13 @@ const DefaultTheme = {
   },
 
   dayjs: dayjs,
-  space: {
-    default: 8,
+  spaceValues: {
+    normal: 8,
     dense: 4,
     large: 12,
   },
+  spaceTypes: "normal",
+  space: 8,
   direction: "ltr",
   mixins: {
     toolbar: {

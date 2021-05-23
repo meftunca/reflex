@@ -13,11 +13,13 @@ declare const DefaultTheme: {
         down(breakPoint: string): string;
     };
     dayjs: typeof dayjs;
-    space: {
-        default: number;
+    spaceValues: {
+        normal: number;
         dense: number;
         large: number;
     };
+    spaceTypes: string;
+    space: number;
     direction: string;
     mixins: {
         toolbar: {

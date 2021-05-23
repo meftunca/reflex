@@ -1,0 +1,34 @@
+import Theme, { Breakpoints } from "../Types";
+import { CSSObject } from "@emotion/react";
+declare type anyObject = {
+    [key: string]: any;
+};
+export declare const get: (obj: anyObject, key: string | number, def?: any, p?: number | undefined, undef?: any) => any;
+export declare type sxType = CSSObject & {
+    xs?: CSSObject;
+    sm?: CSSObject;
+    md?: CSSObject;
+    lg?: CSSObject;
+    xl?: CSSObject;
+    bg?: string | Breakpoints;
+    w?: string | number | Breakpoints;
+    h?: string | number | Breakpoints;
+    m?: string | number | Breakpoints;
+    mt?: string | number | Breakpoints;
+    mr?: string | number | Breakpoints;
+    mb?: string | number | Breakpoints;
+    ml?: string | number | Breakpoints;
+    mx?: string | number | Breakpoints;
+    my?: string | number | Breakpoints;
+    p?: string | number | Breakpoints;
+    pt?: string | number | Breakpoints;
+    pr?: string | number | Breakpoints;
+    pb?: string | number | Breakpoints;
+    pl?: string | number | Breakpoints;
+    px?: string | number | Breakpoints;
+    py?: string | number | Breakpoints;
+};
+export declare const responsive: (styles: (theme: Theme) => sxType | sxType) => (theme: Theme) => {};
+export declare const sxPropInitialiter: (args: (theme: Theme) => sxType | sxType) => (theme: Theme) => {};
+declare const sxPropGenerator: (props: anyObject) => {};
+export default sxPropGenerator;

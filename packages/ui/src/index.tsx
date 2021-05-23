@@ -1,6 +1,6 @@
 /// <reference types="@emotion/react/types/css-prop" />
 import "@emotion/react";
-import EmotionTheme from "./utils/theme/Types";
+import type EmotionTheme from "@re-flex/styled/src/ThemeTypes";
 
 declare module "@emotion/react" {
   export interface Theme extends EmotionTheme {}
@@ -23,7 +23,7 @@ export { default as Backdrop } from "./Backdrop";
 export { default as Banner } from "./Banner";
 
 //@Layout
-export { default as SXBase } from "./Styled/SX";
+export { default as SXBase } from "@re-flex/styled/src/SX";
 export { default as BackgroundImage } from "./BackgroundImage";
 export { default as Box } from "./Box";
 export { default as Button } from "./Button";

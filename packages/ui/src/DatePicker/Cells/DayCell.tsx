@@ -18,8 +18,10 @@ const DayCell: React.FC<CellProps> = ({ day, role }) => {
   const theme = useTheme();
 
   const isSelected = useMemo(() => {
-    return selectedDate.findIndex((d) => day.isSame(d)) !== -1;
-  }, [selectedDate.length]);
+    return selectedDate.some(
+      (d) => day.format("YYYY-MM-DD") === d.format("YYYY-MM-DD")
+    );
+  }, [selectedDate, day]);
 
   const isBetween = useMemo(() => {
     if (mode === "range" && selectedDate.length === 2) {
@@ -33,7 +35,7 @@ const DayCell: React.FC<CellProps> = ({ day, role }) => {
       return query1 || query2;
     }
     return false;
-  }, [selectedDate.length]);
+  }, [selectedDate, day]);
 
   const selectedColor = useMemo(() => {
     return isSelected
@@ -43,13 +45,7 @@ const DayCell: React.FC<CellProps> = ({ day, role }) => {
         theme.palette.text.primary;
   }, [isSelected]);
 
-  const onClick = useCallback(
-    () =>
-      selectedDate.some((d) => day.isSame(d)) === true
-        ? null
-        : onChangeSelectedDate(day),
-    [selectedDate, day]
-  );
+  const onClick = () => onChangeSelectedDate(day);
   return (
     <div
       css={{
@@ -77,12 +73,13 @@ const DayCell: React.FC<CellProps> = ({ day, role }) => {
       }}
     >
       <Button
-        size={16}
+        size={1}
         onClick={onClick}
         variant={
           isSelected ? "contained" : dayjs().isSame(day) ? "outlined" : "text"
         }
         color={selectedColor}
+        css={{ fontSize: 14 }}
       >
         {day.format("DD")}
       </Button>

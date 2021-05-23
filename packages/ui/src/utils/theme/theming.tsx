@@ -3,7 +3,7 @@ import { CacheProvider } from "@emotion/react";
 import React from "react";
 import BaseLine from "../../BaseLine";
 import { ThemeProvider as EmotionProvider } from "./styled";
-import Theme from "./Types";
+import type Theme from "@re-flex/styled/src/ThemeTypes";
 
 const reflexCache = createCache({
   key: "reflex",

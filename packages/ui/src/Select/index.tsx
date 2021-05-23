@@ -44,7 +44,7 @@ const Select: React.FC<Props> = ({
   variant = "select",
   previewType = "text",
   renderInput = TextField,
-  renderValue = ({ title }) => <Chip label={title} size={12} />,
+  renderValue = ({ title }) => <Chip label={title} size={1} />,
   inputProps = { variant: "outlined" },
   fieldKeyName = "value",
   children,
@@ -88,7 +88,7 @@ const Select: React.FC<Props> = ({
           leftItem={prefixIcon}
           key={key || dataIndex + ""}
           button
-          size={12}
+          size={1}
           onClick={() => {
             //@ts-ignore
             onChange(
@@ -144,11 +144,17 @@ const Select: React.FC<Props> = ({
             tag: "button",
             readOnly: true,
             fullWidth: true,
+            sx: {
+              "&>div": {
+                p: 0,
+                minHeight: 48,
+              },
+            },
             ...inputProps,
             endAdornment: (
               <div css={{ display: "flex", placeItems: "center" }}>
                 <IconButton
-                  size={12}
+                  size={1}
                   //@ts-ignore
                   onClick={() => onChange(mode === "multiple" ? [] : null)}
                 >

@@ -1,5 +1,5 @@
 {
-  "packages": ["docs/*", "ui/*"],
+  "packages": ["docs/*", "ui/*", "styled/*", "form/*"],
   "version": "0.0.1",
   "npmClient": "yarn",
   "useWorkspaces": true

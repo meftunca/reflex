@@ -1,33 +1,4 @@
 declare const DarkTheme: {
-    prefix: string;
-    breakpoints: {
-        values: {
-            xs: number;
-            sm: number;
-            md: number;
-            lg: number;
-            xl: number;
-        };
-        up(breakPoint: string): string;
-        down(breakPoint: string): string;
-    };
-    space: {
-        default: number;
-        dense: number;
-        large: number;
-    };
-    direction: string;
-    mixins: {
-        toolbar: {
-            minHeight: number;
-            "@media (min-width:0px) and (orientation: landscape)": {
-                minHeight: number;
-            };
-            "@media (min-width:600px)": {
-                minHeight: number;
-            };
-        };
-    };
     overrides: {};
     palette: {
         common: {
@@ -119,6 +90,41 @@ declare const DarkTheme: {
     };
     props: {};
     shadows: string[];
+    nprogress: {
+        color: string;
+    };
+    prefix: string;
+    breakpoints: {
+        values: {
+            xs: number;
+            sm: number;
+            md: number;
+            lg: number;
+            xl: number;
+        };
+        up(breakPoint: string): string;
+        down(breakPoint: string): string;
+    };
+    dayjs: typeof import("dayjs");
+    spaceValues: {
+        normal: number;
+        dense: number;
+        large: number;
+    };
+    spaceTypes: string;
+    space: number;
+    direction: string;
+    mixins: {
+        toolbar: {
+            minHeight: number;
+            "@media (min-width:0px) and (orientation: landscape)": {
+                minHeight: number;
+            };
+            "@media (min-width:600px)": {
+                minHeight: number;
+            };
+        };
+    };
     typography: {
         importFonts: string;
         htmlFontSize: number;
@@ -240,6 +246,7 @@ declare const DarkTheme: {
             easeOut: string;
             easeIn: string;
             sharp: string;
+            linear: string;
         };
         duration: {
             shortest: number;
@@ -259,9 +266,6 @@ declare const DarkTheme: {
         modal: number;
         snackbar: number;
         tooltip: number;
-    };
-    nprogress: {
-        color: string;
     };
 };
 export default DarkTheme;

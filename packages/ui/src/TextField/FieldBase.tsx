@@ -1,8 +1,7 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import clsx from "clsx";
-import Box from "../Box";
+import Box, { BoxProps } from "../Box";
 const TextFieldBase = styled(Box)<{ size: number }>`
   display: flex;
   place-items: center;
@@ -32,12 +31,18 @@ const TextFieldBase = styled(Box)<{ size: number }>`
       display: inline-block;
       max-width: 100%;
       transform: translateY(0px);
-      font-size: ${({ size = 16 }) => size}px;
+      font-size: ${({ size = 14 }) => size}px;
+      transform: translateY(
+        calc(var(--textfield-input-base-padding, 14px) / 2)
+      );
+      transform-origin: left top;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: calc(100% - 24px);
     }
   }
-  label {
-    transform: translateY(calc(var(--textfield-input-base-padding, 16px) / 4));
-  }
+
   &.outlined {
     border-radius: 4px;
     border: none;
@@ -133,7 +138,7 @@ const TextFieldBase = styled(Box)<{ size: number }>`
   }
 `;
 
-type Props = {
+type Props = BoxProps & {
   label: string;
   htmlFor: string;
   prefix: string;
@@ -156,11 +161,14 @@ const FieldBase: React.FC<Props> = ({
   mode = "outlined",
   size = 14,
   htmlFor,
+  className,
+  ...rest
 }) => (
   <TextFieldBase
     overflow="visible"
-    className={clsx({ active: isFocused || isActive }, mode)}
+    className={clsx({ active: isFocused || isActive }, mode, className)}
     size={size}
+    {...rest}
   >
     <div className={"leading"}>{startAdornment}</div>
     <div className={"content"}>

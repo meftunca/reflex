@@ -1,4 +1,4 @@
-import { cx } from "@emotion/css";
+import clsx from "clsx";
 import React, { useMemo } from "react";
 import { useTheme, css } from "@emotion/react";
 import sxPropGenerator from "../utils/theme/sx";
@@ -19,7 +19,11 @@ const Icon: React.FC<IconProps> = ({
     return css(sxPropGenerator({ sx, theme }));
   }, [sx, theme]);
   return (
-    <span className={cx(className, "material-icons")} css={sxClass} {...props}>
+    <span
+      className={clsx(className, "material-icons")}
+      css={sxClass}
+      {...props}
+    >
       {children}
     </span>
   );

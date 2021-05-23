@@ -1,10 +1,12 @@
 /** @jsx jsx */
 import { useTheme } from "@emotion/react";
 import React from "react";
-import Ripple from "../Ripple";
-import Text from "../Typography";
-import { jsx } from "../utils/theme/styled";
-import StyledButton from "./styledButton";
+import { useRef } from "react";
+import Ripple, { onRipple } from "../Ripple";
+import StyledButton from "@re-flex/styled/src/Button/Root";
+import StyledButtonContentItem from "@re-flex/styled/src/Button/Content";
+import StyledButtonIconItem from "@re-flex/styled/src/Button/Icon";
+import clsx from "clsx";
 
 /*
 
@@ -66,30 +68,45 @@ const Button: React.FC<Props> = React.forwardRef<Ref, Props>(
       colorDepth = "main",
       suffixIcon,
       affixIcon,
-      size = 14,
+      size = 1.25,
       ...rest
     },
     ref
   ) => {
     const { prefix } = useTheme();
+    const rippleRef = useRef<
+      | {
+          onRipple: onRipple;
+        }
+      | undefined
+    >();
     return (
       <StyledButton
-        className={[
-          prefix + "-btn ",
-          Array.isArray(className) ? className.join(" ") : className,
-        ].join(" ")}
+        className={clsx(prefix + "-btn", className)}
         variant={variant}
         colorDepth={colorDepth}
         size={size}
         {...rest}
         ref={ref}
+        onMouseDown={(e) => {
+          if (rippleRef.current?.onRipple) {
+            rippleRef.current?.onRipple(e);
+          }
+        }}
       >
-        {affixIcon}
-        <Text variant="button" tag="span">
-          {children}
-        </Text>
-        {suffixIcon}
-        {ripple && <Ripple {...ripple} />}
+        {/* @ts-ignore */}
+        {ripple && <Ripple {...ripple} ref={rippleRef} />}
+        {affixIcon && (
+          <StyledButtonIconItem className="affix-icon-item">
+            {affixIcon}
+          </StyledButtonIconItem>
+        )}
+        <StyledButtonContentItem>{children}</StyledButtonContentItem>
+        {suffixIcon && (
+          <StyledButtonIconItem className="suffix-icon-item">
+            {suffixIcon}
+          </StyledButtonIconItem>
+        )}
       </StyledButton>
     );
   }

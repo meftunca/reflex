@@ -38,7 +38,7 @@ const TextFieldBase = styled(Box)(
 );
 
 /** A TextField with a configurable any think. */
-export type InputProps = {
+export type InputProps = BoxProps & {
   /** TextField Variant */
   fieldProps?: BoxProps;
   variant?: "outlined" | "filled";
@@ -67,7 +67,7 @@ const TextField: React.FC<InputProps> = ({
   startAdornment,
   endAdornment,
   tag = "input",
-  size = 16,
+  size = 14,
   label = "TextField",
   fieldProps = {},
   readOnly = false,
@@ -78,6 +78,7 @@ const TextField: React.FC<InputProps> = ({
   htmlFor = Number(Date.now()).toString(16),
   wrapperClassName,
   fullWidth,
+  ...wrapperProps
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const theme = useTheme();
@@ -91,6 +92,7 @@ const TextField: React.FC<InputProps> = ({
       overflow="visible"
       css={css({ width: fullWidth ? "100%" : "auto" })}
       {...fieldProps}
+      {...wrapperProps}
     >
       <FieldBase
         className={wrapperClassName}
@@ -103,11 +105,7 @@ const TextField: React.FC<InputProps> = ({
         size={size}
         htmlFor={htmlFor}
         isActive={
-          typeof value === "undefined" || value === null
-            ? false
-            : typeof value === "string"
-            ? value?.length > 0
-            : true
+          !value ? false : typeof value === "string" ? value?.length > 0 : true
         } //label'ı aktif eder
       >
         {/* @ts-ignore */}

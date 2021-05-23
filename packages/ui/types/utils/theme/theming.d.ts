@@ -1,5 +1,5 @@
 import React from "react";
-import Theme from "./Types";
+import type Theme from "@re-flex/styled/src/ThemeTypes";
 export declare const ThemeProvider: React.FC<{
     theme: Theme;
 }>;

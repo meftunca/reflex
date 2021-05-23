@@ -1,6 +1,6 @@
 import React from "react";
 import { BoxProps } from "../Box";
-export declare type InputProps = {
+export declare type InputProps = BoxProps & {
     fieldProps?: BoxProps;
     variant?: "outlined" | "filled";
     startAdornment?: React.ReactNode;

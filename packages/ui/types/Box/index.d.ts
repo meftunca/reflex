@@ -1,6 +1,6 @@
 import React from "react";
 import { sxType } from "../utils/theme/sx";
-import { CSSObject } from "@emotion/css";
+import { CSSObject } from "@emotion/react";
 export declare type BoxProps = {
     theme?: any;
     className?: string | string[];
@@ -27,15 +27,5 @@ export declare type BoxProps = {
     spacing?: number | number[];
     style?: {};
 };
-export declare const StyledBox: import("@emotion/styled").StyledComponent<React.ClassAttributes<HTMLElement> & React.HTMLAttributes<HTMLElement> & {
-    sx?: sxType | undefined;
-    as?: HTMLElementTagNameMap | undefined;
-} & {
-    children?: React.ReactNode;
-} & {
-    theme?: import("@emotion/react").Theme | undefined;
-} & {
-    children?: import("react").ReactNode;
-} & BoxProps, {}, {}>;
 declare const Box: React.FC<BoxProps>;
 export default Box;

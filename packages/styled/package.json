@@ -1,0 +1,79 @@
+{
+  "name": "@re-flex/styled",
+  "description": "Viya ui styled component library",
+  "version": "0.2.3",
+  "source": "src/index.tsx",
+  "main": "src/index.tsx",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.module.js",
+  "esmodule": "dist/index.modern.js",
+  "unpkg": "dist/index.umd.js",
+  "types": "types/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "tsc:build": "tsc --tsconfig tsconfig.build.json",
+    "mic:build": "microbundle build --tsconfig tsconfig.build.json --jsx React.createElement --compress true",
+    "build": "yarn tsc:build;yarn mic:build",
+    "develop": "node ./compiler/build.js --watch",
+    "publish": " npm publish --access public",
+    "start": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meftunca/reflex.git"
+  },
+  "keywords": [
+    "react",
+    "starter kit",
+    "ui kit",
+    "material",
+    "paper design",
+    "design",
+    "ui",
+    "modern",
+    "responsive"
+  ],
+  "author": " <buraksenturk25@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meftunca/reflex/issues"
+  },
+  "homepage": "meftunca.github.io/reflex",
+  "peerDependencies": {
+    "color2k": "*",
+    "@emotion/styled": "*",
+    "@emotion/react": "*",
+    "react": "*",
+    "dayjs": "*"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
+    "@types/enzyme": "^3.10.8",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.3.1",
+    "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5",
+    "@types/react-table": "^7.7.0",
+    "@types/resize-observer-browser": "^0.1.5",
+    "microbundle": "^0.13.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
+    "tslib": "2.2.0",
+    "typescript": "^4.2.4"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  }
+}

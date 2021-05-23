@@ -1,5 +1,5 @@
 import "@emotion/react";
-import EmotionTheme from "./utils/theme/Types";
+import type EmotionTheme from "@re-flex/styled/src/ThemeTypes";
 declare module "@emotion/react" {
     interface Theme extends EmotionTheme {
     }
@@ -15,7 +15,7 @@ export { default as AppBar } from "./AppBar";
 export { default as Avatar } from "./Avatar";
 export { default as Backdrop } from "./Backdrop";
 export { default as Banner } from "./Banner";
-export { default as SXBase } from "./Styled/SX";
+export { default as SXBase } from "@re-flex/styled/src/SX";
 export { default as BackgroundImage } from "./BackgroundImage";
 export { default as Box } from "./Box";
 export { default as Button } from "./Button";

@@ -65,7 +65,7 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
       setPosition(element, translateX);
     }
   }, []);
-  onSwipeEnd = useCallback((element, swipeX: number, swipeY: number) => {
+  onSwipeEnd = (element, swipeX: number, swipeY: number) => {
     element.style.transitionDuration = "200ms";
     if (element) {
       const cWidth = element.clientWidth / countChild;
@@ -81,9 +81,9 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
         setPosition(element, translateX);
       }
     }
-  }, []);
+  };
 
-  const goTo = useCallback((defIndex: number) => {
+  const goTo = (defIndex: number) => {
     // Set the index to the next index or the first index
     if (container) {
       index = defIndex % (countChild - 1);
@@ -91,9 +91,9 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
       const translateX = Math.min(cWidth * -defIndex, 0);
       setPosition(container, translateX);
     }
-  }, []);
+  };
 
-  const next = useCallback(() => {
+  const next = () => {
     // Set the index to the next index or the first index
     const nextIndex = Math.min(index + 1, countChild - 1);
     index = nextIndex === countChild - 1 ? 0 : nextIndex;
@@ -102,9 +102,9 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
       const translateX = Math.min(cWidth * -index, 0);
       setPosition(container, translateX);
     }
-  }, []);
+  };
 
-  const prev = useCallback(() => {
+  const prev = () => {
     // Set the index to the prev index or the last index
     const prevIndex = Math.max(index - 1, 0);
     index = prevIndex || countChild - 1;
@@ -113,7 +113,7 @@ const Carousel: React.FC<Props> = ({ children, initialIndex = 0 }) => {
       const translateX = Math.min(cWidth * -index, 0);
       setPosition(container, translateX);
     }
-  }, []);
+  };
 
   const slideList = useMemo(() => {
     if (!container) return [];
